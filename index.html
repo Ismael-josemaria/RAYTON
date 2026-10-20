@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RAYTON: Guerra de Pandillas | Clash of Delinquents</title>
+  <meta name="description" content="Juego de estrategia de construcción de base y asalto de pandillas estilo Clash of Clans inspirado en Tokyo Revengers y Wind Breaker.">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Inter:wght@400;500;600;700&family=Russo+One&family=Yuji+Boku&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Contenedor Principal del Juego -->
+  <div id="game-app">
+    
+    <!-- Top Bar: Recursos y Estatus de Pandilla (Estilo Clash of Clans) -->
+    <header id="top-resource-bar">
+      
+      <!-- Identidad de la Banda y Estado de Paz -->
+      <div class="gang-badge-pill" id="gang-badge" title="Cuartel General de RAYTON">
+        <span class="kanji-crest">雷頓</span>
+        <div class="gang-text">
+          <span class="gang-name">RAYTON</span>
+          <span class="gang-sub" id="hq-level-indicator">SEDE NIVEL 1</span>
+        </div>
+        <div class="base-peace-banner" id="base-peace-indicator">
+          <span class="peace-dot"></span> EN PAZ
+        </div>
+      </div>
+
+      <!-- Recursos Clave (Oro, Elixir y Elixir Oscuro) -->
+      <div class="resources-deck">
+        
+        <!-- Yenes (Oro) -->
+        <div class="res-box res-yen" title="Fondos de la pandilla para construir y mejorar defensas">
+          <div class="res-icon">💴</div>
+          <div class="res-body">
+            <div class="res-header">
+              <span class="res-title">Yenes</span>
+              <span class="res-amount" id="res-yen-val">4,500 / 10,000</span>
+            </div>
+            <div class="res-meter-bg"><div class="res-meter-fill fill-yen" id="res-yen-bar" style="width: 45%;"></div></div>
+          </div>
+          <button class="res-collect-quick-btn" id="btn-collect-yen" title="Recolectar ganancias de puestos">Recolectar</button>
+        </div>
+
+        <!-- Respeto Callejero (Elixir) -->
+        <div class="res-box res-respect" title="Respeto y espíritu de banda para entrenar tropas de asalto">
+          <div class="res-icon">🔥</div>
+          <div class="res-body">
+            <div class="res-header">
+              <span class="res-title">Respeto</span>
+              <span class="res-amount" id="res-respect-val">3,200 / 8,000</span>
+            </div>
+            <div class="res-meter-bg"><div class="res-meter-fill fill-respect" id="res-respect-bar" style="width: 40%;"></div></div>
+          </div>
+          <button class="res-collect-quick-btn" id="btn-collect-respect" title="Recolectar espíritu de dojos">Recolectar</button>
+        </div>
+
+        <!-- Esencia Sombría (Elixir Oscuro CoC) -->
+        <div class="res-box res-dark-elixir" title="Esencia Sombría para tropas de élite, dragones y héroe">
+          <div class="res-icon">🧪</div>
+          <div class="res-body">
+            <div class="res-header">
+              <span class="res-title">Esencia</span>
+              <span class="res-amount" id="res-dark-val">650 / 3,000</span>
+            </div>
+            <div class="res-meter-bg"><div class="res-meter-fill fill-dark-elixir" id="res-dark-bar" style="width: 22%;"></div></div>
+          </div>
+          <button class="res-collect-quick-btn" id="btn-collect-dark" title="Recolectar esencia de laboratorios">Recolectar</button>
+        </div>
+
+        <!-- Constructores / Pandilleros de obra -->
+        <div class="res-pill" title="Constructores de la pandilla libres">
+          <span class="res-pill-icon">🔨</span>
+          <span class="res-pill-text" id="builder-count">2/2</span>
+        </div>
+
+        <!-- Capacidad de Ejército -->
+        <div class="res-pill" title="Tropas de asalto listas en campamentos">
+          <span class="res-pill-icon">👥</span>
+          <span class="res-pill-text" id="army-capacity-count">30/50</span>
+        </div>
+
+        <!-- Insignias de Honor (Gemas) -->
+        <div class="res-pill gems" title="Insignias de Honor">
+          <span class="res-pill-icon">💎</span>
+          <span class="res-pill-text" id="gems-count">250</span>
+        </div>
+
+      </div>
+
+      <!-- Controles de Utilidad -->
+      <div class="header-controls">
+        <button id="btn-theme-toggle" class="ctrl-btn" title="Alternar Vista: 🌲 Aldea de Hierba Mítica / 🏙️ Asfalto Shinjuku">🌲</button>
+        <button id="btn-clan-castle" class="ctrl-btn" title="Castillo de la Pandilla / Alianza de Tokio">🏯</button>
+        <button id="btn-open-defense-mode" class="ctrl-btn defense" title="🛡️ Probar Defensas de Aldea (Simular Asedio de Oleadas)">🛡️</button>
+        <button id="btn-replay-intro" class="ctrl-btn" title="Ver Intro / Historia">🎬</button>
+        <button id="btn-audio-toggle" class="ctrl-btn" title="Sonido">🔊</button>
+        <button id="btn-reset-game" class="ctrl-btn danger" title="Reiniciar Base">🔄</button>
+      </div>
+
+    </header>
+
+    <!-- Overlay de Modo Asalto (HUD Superior durante la Guerra / Raid) -->
+    <div id="raid-top-hud" class="raid-hud-banner hidden" style="display: none;">
+      <div class="raid-meta">
+        <span class="raid-target-name" id="raid-target-title">ASALTANDO: PUESTO DE SHIBUYA</span>
+        <div class="raid-stars" id="raid-stars-display">
+          <span class="star-slot" id="raid-star-1">★</span>
+          <span class="star-slot" id="raid-star-2">★</span>
+          <span class="star-slot" id="raid-star-3">★</span>
+        </div>
+      </div>
+
+      <div class="raid-progress-center">
+        <div class="raid-pct-box">
+          <span class="raid-pct-val" id="raid-damage-pct">0%</span>
+          <span class="raid-pct-label">DESTRUCCIÓN</span>
+        </div>
+        <div class="raid-loot-box">
+          <span>Saqueado: <strong id="raid-looted-yen">+0 ¥</strong> | <strong id="raid-looted-respect">+0 🔥</strong> | <strong id="raid-looted-dark">+0 🧪</strong></span>
+        </div>
+      </div>
+
+      <div class="raid-timer-box">
+        <span class="timer-label">TIEMPO</span>
+        <span class="timer-val" id="raid-timer">03:00</span>
+        <button id="btn-end-raid" class="btn btn-danger btn-sm">🚩 Terminar Asalto</button>
+      </div>
+    </div>
+
+    <!-- Overlay de Modo Defensa de Base (Tower Defense) -->
+    <div id="defense-top-hud" class="defense-hud-banner hidden" style="display: none;">
+      <div class="defense-meta">
+        <span class="defense-title" id="defense-wave-title">🛡️ ASEDIO A TU ALDEA: OLEADA 1/3</span>
+        <span class="defense-sub">Tus cañones, morteros, trampas y cuadrilla defienden tu territorio</span>
+      </div>
+
+      <div class="defense-progress-center">
+        <div class="defense-hp-box">
+          <span class="defense-hp-val" id="defense-village-hp">100%</span>
+          <span class="defense-hp-label">INTEGRIDAD</span>
+        </div>
+        <div class="defense-enemies-box">
+          <span>Invasores activos: <strong id="defense-enemies-count">0</strong></span>
+        </div>
+      </div>
+
+      <div class="defense-timer-box">
+        <button id="btn-end-defense" class="btn btn-danger btn-sm">🚩 Retirar Asedio</button>
+      </div>
+    </div>
+
+    <!-- Canvas Principal del Barrio / Campo de Guerra -->
+    <div id="viewport-container">
+      <canvas id="base-canvas"></canvas>
+
+      <!-- Viñetas de atmósfera para diferenciar combate y defensa -->
+      <div id="combat-vignette" class="combat-vignette hidden"></div>
+      <div id="defense-vignette" class="defense-vignette hidden"></div>
+
+      <!-- Puntero flotante o guía de colocación -->
+      <div id="grid-cursor-helper" class="grid-helper hidden"></div>
+
+      <!-- Banner de alerta de despliegue en asalto -->
+      <div id="deployment-hint" class="deploy-banner hidden">
+        ⚔️ ZONA DE GUERRA: Toca una tropa abajo y haz clic en el perímetro rojo exterior para desplegarla
+      </div>
+    </div>
+
+    <!-- Barra Inferior de Comandos (Modo Base de Barrio) -->
+    <footer id="bottom-hud-base" class="bottom-hud">
+      <div class="hud-left">
+        <div class="base-info-box">
+          <span class="base-name" id="hud-base-theme-title">ALDEA MÍTICA DE RAYTON</span>
+          <span class="base-status" id="hud-base-status-desc">Defensas Activas • Campo Fértil y Paz</span>
+        </div>
+      </div>
+
+      <div class="hud-center-actions">
+        <!-- Botón Construir / Tienda -->
+        <button class="action-card-btn" id="btn-open-shop">
+          <span class="action-icon">🔨</span>
+          <span class="action-title">Construir</span>
+          <span class="action-sub">Defensas & Puestos</span>
+        </button>
+
+        <!-- Botón Entrenar Tropas -->
+        <button class="action-card-btn" id="btn-open-barracks">
+          <span class="action-icon">🥋</span>
+          <span class="action-title">Entrenar</span>
+          <span class="action-sub" id="btn-sub-trained">30/50 Tropas</span>
+        </button>
+
+        <!-- Botón Probar Defensas (Tower Defense RTS) -->
+        <button class="action-card-btn defense-btn" id="btn-trigger-defense" title="Simula un asalto rival contra tu aldea para probar la eficacia de tus cañones, torres y muros">
+          <span class="action-icon">🛡️</span>
+          <span class="action-title">Defensa</span>
+          <span class="action-sub">Probar Base</span>
+        </button>
+
+        <!-- Botón ¡A LA GUERRA! / Asaltar Base Rival -->
+        <button class="action-card-btn war-btn" id="btn-open-war-map">
+          <span class="action-icon">⚔️</span>
+          <span class="action-title">¡A LA GUERRA!</span>
+          <span class="action-sub">Asaltar Pandillas</span>
+        </button>
+      </div>
+
+      <div class="hud-right">
+        <button class="action-card-btn mini" id="btn-collect-all" title="Recolectar todo el dinero y espíritu disponible">
+          <span class="action-icon">✨</span>
+          <span class="action-title">Recolectar Todo</span>
+        </button>
+      </div>
+    </footer>
+
+    <!-- Dock Contextual de Edificio Seleccionado (Estilo CoC) -->
+    <div id="building-context-dock" class="building-context-dock hidden">
+      <div class="context-bldg-header">
+        <span id="ctx-bldg-icon" class="ctx-icon">🏢</span>
+        <div class="ctx-meta">
+          <h4 id="ctx-bldg-name">Sede Central</h4>
+          <span id="ctx-bldg-level">Nivel 1</span>
+        </div>
+      </div>
+      <div class="context-actions">
+        <button class="ctx-btn" id="btn-ctx-info" title="Ver detalles y estadísticas">
+          <span class="ctx-btn-icon">ℹ️</span>
+          <span class="ctx-btn-label">Info</span>
+        </button>
+        <button class="ctx-btn" id="btn-ctx-upgrade" title="Mejorar edificio">
+          <span class="ctx-btn-icon">⚡</span>
+          <span class="ctx-btn-label" id="ctx-upgrade-label">Mejorar</span>
+        </button>
+        <button class="ctx-btn" id="btn-ctx-move" title="Reubicar edificio en otra casilla">
+          <span class="ctx-btn-icon">✋</span>
+          <span class="ctx-btn-label">Mover</span>
+        </button>
+        <button class="ctx-btn hidden" id="btn-ctx-collect" title="Recolectar ganancias">
+          <span class="ctx-btn-icon">💰</span>
+          <span class="ctx-btn-label">Cobrar</span>
+        </button>
+        <button class="ctx-btn hidden" id="btn-ctx-train" title="Entrenar Tropas">
+          <span class="ctx-btn-icon">🥋</span>
+          <span class="ctx-btn-label">Entrenar</span>
+        </button>
+        <button class="ctx-btn hidden" id="btn-ctx-spells" title="Preparar Brebajes">
+          <span class="ctx-btn-icon">🧪</span>
+          <span class="ctx-btn-label">Brebajes</span>
+        </button>
+        <button class="ctx-btn hidden" id="btn-ctx-clear" title="Limpiar obstáculo para ganar Gemas">
+          <span class="ctx-btn-icon">⛏️</span>
+          <span class="ctx-btn-label" id="ctx-clear-label">Limpiar</span>
+        </button>
+        <button class="ctx-btn close" id="btn-ctx-close" title="Deseleccionar">
+          <span class="ctx-btn-icon">✕</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Botón Flotante de Habilidad del Héroe (Patada Nuclear de Ren Kazuma) -->
+    <div id="hero-ability-button-wrap" class="hero-ability-wrap hidden" style="display: none;">
+      <button class="hero-ability-btn" id="btn-hero-ability" title="Activar Patada Nuclear: ¡Cura a Ren, invoca 4 brawlers de refuerzo y desata furia!">
+        <img src="assets/images/ren.jpg" alt="Ren Kazuma" class="hero-ability-avatar">
+        <div class="hero-ability-info">
+          <span class="hero-ability-title">⚡ PATADA NUCLEAR</span>
+          <span class="hero-ability-desc">¡Habilidad del Líder Lista!</span>
+        </div>
+      </button>
+    </div>
+
+    <!-- Barra Inferior de Despliegue de Tropas & Hechizos (Modo Asalto) -->
+    <footer id="bottom-hud-raid" class="bottom-hud raid-hud hidden" style="display: none;">
+      <div class="troop-deploy-deck" id="troop-deploy-container">
+        <!-- Renderizado dinámico de tarjetas de tropas y hechizos listos para desplegar -->
+      </div>
+    </footer>
+
+    <!-- ================= MODALES ================= -->
+
+    <!-- 1. Modal de Tienda / Construcción -->
+    <div id="shop-modal" class="modal-backdrop hidden">
+      <div class="modal-window large">
+        <div class="modal-header">
+          <div class="modal-title-wrap">
+            <span class="modal-kicker">INGENIERÍA & DEFENSA DE ALDEA</span>
+            <h3>CONSTRUIR EN LA ALDEA</h3>
+          </div>
+          <button class="btn-close-modal" data-close="shop-modal">✕</button>
+        </div>
+
+        <!-- Categorías de Tienda (Estilo Clash of Clans) -->
+        <div class="shop-tabs-nav">
+          <button class="shop-nav-btn active" data-cat="resources">Puestos & Recursos</button>
+          <button class="shop-nav-btn" data-cat="defenses">Defensas</button>
+          <button class="shop-nav-btn" data-cat="army">Cuartel & Tropas</button>
+          <button class="shop-nav-btn" data-cat="traps">Trampas Ocultas</button>
+          <button class="shop-nav-btn" data-cat="walls">Barricadas & Muros</button>
+        </div>
+
+        <div class="shop-catalog-grid" id="shop-catalog-container">
+          <!-- Renderizado dinámico de edificios disponibles -->
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. Modal de Cuartel / Entrenamiento de Tropas -->
+    <div id="barracks-modal" class="modal-backdrop hidden">
+      <div class="modal-window large">
+        <div class="modal-header">
+          <div class="modal-title-wrap">
+            <span class="modal-kicker">PATIO DE PELEA & RECLUTAMIENTO</span>
+            <h3>ENTRENAR PANDILLEROS DE ASALTO</h3>
+          </div>
+          <button class="btn-close-modal" data-close="barracks-modal">✕</button>
+        </div>
+
+        <!-- Pestañas de Cuartel -->
+        <div class="shop-tabs-nav">
+          <button class="barracks-nav-btn active" data-bcat="troops">🥊 Tropas de Pandilla</button>
+          <button class="barracks-nav-btn" data-bcat="dark">🐉 Élite & Bestias (Esencia)</button>
+          <button class="barracks-nav-btn" data-bcat="spells">🧪 Brebajes & Hechizos</button>
+        </div>
+
+        <div class="army-status-summary">
+          <div class="army-stat">Capacidad de Campamento: <strong id="modal-army-capacity">30 / 50</strong></div>
+          <div class="army-stat">Respeto Disponible: <strong id="modal-respect-balance">3,200 🔥</strong></div>
+          <div class="army-stat">Esencia Sombría: <strong id="modal-dark-balance">650 🧪</strong></div>
+        </div>
+
+        <div class="troops-training-grid" id="troops-training-container">
+          <!-- Renderizado dinámico de tipos de tropas o hechizos -->
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. Modal de Mapa de Guerra (Campaña y Multijugador) -->
+    <div id="war-map-modal" class="modal-backdrop hidden">
+      <div class="modal-window medium">
+        <div class="modal-header">
+          <div class="modal-title-wrap">
+            <span class="modal-kicker">INCURSIONES TERRITORIALES DE TOKIO</span>
+            <h3>MAPA DE GUERRA & ASALTOS</h3>
+          </div>
+          <button class="btn-close-modal" data-close="war-map-modal">✕</button>
+        </div>
+
+        <!-- Pestañas de Guerra: Campaña vs Multijugador -->
+        <div class="modal-tabs-header">
+          <button class="modal-tab-btn active" id="tab-war-campaign">🗺️ Modo Campaña (Tokio)</button>
+          <button class="modal-tab-btn" id="tab-war-multiplayer">⚔️ Buscar Rival Multijugador</button>
+        </div>
+
+        <!-- Panel Campaña -->
+        <div id="war-pane-campaign" class="modal-tab-pane">
+          <div class="rival-bases-list" id="rival-bases-container">
+            <!-- Renderizado dinámico de bases enemigas -->
+          </div>
+        </div>
+
+        <!-- Panel Multijugador CoC Style -->
+        <div id="war-pane-multiplayer" class="modal-tab-pane hidden">
+          <div class="multiplayer-search-card">
+            <div class="multiplayer-target-header">
+              <span class="target-crest" id="mp-target-crest">🏯</span>
+              <div class="multiplayer-target-info">
+                <h3 id="mp-target-name">Aldea de Takemichi</h3>
+                <span id="mp-target-gang">Banda ToMan del Oeste • Nivel 2</span>
+              </div>
+            </div>
+
+            <div class="multiplayer-rewards-grid">
+              <div class="mp-reward-pill">
+                <span>Botín Yenes:</span>
+                <strong id="mp-target-yen">¥ 8,400</strong>
+              </div>
+              <div class="mp-reward-pill">
+                <span>Botín Respeto:</span>
+                <strong id="mp-target-respect">5,200 🔥</strong>
+              </div>
+              <div class="mp-reward-pill">
+                <span>Trofeos en Juego:</span>
+                <strong id="mp-target-trophies">+32 🏆 / -18 🏆</strong>
+              </div>
+            </div>
+
+            <div class="multiplayer-actions-row">
+              <button class="btn btn-outline" id="btn-mp-next-target">
+                <span>🔄</span> Siguiente Rival (<span class="search-cost-hint">¥ 50</span>)
+              </button>
+              <button class="btn btn-danger btn-large" id="btn-mp-launch-attack">
+                <span>⚔️</span> ¡ASALTAR ESTA ALDEA!
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. Modal de Información y Mejora de Edificio Seleccionado -->
+    <div id="building-info-modal" class="modal-backdrop hidden">
+      <div class="modal-window small">
+        <div class="modal-header">
+          <div class="modal-title-wrap">
+            <span class="modal-kicker" id="info-bldg-cat">DEFENSA URBANA</span>
+            <h3 id="info-bldg-name">Torre de Vigías con Bates</h3>
+          </div>
+          <button class="btn-close-modal" data-close="building-info-modal">✕</button>
+        </div>
+
+        <div class="building-info-body">
+          <div class="bldg-graphic-preview" id="info-bldg-icon">🗼</div>
+          <p id="info-bldg-desc">Centinelas con bates y piedras que atacan a los intrusos a distancia.</p>
+          
+          <div class="bldg-stats-list">
+            <div class="bldg-stat-row"><span>Nivel:</span><strong id="info-bldg-level">1</strong></div>
+            <div class="bldg-stat-row"><span>Puntos de Vida (HP):</span><strong id="info-bldg-hp">400 / 400</strong></div>
+            <div class="bldg-stat-row" id="info-bldg-stat-special"><span>Daño por Segundo:</span><strong>25 DPS</strong></div>
+          </div>
+
+          <div class="bldg-upgrade-box">
+            <button class="btn btn-gold btn-block" id="btn-upgrade-building">
+              <span>⚡</span> Mejorar a Nivel <span id="upgrade-target-level">2</span> (<span id="upgrade-cost">¥ 1,200</span>)
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. Modal de Resultados de Asalto (3 Estrellas & Recompensas) -->
+    <div id="raid-victory-modal" class="modal-backdrop hidden" style="display: none;">
+      <div class="modal-window medium victory-style">
+        <div class="victory-header">
+          <span class="victory-emblem">⚡ RAYTON HA ARRASADO ⚡</span>
+          <h2 id="victory-title">¡VICTORIA TOTAL!</h2>
+        </div>
+
+        <div class="victory-stars-big" id="victory-stars-container">
+          <span class="star-big active" id="v-star-1">★</span>
+          <span class="star-big active" id="v-star-2">★</span>
+          <span class="star-big active" id="v-star-3">★</span>
+        </div>
+
+        <div class="victory-stats-wrap">
+          <div class="v-stat-box">
+            <span class="v-label">DESTRUCCIÓN</span>
+            <span class="v-val" id="victory-pct">100%</span>
+          </div>
+          <div class="v-stat-box">
+            <span class="v-label">BOTÍN DE YENES</span>
+            <span class="v-val highlight" id="victory-yen">+¥ 3,500</span>
+          </div>
+          <div class="v-stat-box">
+            <span class="v-label">RESPETO CALLEJERO</span>
+            <span class="v-val highlight-fire" id="victory-respect">+1,800 🔥</span>
+          </div>
+          <div class="v-stat-box">
+            <span class="v-label">ESENCIA SOMBRÍA</span>
+            <span class="v-val highlight-purple" id="victory-dark">+0 🧪</span>
+          </div>
+          <div class="v-stat-box">
+            <span class="v-label">TROFEOS DE GUERRA</span>
+            <span class="v-val highlight-gold" id="victory-trophies">+30 🏆</span>
+          </div>
+          <div class="v-stat-box">
+            <span class="v-label">BONUS 100% PERFECTO</span>
+            <span class="v-val highlight-cyan" id="victory-gems">+10 💎</span>
+          </div>
+        </div>
+
+        <button class="btn btn-primary btn-large btn-block" id="btn-return-home" style="font-size: 1.05rem; padding: 14px 20px;">
+          <span>🏯 Volver a Mi Aldea</span> <span id="auto-return-countdown" style="margin-left: 6px; font-weight: 400; opacity: 0.85;">(3s)</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- 6. Modal de Resultados de DEFENSA DE ALDEA -->
+    <div id="defense-victory-modal" class="modal-backdrop hidden">
+      <div class="modal-window medium victory-style">
+        <div class="victory-header">
+          <span class="victory-emblem">🛡️ DEFENSA DE BASE COMPLETADA 🛡️</span>
+          <h2 id="defense-victory-title">¡ALDEA INVICTA!</h2>
+        </div>
+
+        <div class="victory-stars-big" id="defense-stars-container">
+          <span class="star-big active" id="d-star-1">★</span>
+          <span class="star-big active" id="d-star-2">★</span>
+          <span class="star-big active" id="d-star-3">★</span>
+        </div>
+
+        <div class="victory-stats-wrap">
+          <div class="v-stat-box">
+            <span class="v-label">INTEGRIDAD FINAL</span>
+            <span class="v-val" id="defense-result-pct">92%</span>
+          </div>
+          <div class="v-stat-box">
+            <span class="v-label">RECOMPENSA DE HONOR</span>
+            <span class="v-val highlight" id="defense-result-gems">+15 💎</span>
+          </div>
+          <div class="v-stat-box">
+            <span class="v-label">TROFEOS DEFENSIVOS</span>
+            <span class="v-val highlight-fire" id="defense-result-trophies">+25 🏆</span>
+          </div>
+        </div>
+
+        <button class="btn btn-primary btn-large btn-block" id="btn-return-from-defense">
+          Volver a Gestionar Base
+        </button>
+      </div>
+    </div>
+
+    <!-- 7. Modal de Castillo del Clan / Sede de Alianza & Guerra -->
+    <div id="clan-modal" class="modal-backdrop hidden">
+      <div class="modal-window medium">
+        <div class="modal-header">
+          <div class="modal-title-wrap">
+            <span class="modal-kicker">HERMANDAD DE BANDAS DE TOKIO</span>
+            <h3>CASTILLO DEL CLAN: ALIANZA RAYTON</h3>
+          </div>
+          <button class="btn-close-modal" data-close="clan-modal">✕</button>
+        </div>
+
+        <!-- Pestañas de Clan (Mi Clan, Guerra de Clanes, Ranking) -->
+        <div class="modal-tabs-header">
+          <button class="modal-tab-btn active" id="tab-clan-info">🏯 Mi Clan</button>
+          <button class="modal-tab-btn" id="tab-clan-wars">⚔️ Guerra de Clanes</button>
+          <button class="modal-tab-btn" id="tab-clan-ranking">🏆 Ranking Global</button>
+        </div>
+
+        <!-- Panel 1: Info de Mi Clan -->
+        <div id="clan-pane-info" class="modal-tab-pane">
+          <div class="clan-crest-banner">
+            <span class="clan-crest-large">🏯</span>
+            <div class="clan-info-text">
+              <h4>Alianza Bōfurin & ToMan de Makochi</h4>
+              <span class="clan-status-badge">Nivel de Clan: 4 • 28 Miembros • Liga de Oro I</span>
+            </div>
+          </div>
+
+          <div class="clan-perks-grid">
+            <div class="clan-perk-card">
+              <span class="perk-icon">🛡️</span>
+              <div class="perk-details">
+                <strong>Defensa Territorial Activa</strong>
+                <p>Las tropas del castillo salen a defender la aldea ante asaltos enemigos.</p>
+              </div>
+            </div>
+            <div class="clan-perk-card">
+              <span class="perk-icon">💴</span>
+              <div class="perk-details">
+                <strong>Botín Extra de Guerra</strong>
+                <p>+20% de Yenes y Respeto en cada asalto victorioso.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="clan-request-box">
+            <h4>Refuerzos de Cuadrilla</h4>
+            <p>Pide a los clanes aliados veteranos con motocicletas y magos de pirotecnia para tu ejército.</p>
+            <button class="btn btn-gold btn-block" id="btn-request-clan-troops">
+              <span>👥</span> ¡Solicitar Refuerzos de Clan (+4 Tropas de Élite)!
+            </button>
+          </div>
+        </div>
+
+        <!-- Panel 2: Guerra de Clanes -->
+        <div id="clan-pane-wars" class="modal-tab-pane hidden">
+          <div class="clan-war-vs-card">
+            <div class="clan-war-side ally">
+              <span class="war-crest-icon">🏯</span>
+              <span class="war-team-name">RAYTON ALLIANCE</span>
+              <span class="war-team-stars" id="war-stars-ally">★★ 36</span>
+            </div>
+            <div class="clan-war-vs-center">
+              <span class="vs-badge">VS</span>
+              <span class="war-timer-pill">Día de Batalla: 14h 22m</span>
+            </div>
+            <div class="clan-war-side enemy">
+              <span class="war-crest-icon">🐍</span>
+              <span class="war-team-name">KUROHEBI SYNDICATE</span>
+              <span class="war-team-stars" id="war-stars-enemy">★ 28</span>
+            </div>
+          </div>
+
+          <div class="clan-perk-card" style="margin-top: 8px;">
+            <span class="perk-icon">💰</span>
+            <div class="perk-details">
+              <strong>Bote de Botín de Guerra Acumulado</strong>
+              <p>Recompensa por victoria: <strong style="color: var(--gold-bright);">+¥ 18,500 | +12,000 🔥 | +850 🧪</strong></p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Panel 3: Clasificación Global de Tokio -->
+        <div id="clan-pane-ranking" class="modal-tab-pane hidden">
+          <table class="global-rankings-table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Clan / Alianza</th>
+                <th>Miembros</th>
+                <th>Trofeos 🏆</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="rank-num gold">1</span></td>
+                <td><span class="rank-clan-name">Tokyo Manji Gang</span><br><span class="rank-clan-level">Nv. 10</span></td>
+                <td>50/50</td>
+                <td><span class="rank-trophies">38,420 🏆</span></td>
+              </tr>
+              <tr>
+                <td><span class="rank-num silver">2</span></td>
+                <td><span class="rank-clan-name">Bōfurin Makochi</span><br><span class="rank-clan-level">Nv. 9</span></td>
+                <td>48/50</td>
+                <td><span class="rank-trophies">35,110 🏆</span></td>
+              </tr>
+              <tr>
+                <td><span class="rank-num bronze">3</span></td>
+                <td><span class="rank-clan-name">Sindicato Kurohebi</span><br><span class="rank-clan-level">Nv. 8</span></td>
+                <td>49/50</td>
+                <td><span class="rank-trophies">32,800 🏆</span></td>
+              </tr>
+              <tr style="background: rgba(245, 158, 11, 0.12); border-left: 3px solid var(--gold-bright);">
+                <td><span class="rank-num gold">4</span></td>
+                <td><span class="rank-clan-name" style="color: var(--gold-bright);">RAYTON (Tú)</span><br><span class="rank-clan-level">Nv. 4</span></td>
+                <td>28/50</td>
+                <td><span class="rank-trophies">24,350 🏆</span></td>
+              </tr>
+              <tr>
+                <td><span class="rank-num">5</span></td>
+                <td><span class="rank-clan-name">Lobos de Roppongi</span><br><span class="rank-clan-level">Nv. 6</span></td>
+                <td>42/50</td>
+                <td><span class="rank-trophies">21,900 🏆</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= CINEMATIC INTRO OVERLAY (ANIME STYLE) ================= -->
+    <div id="intro-overlay" class="intro-backdrop">
+      <div class="intro-bg-image-wrap">
+        <img src="assets/images/banner.jpg" alt="Tokyo Night Skyline" class="intro-bg-img">
+        <div class="intro-vignette"></div>
+        <div class="intro-speed-lines"></div>
+      </div>
+
+      <div class="intro-container">
+        <!-- Badge & Title -->
+        <div class="intro-brand">
+          <span class="intro-kanji-crest">雷頓</span>
+          <h1 class="intro-main-title">RAYTON</h1>
+          <span class="intro-tagline">ERA DE PANDILLAS • CLASH OF GANGS</span>
+        </div>
+
+        <!-- Dialogue / Story Card -->
+        <div class="intro-story-card">
+          <div class="intro-speaker-row" id="intro-speaker-row">
+            <img src="assets/images/ren.jpg" alt="Ren Kazuma" id="intro-speaker-avatar" class="intro-avatar">
+            <div class="intro-speaker-meta">
+              <h3 id="intro-speaker-name">Crónica de las Calles de Tokio</h3>
+              <span id="intro-speaker-role">Prólogo • 2026</span>
+            </div>
+            <div class="intro-step-dots" id="intro-step-dots">
+              <span class="step-dot active"></span>
+              <span class="step-dot"></span>
+              <span class="step-dot"></span>
+            </div>
+          </div>
+
+          <div class="intro-story-text-wrap">
+            <p id="intro-story-text" class="intro-text-content">
+              En los callejones oscuros de Shibuya y Shinjuku, la fuerza bruta impone la ley. Sindicatos despiadados como Kurohebi extorsionan a los comerciantes y aplastan a quienes se atreven a levantar la mirada...
+            </p>
+          </div>
+
+          <div class="intro-actions-row">
+            <button class="btn btn-outline-danger" id="btn-skip-intro">⏭️ Saltar Intro</button>
+            <button class="btn btn-primary btn-large" id="btn-next-intro">
+              <span id="intro-btn-label">Siguiente ❯</span>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Toast de Notificaciones -->
+    <div id="toast-notify" class="toast-notify hidden"></div>
+
+  </div>
+
+  <!-- Scripts -->
+  <script src="audio.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>
