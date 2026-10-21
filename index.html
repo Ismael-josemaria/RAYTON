@@ -20,9 +20,9 @@
     <!-- Top Bar: Recursos y Estatus de Pandilla (Estilo Clash of Clans) -->
     <header id="top-resource-bar">
       
-      <!-- Identidad de la Banda y Estado de Paz -->
+      <!-- Identidad de la Banda con Logo Oficial y Estado de Paz -->
       <div class="gang-badge-pill" id="gang-badge" title="Cuartel General de RAYTON">
-        <span class="kanji-crest">雷頓</span>
+        <img src="assets/images/rayton_logo.png" alt="RAYTON Emblem" class="gang-logo-badge">
         <div class="gang-text">
           <span class="gang-name">RAYTON</span>
           <span class="gang-sub" id="hq-level-indicator">SEDE NIVEL 1</span>
@@ -86,6 +86,12 @@
           <span class="res-pill-text" id="army-capacity-count">30/50</span>
         </div>
 
+        <!-- Conquista de Japón (Risk) -->
+        <div class="res-pill japan-conquest-pill" id="hud-japan-conquest-btn" title="🗾 Dominación de Japón (Estilo Risk): ¡Conquista todo Japón!">
+          <span class="res-pill-icon">🗾</span>
+          <span class="res-pill-text" id="hud-japan-conquest-pct">Japón: 6% (1/16)</span>
+        </div>
+
         <!-- Insignias de Honor (Gemas) -->
         <div class="res-pill gems" title="Insignias de Honor">
           <span class="res-pill-icon">💎</span>
@@ -94,13 +100,17 @@
 
       </div>
 
-      <!-- Controles de Utilidad -->
+      <!-- Controles de Utilidad (Limpio y Fácil de Entender) -->
       <div class="header-controls">
-        <button id="btn-theme-toggle" class="ctrl-btn" title="Alternar Vista: 🌲 Aldea de Hierba Mítica / 🏙️ Asfalto Shinjuku">🌲</button>
+        <button id="btn-open-help" class="ctrl-btn help-btn" title="📖 Guía Rápida: Cómo Jugar">📖</button>
+        <button id="btn-music-toggle" class="ctrl-btn music-btn active" title="🎵 Música Tranquila: Activa / Pausa">🎵</button>
+        <button id="btn-audio-toggle" class="ctrl-btn" title="Sonido: Efectos">🔊</button>
+        <button id="btn-theme-toggle" class="ctrl-btn" title="Alternar Terreno: 🏙️ Asfalto Gris / 🌲 Césped Mítico">🏙️</button>
+        <button id="btn-weather-toggle" class="ctrl-btn" title="Alternar Clima de Tokio: 🌧️ Lluvia Neón / 🌸 Sakura / ⚡ Neón / ☀️ Despejado">🌧️</button>
+        <button id="btn-open-gacha" class="ctrl-btn gacha" title="🎰 Reclutamiento de Líderes (Gacha de Pandillas)">🎰</button>
         <button id="btn-clan-castle" class="ctrl-btn" title="Castillo de la Pandilla / Alianza de Tokio">🏯</button>
         <button id="btn-open-defense-mode" class="ctrl-btn defense" title="🛡️ Probar Defensas de Aldea (Simular Asedio de Oleadas)">🛡️</button>
         <button id="btn-replay-intro" class="ctrl-btn" title="Ver Intro / Historia">🎬</button>
-        <button id="btn-audio-toggle" class="ctrl-btn" title="Sonido">🔊</button>
         <button id="btn-reset-game" class="ctrl-btn danger" title="Reiniciar Base">🔄</button>
       </div>
 
@@ -128,6 +138,7 @@
       </div>
 
       <div class="raid-timer-box">
+        <button id="btn-raid-speed" class="btn btn-warning btn-sm" style="font-weight: 800; padding: 5px 12px; border-radius: 6px; box-shadow: 0 0 10px rgba(234, 179, 8, 0.4);" title="Acelerar Combate: 1x / 2x / 4x">⚡ 1x</button>
         <span class="timer-label">TIEMPO</span>
         <span class="timer-val" id="raid-timer">03:00</span>
         <button id="btn-end-raid" class="btn btn-danger btn-sm">🚩 Terminar Asalto</button>
@@ -152,6 +163,7 @@
       </div>
 
       <div class="defense-timer-box">
+        <button id="btn-defense-speed" class="btn btn-warning btn-sm" style="font-weight: 800; padding: 5px 12px; border-radius: 6px; box-shadow: 0 0 10px rgba(234, 179, 8, 0.4);" title="Acelerar Simulación: 1x / 2x / 4x">⚡ 1x</button>
         <button id="btn-end-defense" class="btn btn-danger btn-sm">🚩 Retirar Asedio</button>
       </div>
     </div>
@@ -171,14 +183,25 @@
       <div id="deployment-hint" class="deploy-banner hidden">
         ⚔️ ZONA DE GUERRA: Toca una tropa abajo y haz clic en el perímetro rojo exterior para desplegarla
       </div>
+
+      <!-- Banner Flotante de Objetivo Rápido y Guía para Nuevos Jugadores -->
+      <div id="quick-objective-pill" class="quick-objective-pill">
+        <span class="obj-icon">💡</span>
+        <div class="obj-text">
+          <strong id="obj-title">Siguiente Paso:</strong>
+          <span id="obj-desc">Construye Puestos de Yenes o abre el Cuartel para entrenar tropas</span>
+        </div>
+        <button id="btn-obj-action" class="obj-btn-action">Ir</button>
+        <button id="btn-dismiss-obj" class="obj-btn-close" title="Ocultar pista">✕</button>
+      </div>
     </div>
 
     <!-- Barra Inferior de Comandos (Modo Base de Barrio) -->
     <footer id="bottom-hud-base" class="bottom-hud">
       <div class="hud-left">
         <div class="base-info-box">
-          <span class="base-name" id="hud-base-theme-title">ALDEA MÍTICA DE RAYTON</span>
-          <span class="base-status" id="hud-base-status-desc">Defensas Activas • Campo Fértil y Paz</span>
+          <span class="base-name" id="hud-base-theme-title">DISTRITO URBANO RAYTON • TOKIO</span>
+          <span class="base-status" id="hud-base-status-desc">Asfalto y Hormigón • Bastión Supremo</span>
         </div>
       </div>
 
@@ -204,11 +227,18 @@
           <span class="action-sub">Probar Base</span>
         </button>
 
-        <!-- Botón ¡A LA GUERRA! / Asaltar Base Rival -->
+        <!-- Botón ¡A LA GUERRA! / Conquista de Japón Risk -->
         <button class="action-card-btn war-btn" id="btn-open-war-map">
-          <span class="action-icon">⚔️</span>
-          <span class="action-title">¡A LA GUERRA!</span>
-          <span class="action-sub">Asaltar Pandillas</span>
+          <span class="action-icon">🗾</span>
+          <span class="action-title">¡CONQUISTA JAPÓN!</span>
+          <span class="action-sub" id="btn-sub-war">Guerra Risk (1/16)</span>
+        </button>
+
+        <!-- Botón Gacha & Cuartel de Líderes -->
+        <button class="action-card-btn gacha-btn" id="btn-open-gacha-dock" title="Recluta y asigna a los líderes supremos de tu banda con habilidades de ejército, sanación o furia">
+          <span class="action-icon">👑</span>
+          <span class="action-title">Líderes</span>
+          <span class="action-sub" id="btn-sub-leader-name">Ren (Nv. 1)</span>
         </button>
       </div>
 
@@ -334,31 +364,83 @@
           <div class="army-stat">Esencia Sombría: <strong id="modal-dark-balance">650 🧪</strong></div>
         </div>
 
+        <!-- Cola de Reclutamiento con Tiempo Real -->
+        <div class="recruitment-queue-card" id="recruitment-queue-container">
+          <!-- Renderizado dinámico de la unidad en entrenamiento y cola -->
+        </div>
+
         <div class="troops-training-grid" id="troops-training-container">
           <!-- Renderizado dinámico de tipos de tropas o hechizos -->
         </div>
       </div>
     </div>
 
-    <!-- 3. Modal de Mapa de Guerra (Campaña y Multijugador) -->
+    <!-- 3. Modal de Mapa de Guerra (Dominación de Japón Risk, Campaña y Multijugador) -->
     <div id="war-map-modal" class="modal-backdrop hidden">
-      <div class="modal-window medium">
+      <div class="modal-window xlarge japan-risk-window">
         <div class="modal-header">
           <div class="modal-title-wrap">
-            <span class="modal-kicker">INCURSIONES TERRITORIALES DE TOKIO</span>
-            <h3>MAPA DE GUERRA & ASALTOS</h3>
+            <span class="modal-kicker">CONQUISTA NACIONAL • DOMINIO TOTAL DE JAPÓN</span>
+            <h3>MAPA ESTRATÉGICO DE GUERRA (RISK)</h3>
           </div>
           <button class="btn-close-modal" data-close="war-map-modal">✕</button>
         </div>
 
-        <!-- Pestañas de Guerra: Campaña vs Multijugador -->
+        <!-- Pestañas de Guerra: Dominación de Japón (Risk) vs Campaña vs Multijugador -->
         <div class="modal-tabs-header">
-          <button class="modal-tab-btn active" id="tab-war-campaign">🗺️ Modo Campaña (Tokio)</button>
+          <button class="modal-tab-btn active" id="tab-war-japan">🗾 Dominación de Japón (Risk)</button>
+          <button class="modal-tab-btn" id="tab-war-campaign">🏙️ Asaltos de Barrio</button>
           <button class="modal-tab-btn" id="tab-war-multiplayer">⚔️ Buscar Rival Multijugador</button>
         </div>
 
+        <!-- Panel 1: Conquista Territorial de Japón (Estilo RISK) -->
+        <div id="war-pane-japan" class="modal-tab-pane">
+          <!-- Barra Superior de Conquista Nacional -->
+          <div class="japan-risk-topbar">
+            <div class="risk-dominion-stat">
+              <div class="risk-title-row">
+                <span class="risk-label">🗾 DOMINIO DE JAPÓN (OBJETIVO SUPREMO)</span>
+                <span class="risk-progress-text" id="japan-risk-progress-text">1 / 16 Provincias (6.2%)</span>
+              </div>
+              <div class="risk-progress-track">
+                <div class="risk-progress-bar" id="japan-risk-progress-fill" style="width: 6.25%;"></div>
+              </div>
+            </div>
+            <div class="risk-taxes-deck">
+              <div class="risk-tax-rate">
+                <span>Tributo Pasivo:</span>
+                <strong id="japan-risk-tax-rate">+¥ 400 / +200 🔥 por min</strong>
+              </div>
+              <button class="btn btn-gold btn-sm" id="btn-collect-japan-taxes">
+                <span>💰</span> Cobrar Tributos (<span id="japan-uncollected-taxes">¥ 0</span>)
+              </button>
+            </div>
+          </div>
+
+          <!-- Cinta de Bonus Regionales de Dominación (Risk Continent Bonuses) -->
+          <div class="regional-bonuses-ribbon" id="regional-bonuses-container">
+            <!-- 8 Regiones de Japón con su estado y bonus -->
+          </div>
+
+          <!-- Escenario Táctico: Mapa Interactivo de Japón y Drawer de Inteligencia -->
+          <div class="japan-tactical-layout">
+            <div class="japan-map-viewport" id="japan-map-viewport">
+              <img src="assets/images/japan_map.jpg" alt="Mapa Estratégico de Japón" class="japan-map-img">
+              <svg class="japan-map-connections" id="japan-map-svg-lines"></svg>
+              <div class="japan-territories-overlay" id="japan-territories-overlay">
+                <!-- 16 pines interactivos de territorios con tropas, estandarte y estado -->
+              </div>
+            </div>
+
+            <!-- Panel Lateral de Inteligencia y Órdenes Militares -->
+            <div class="territory-intel-drawer" id="territory-intel-drawer">
+              <!-- Renderizado dinámico del territorio seleccionado -->
+            </div>
+          </div>
+        </div>
+
         <!-- Panel Campaña -->
-        <div id="war-pane-campaign" class="modal-tab-pane">
+        <div id="war-pane-campaign" class="modal-tab-pane hidden">
           <div class="rival-bases-list" id="rival-bases-container">
             <!-- Renderizado dinámico de bases enemigas -->
           </div>
@@ -447,6 +529,15 @@
           <span class="star-big active" id="v-star-3">★</span>
         </div>
 
+        <!-- Banner de Conquista Territorial de Japón (Si aplica) -->
+        <div id="victory-conquest-banner" class="victory-conquest-banner hidden">
+          <span class="v-conquest-icon">🗾</span>
+          <div class="v-conquest-info">
+            <h4 id="v-conquest-title">¡PROVINCIA ANEXADA A RAYTON!</h4>
+            <span id="v-conquest-sub">Control de Japón ampliado al 12%</span>
+          </div>
+        </div>
+
         <div class="victory-stats-wrap">
           <div class="v-stat-box">
             <span class="v-label">DESTRUCCIÓN</span>
@@ -477,6 +568,47 @@
         <button class="btn btn-primary btn-large btn-block" id="btn-return-home" style="font-size: 1.05rem; padding: 14px 20px;">
           <span>🏯 Volver a Mi Aldea</span> <span id="auto-return-countdown" style="margin-left: 6px; font-weight: 400; opacity: 0.85;">(3s)</span>
         </button>
+      </div>
+    </div>
+
+    <!-- Modal Épico de Dominación Total: Shogun Supremo de Japón (Risk 100%) -->
+    <div id="japan-conquest-victory-modal" class="modal-backdrop hidden" style="display: none;">
+      <div class="modal-window medium victory-style shogun-grand-modal">
+        <div class="victory-header">
+          <span class="victory-emblem">🗾 DOMINIO TOTAL DE TODO JAPÓN 🗾</span>
+          <h2>¡SHOGUN SUPREMO DE JAPÓN!</h2>
+          <span class="shogun-victory-sub">Has conquistado las 8 Regiones y 16 Provincias de Japón bajo la bandera unificada de RAYTON</span>
+        </div>
+
+        <div class="shogun-emblem-showcase">
+          <div class="shogun-kanji-big">天下統一</div>
+          <div class="shogun-rank-badge">👑 UNIFICACIÓN COMPLETA (100% CONTROL RISK) 👑</div>
+        </div>
+
+        <div class="victory-stats-wrap">
+          <div class="v-stat-box">
+            <span class="v-label">RECOMPENSA IMPERIAL</span>
+            <span class="v-val highlight-cyan">+1,000 💎 Gemas</span>
+          </div>
+          <div class="v-stat-box">
+            <span class="v-label">TESORO DE LAS 8 REGIONES</span>
+            <span class="v-val highlight">+¥ 150,000</span>
+          </div>
+          <div class="v-stat-box">
+            <span class="v-label">RESPETO NACIONAL</span>
+            <span class="v-val highlight-fire">+80,000 🔥</span>
+          </div>
+          <div class="v-stat-box">
+            <span class="v-label">TÍTULO HISTÓRICO</span>
+            <span class="v-val highlight-gold">Emperador de las Calles</span>
+          </div>
+        </div>
+
+        <div class="shogun-modal-actions">
+          <button class="btn btn-gold btn-large btn-block" id="btn-claim-shogun-reward">
+            <span>🏯</span> Reclamar Corona Imperial y Continuar Reinando
+          </button>
+        </div>
       </div>
     </div>
 
@@ -645,6 +777,165 @@
       </div>
     </div>
 
+    <!-- 8. Modal de Gacha de Líderes (Convocatoria de Comandantes de Tokio) -->
+    <div id="gacha-modal" class="modal-backdrop hidden" style="display: none;">
+      <div class="modal-window large gacha-window">
+        <div class="modal-header">
+          <div class="modal-title-wrap">
+            <span class="modal-kicker">龍神召喚 • GACHA DE COMANDANTES</span>
+            <h3>CONVOCATORIA DE LÍDERES SUPREMOS</h3>
+          </div>
+          <button class="btn-close-modal" data-close="gacha-modal">✕</button>
+        </div>
+
+        <!-- Banner Visual del Gacha -->
+        <div class="gacha-banner-wrap">
+          <img src="assets/images/gacha_banner.jpg" alt="Gacha de Líderes de Tokio" class="gacha-banner-img">
+          <div class="gacha-banner-overlay">
+            <div class="gacha-rates-badge">
+              <span>⭐⭐⭐⭐⭐ Legendarios 12% | ⭐⭐⭐⭐ Élites 35%</span>
+            </div>
+            <p class="gacha-banner-tagline">¡Desbloquea líderes con Habilidad de Ejército Masivo, Sanación Continua, Furia Berserker y Ataque Sombrío!</p>
+          </div>
+        </div>
+
+        <!-- Barra de Botones de Invocación -->
+        <div class="gacha-summon-bar">
+          <div class="summon-group">
+            <span class="summon-group-label">💎 INVOCACIÓN POR GEMAS</span>
+            <div class="summon-buttons-row">
+              <button class="btn btn-gold btn-summon" id="btn-gacha-single-gems">
+                <span class="summon-btn-icon">🎰</span>
+                <span class="summon-btn-text">Reclutar x1</span>
+                <span class="summon-cost">50 💎</span>
+              </button>
+              <button class="btn btn-gold btn-summon highlight-glow" id="btn-gacha-multi-gems">
+                <span class="summon-badge-deal">¡Élite o Legendario Garantizado!</span>
+                <span class="summon-btn-icon">✨</span>
+                <span class="summon-btn-text">Gran Convocatoria x10</span>
+                <span class="summon-cost">450 💎</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="summon-group">
+            <span class="summon-group-label">🔥 CONVOCATORIA POR RESPETO</span>
+            <div class="summon-buttons-row">
+              <button class="btn btn-primary btn-summon" id="btn-gacha-single-respect">
+                <span class="summon-btn-icon">🔥</span>
+                <span class="summon-btn-text">Tirada x1</span>
+                <span class="summon-cost">2.500 🔥</span>
+              </button>
+              <button class="btn btn-primary btn-summon" id="btn-gacha-multi-respect">
+                <span class="summon-btn-icon">⚡</span>
+                <span class="summon-btn-text">Tirada x10</span>
+                <span class="summon-cost">22.500 🔥</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Líder Activo Actual -->
+        <div class="active-leader-strip" id="active-leader-banner-display">
+          <!-- Renderizado dinámico del líder activo -->
+        </div>
+
+        <!-- Roster de Líderes Disponibles -->
+        <div class="gacha-roster-section">
+          <div class="gacha-roster-header">
+            <h4>CUARTEL DE LÍDERES • TU COLECCIÓN</h4>
+            <span class="gacha-roster-sub" id="gacha-roster-count">1/6 Desbloqueados</span>
+          </div>
+          <div class="gacha-leaders-grid" id="gacha-leaders-container">
+            <!-- Renderizado dinámico de tarjetas de líderes -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 9. Modal de Animación y Revelación de Invocación (Anime Reveal) -->
+    <div id="gacha-reveal-modal" class="modal-backdrop hidden" style="display: none;">
+      <div class="gacha-reveal-window">
+        <div class="gacha-reveal-rays"></div>
+        <div class="gacha-reveal-header">
+          <span class="gacha-reveal-kanji">龍神召喚</span>
+          <h2 id="gacha-reveal-title">¡COMANDANTE RECLUTADO!</h2>
+        </div>
+
+        <div class="gacha-reveal-cards-container" id="gacha-reveal-cards-grid">
+          <!-- Tarjetas reveladas con animaciones y volteos -->
+        </div>
+
+        <div class="gacha-reveal-actions">
+          <button class="btn btn-gold btn-large" id="btn-gacha-reveal-claim">
+            🏯 Reclamar y Asignar a la Banda
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal de Guía Rápida (Cómo Jugar a RAYTON) -->
+    <div id="help-modal" class="modal-backdrop hidden" style="display: none;">
+      <div class="modal-window medium help-modal-window">
+        <div class="modal-header">
+          <div class="modal-title-wrap">
+            <span class="modal-kicker">MANUAL DE LA BANDA</span>
+            <h3>📖 GUÍA RÁPIDA: CÓMO JUGAR A RAYTON</h3>
+          </div>
+          <button class="btn-close-modal" data-close="help-modal">✕</button>
+        </div>
+
+        <div class="help-guide-body">
+          <p class="help-intro-subtitle">RAYTON combina estrategia de construcción de base urbana (Clash of Clans) con conquista territorial de Japón (Risk). Sigue estos 4 pasos básicos para triunfar:</p>
+          
+          <div class="help-steps-grid">
+            <div class="help-step-card">
+              <div class="help-step-icon">🏗️</div>
+              <div class="help-step-content">
+                <h4>1. Construye y Produce</h4>
+                <p>Coloca <strong>Puestos de Yenes</strong> (dinero 💴) y <strong>Dojos</strong> (respeto 🔥). Toca cualquier edificio para subirlo de nivel o reubicarlo libremente.</p>
+              </div>
+            </div>
+
+            <div class="help-step-card">
+              <div class="help-step-icon">🥊</div>
+              <div class="help-step-content">
+                <h4>2. Recluta tu Cuadrilla</h4>
+                <p>En el <strong>Cuartel</strong> entrena tropas de asalto: Brawlers de choque, Centinelas con bates, Motociclistas veloces y Delincuentes con bombas Molotov.</p>
+              </div>
+            </div>
+
+            <div class="help-step-card">
+              <div class="help-step-icon">🗾</div>
+              <div class="help-step-content">
+                <h4>3. Conquista Japón (Risk)</h4>
+                <p>En <strong>¡Conquista Japón!</strong> asigna tropas a las 16 provincias. Captura regiones para bonus y <strong>cobra tributos pasivos en ¥</strong> automáticamente.</p>
+              </div>
+            </div>
+
+            <div class="help-step-card">
+              <div class="help-step-icon">🛡️</div>
+              <div class="help-step-content">
+                <h4>4. Asalta y Defiende</h4>
+                <p>Pulsa <strong>Defensa (Probar Base)</strong> para ver si tus cañones resisten invasiones enemigas, o asalta barrios rivales en busca de botín y trofeos.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="help-tips-box">
+            <span class="tip-badge">💡 CONSEJO RÁPIDO</span>
+            <p>Limpia obstáculos (árboles y rocas) en tu terreno para conseguir <strong>Gemas 💎</strong>. Usa el botón 🎵 para activar la música lofi tranquila de fondo.</p>
+          </div>
+
+          <div class="help-footer-actions">
+            <button class="btn btn-gold btn-large btn-block" id="btn-close-help">
+              <span>⚡</span> ¡Entendido, Vamos a Dominar las Calles!
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- ================= CINEMATIC INTRO OVERLAY (ANIME STYLE) ================= -->
     <div id="intro-overlay" class="intro-backdrop">
       <div class="intro-bg-image-wrap">
@@ -656,7 +947,7 @@
       <div class="intro-container">
         <!-- Badge & Title -->
         <div class="intro-brand">
-          <span class="intro-kanji-crest">雷頓</span>
+          <img src="assets/images/rayton_logo.png" alt="RAYTON Official Logo" class="intro-logo-big">
           <h1 class="intro-main-title">RAYTON</h1>
           <span class="intro-tagline">ERA DE PANDILLAS • CLASH OF GANGS</span>
         </div>

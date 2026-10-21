@@ -303,10 +303,11 @@ const TROOP_TYPES = {
     icon: '🏏',
     hp: 110,
     dps: 26,
-    speed: 1.8,
+    speed: 1.05,
     costRespect: 25,
     costDark: 0,
     housing: 1,
+    trainTime: 3,
     range: 0.8,
     category: 'troops',
     targetPriority: 'any',
@@ -318,10 +319,11 @@ const TROOP_TYPES = {
     icon: '🏹',
     hp: 75,
     dps: 28,
-    speed: 1.7,
+    speed: 0.95,
     costRespect: 35,
     costDark: 0,
     housing: 1,
+    trainTime: 4,
     range: 3.5,
     category: 'troops',
     targetPriority: 'any',
@@ -333,10 +335,11 @@ const TROOP_TYPES = {
     icon: '👺',
     hp: 65,
     dps: 36,
-    speed: 2.7,
+    speed: 1.45,
     costRespect: 30,
     costDark: 0,
     housing: 1,
+    trainTime: 3,
     range: 0.8,
     category: 'troops',
     targetPriority: 'resources',
@@ -348,10 +351,11 @@ const TROOP_TYPES = {
     icon: '🍾',
     hp: 75,
     dps: 30,
-    speed: 1.6,
+    speed: 0.90,
     costRespect: 45,
     costDark: 0,
     housing: 1,
+    trainTime: 5,
     range: 3.2,
     category: 'troops',
     targetPriority: 'any',
@@ -363,10 +367,11 @@ const TROOP_TYPES = {
     icon: '🦍',
     hp: 600,
     dps: 22,
-    speed: 1.1,
+    speed: 0.55,
     costRespect: 130,
     costDark: 0,
     housing: 5,
+    trainTime: 10,
     range: 0.9,
     category: 'troops',
     targetPriority: 'defenses',
@@ -378,10 +383,11 @@ const TROOP_TYPES = {
     icon: '🧨',
     hp: 90,
     dps: 280,
-    speed: 2.5,
+    speed: 1.25,
     costRespect: 75,
     costDark: 0,
     housing: 2,
+    trainTime: 6,
     range: 0.8,
     category: 'troops',
     targetPriority: 'walls',
@@ -393,10 +399,11 @@ const TROOP_TYPES = {
     icon: '🧙‍♂️',
     hp: 190,
     dps: 68,
-    speed: 1.5,
+    speed: 0.85,
     costRespect: 0,
     costDark: 30,
     housing: 4,
+    trainTime: 8,
     range: 3.2,
     isSplash: true,
     category: 'dark',
@@ -409,10 +416,11 @@ const TROOP_TYPES = {
     icon: '🏍️',
     hp: 340,
     dps: 40,
-    speed: 2.6,
+    speed: 1.40,
     costRespect: 0,
     costDark: 45,
     housing: 5,
+    trainTime: 12,
     jumpsWalls: true,
     range: 0.9,
     category: 'dark',
@@ -425,10 +433,11 @@ const TROOP_TYPES = {
     icon: '🐉',
     hp: 980,
     dps: 92,
-    speed: 1.3,
+    speed: 0.75,
     costRespect: 0,
     costDark: 95,
     housing: 10,
+    trainTime: 20,
     isFlying: true,
     jumpsWalls: true,
     range: 2.2,
@@ -487,8 +496,70 @@ const SPELL_TYPES = {
   }
 };
 
-// Natural Village Obstacles (Clash of Clans Style - Limpiar por Gemas 💎)
+// Urban & Natural Village Obstacles (Limpiar por Gemas 💎 y Recursos)
 const OBSTACLE_TYPES = {
+  // Urban City Obstacles
+  concrete_block: {
+    id: 'concrete_block',
+    name: 'Bloque de Hormigón Roto',
+    icon: '🧱',
+    costYen: 150,
+    costRespect: 0,
+    gemsMin: 2,
+    gemsMax: 4,
+    desc: 'Escombro de construcción urbana que estorba en la acera. Envía un obrero para ganar gemas.'
+  },
+  scrap_metal: {
+    id: 'scrap_metal',
+    name: 'Chatarra de Motos Bōsōzoku',
+    icon: '⚙️',
+    costYen: 200,
+    costRespect: 0,
+    gemsMin: 3,
+    gemsMax: 5,
+    desc: 'Piezas oxidadas de tubos de escape y motores. Recíclalas para obtener gemas de honor.'
+  },
+  oil_barrel: {
+    id: 'oil_barrel',
+    name: 'Barriles de Petróleo Clandestino',
+    icon: '🛢️',
+    costYen: 300,
+    costRespect: 0,
+    gemsMin: 3,
+    gemsMax: 6,
+    desc: 'Combustible peligroso acumulado en el callejón. Drenarlo otorga gemas e ingresos.'
+  },
+  dumpster: {
+    id: 'dumpster',
+    name: 'Contenedor de Basura Callejero',
+    icon: '🗑️',
+    costYen: 250,
+    costRespect: 0,
+    gemsMin: 2,
+    gemsMax: 5,
+    desc: 'Contenedor industrial desbordado. Límpialo para despejar tu distrito urbano.'
+  },
+  cargo_crate: {
+    id: 'cargo_crate',
+    name: 'Caja de Contrabando Portuario',
+    icon: '📦',
+    costYen: 350,
+    costRespect: 0,
+    gemsMin: 4,
+    gemsMax: 7,
+    desc: 'Caja de madera con botín oculto olvidada tras una redada nocturna.'
+  },
+  gem_stash: {
+    id: 'gem_stash',
+    name: 'Alijo Secreto de Gemas de Honor',
+    icon: '💎',
+    costYen: 0,
+    costRespect: 150,
+    gemsMin: 5,
+    gemsMax: 8,
+    desc: '¡Alijo clandestino dejado por líderes rivales repleto de gemas brillantes!'
+  },
+  // Legacy / Rural natural obstacles
   tree_trunk: {
     id: 'tree_trunk',
     name: 'Tronco de Roble Podrido',
@@ -497,7 +568,7 @@ const OBSTACLE_TYPES = {
     costRespect: 0,
     gemsMin: 2,
     gemsMax: 4,
-    desc: 'Un viejo tronco que estorba en la aldea. Límpialo con un constructor para ganar gemas.'
+    desc: 'Un viejo tronco que estorba en el terreno.'
   },
   rock_boulder: {
     id: 'rock_boulder',
@@ -527,22 +598,805 @@ const OBSTACLE_TYPES = {
     costRespect: 0,
     gemsMin: 2,
     gemsMax: 5,
-    desc: 'Árbol silvestre que crece en el terreno fértil de la aldea.'
+    desc: 'Árbol silvestre que crece en el terreno.'
   }
 };
 
-// Hero Unit: Ren Kazuma (Barbarian King equivalent)
+// ==========================================================================
+// TOKYO DELINQUENT LEADERS REGISTRY (12 COMMANDERS)
+// ==========================================================================
+
+const LEADERS_DATA = {
+  ren: {
+    id: 'ren',
+    name: 'Ren "Ray" Kazuma',
+    title: '初代総長 • Líder Supremo de RAYTON',
+    role: 'Delincuente Supremo & Daño Explosivo',
+    rarity: 'legendary',
+    stars: 5,
+    avatar: 'assets/images/ren.jpg',
+    icon: '👑',
+    color: '#f59e0b',
+    hpBase: 1600,
+    hpPerLevel: 220,
+    dpsBase: 110,
+    dpsPerLevel: 18,
+    speed: 2.1,
+    targetPriority: 'any',
+    passiveName: 'Presencia del Comandante',
+    passiveDesc: 'Aumenta el daño de todas las tropas aliadas un +20% mientras combate.',
+    abilityId: 'nuclear_kick',
+    abilityName: '⚡ Patada Nuclear',
+    abilityDesc: '¡Cura +700 HP, invoca 4 brawlers de refuerzo y desata onda expansiva destructiva!'
+  },
+  kaito: {
+    id: 'kaito',
+    name: 'Kaito Shiro',
+    title: 'Makochi • El General del Viento',
+    role: 'Comandante & Despliegue de Ejército Masivo',
+    rarity: 'legendary',
+    stars: 5,
+    avatar: 'assets/images/kaito.jpg',
+    icon: '🪭',
+    color: '#06b6d4',
+    hpBase: 1400,
+    hpPerLevel: 190,
+    dpsBase: 95,
+    dpsPerLevel: 16,
+    speed: 2.0,
+    targetPriority: 'any',
+    passiveName: '¡A la Carga, Escuadrón!',
+    passiveDesc: '¡Al desplegarse, aparece automáticamente con una escolta de 6 Novatos con Bate y 3 Arqueras!',
+    abilityId: 'tactical_reinforce',
+    abilityName: '🚩 Refuerzo Táctico',
+    abilityDesc: 'Convoca de inmediato 4 Lanzadores de Molotov y 1 Tanque con Viga en su posición.'
+  },
+  aoi: {
+    id: 'aoi',
+    name: 'Aoi "La Curandera"',
+    title: 'Makochi • Médica Callejera de Élite',
+    role: 'Sanadora Legendaria & Soporte Vital',
+    rarity: 'legendary',
+    stars: 5,
+    avatar: 'assets/images/aoi.jpg',
+    icon: '💚',
+    color: '#10b981',
+    hpBase: 1500,
+    hpPerLevel: 200,
+    dpsBase: 70,
+    dpsPerLevel: 12,
+    speed: 2.2,
+    targetPriority: 'any',
+    passiveName: 'Aura Sanadora Sagrada',
+    passiveDesc: 'Restaura continuamente +40 HP/seg a todas las tropas aliadas en un radio de 4 casillas.',
+    abilityId: 'divine_adrenaline',
+    abilityName: '💉 Adrenalina Divina',
+    abilityDesc: 'Cura masiva de +800 HP e invulnerabilidad dorada durante 3.5 segundos a todo su escuadrón.'
+  },
+  tora: {
+    id: 'tora',
+    name: 'Tora "El Destructor"',
+    title: 'Tigre de Hierro • Titán Rompemuros',
+    role: 'Fuerza Bruta & Furia Berserker',
+    rarity: 'legendary',
+    stars: 5,
+    avatar: 'assets/images/tora.jpg',
+    icon: '🐯',
+    color: '#ef4444',
+    hpBase: 2600,
+    hpPerLevel: 320,
+    dpsBase: 140,
+    dpsPerLevel: 24,
+    speed: 1.8,
+    targetPriority: 'defenses',
+    passiveName: 'Demolición de Murallas',
+    passiveDesc: 'Inflige x3 de daño contra muros y defensas fortificadas.',
+    abilityId: 'berserker_rage',
+    abilityName: '🔥 Furia Berserker',
+    abilityDesc: '¡Crece de tamaño, gana +150% de DPS, duplica su velocidad y causa temblor de tierra!'
+  },
+  ryu: {
+    id: 'ryu',
+    name: 'Ryu "El Dragón Bōsōzoku"',
+    title: 'Capitán de la División de Motociclistas',
+    role: 'Asalto Veloz & Rastro de Fuego',
+    rarity: 'epic',
+    stars: 4,
+    avatar: 'assets/images/ryu.jpg',
+    icon: '🏍️',
+    color: '#f97316',
+    hpBase: 1650,
+    hpPerLevel: 210,
+    dpsBase: 120,
+    dpsPerLevel: 19,
+    speed: 3.2,
+    targetPriority: 'any',
+    passiveName: 'Salto de Barricada',
+    passiveDesc: 'Salta muros con su moto y no se detiene ante obstáculos.',
+    abilityId: 'nitro_blaze',
+    abilityName: '🏍️ Embestida Nitro',
+    abilityDesc: 'Embestida de 550 de daño de choque que deja un rastro ardiente que quema todo por 5 seg.'
+  },
+  kurogane: {
+    id: 'kurogane',
+    name: 'Kurogane "La Serpiente"',
+    title: 'Líder del Sindicato Kurohebi',
+    role: 'Asesino Sombrío & Robo de Vida',
+    rarity: 'epic',
+    stars: 4,
+    avatar: 'assets/images/kurogane.jpg',
+    icon: '🐍',
+    color: '#8b5cf6',
+    hpBase: 1550,
+    hpPerLevel: 195,
+    dpsBase: 130,
+    dpsPerLevel: 20,
+    speed: 2.4,
+    targetPriority: 'defenses',
+    passiveName: 'Daga Drenadora',
+    passiveDesc: 'Restaura el 35% de todo el daño que inflige como salud para sí mismo.',
+    abilityId: 'shadow_strike',
+    abilityName: '🌑 Paso Sombrío',
+    abilityDesc: 'Se teletransporta detrás de la defensa enemiga más poderosa y le asesta 750 de daño crítico.'
+  },
+  daiki: {
+    id: 'daiki',
+    name: 'Daiki "El Puño de Acero"',
+    title: 'Titan Clandestino de Osaka • Campeón Invicto',
+    role: 'Muralla Humana & Daño Sísmico',
+    rarity: 'legendary',
+    stars: 5,
+    avatar: 'assets/images/daiki.jpg',
+    icon: '🥊',
+    color: '#eab308',
+    hpBase: 2800,
+    hpPerLevel: 340,
+    dpsBase: 125,
+    dpsPerLevel: 22,
+    speed: 1.7,
+    targetPriority: 'defenses',
+    passiveName: 'Blindaje de Titanio',
+    passiveDesc: 'Reduce un 35% todo el daño sufrido de cañones y defensas fortificadas.',
+    abilityId: 'titan_punch',
+    abilityName: '🥊 Impacto Sísmico',
+    abilityDesc: '¡Demuele barricadas en radio 3, inflige 850 de daño y activa un escudo protector de +1000 HP!'
+  },
+  gen: {
+    id: 'gen',
+    name: 'Gen "El Artificiero"',
+    title: 'Pirotécnico Temerario de Shinjuku',
+    role: 'Bombardero de Asedio & Fuego de Área',
+    rarity: 'epic',
+    stars: 4,
+    avatar: 'assets/images/gen.jpg',
+    icon: '💣',
+    color: '#ef4444',
+    hpBase: 1450,
+    hpPerLevel: 185,
+    dpsBase: 135,
+    dpsPerLevel: 23,
+    speed: 2.0,
+    targetPriority: 'defenses',
+    passiveName: 'Arsenal Incendiario',
+    passiveDesc: 'Sus ataques incendian estructuras causando un +25% de daño adicional en 4 segundos.',
+    abilityId: 'napalm_barrage',
+    abilityName: '💣 Lluvia de Napalm',
+    abilityDesc: '¡Bombardea con 5 explosivos de área que causan 500 de daño cada uno a defensas enemigas!'
+  },
+  hana: {
+    id: 'hana',
+    name: 'Hana "La Rosa Letal"',
+    title: 'Comandante de la División Kunoichi',
+    role: 'Asalto Hipersónico & Evasión Espectral',
+    rarity: 'legendary',
+    stars: 5,
+    avatar: 'assets/images/hana.jpg',
+    icon: '🌸',
+    color: '#ec4899',
+    hpBase: 1500,
+    hpPerLevel: 195,
+    dpsBase: 130,
+    dpsPerLevel: 21,
+    speed: 3.0,
+    targetPriority: 'any',
+    passiveName: 'Danza Espectral',
+    passiveDesc: 'Tiene un 40% de probabilidad de esquivar cualquier proyectil o cañonazo enemigo.',
+    abilityId: 'petal_vortex',
+    abilityName: '🌸 Vórtice de Cuchillas',
+    abilityDesc: '¡Gira con velocidad relámpago volviéndose inmune 4 seg y arrasando edificios en radio por 650 de daño!'
+  },
+  kazuki: {
+    id: 'kazuki',
+    name: 'Kazuki "El Filo Nocturno"',
+    title: 'Maestro de Katana de los Dojos de Kioto',
+    role: 'Corte Crítico & Destructor de Murallas',
+    rarity: 'legendary',
+    stars: 5,
+    avatar: 'assets/images/kazuki.jpg',
+    icon: '⚔️',
+    color: '#6366f1',
+    hpBase: 1650,
+    hpPerLevel: 215,
+    dpsBase: 145,
+    dpsPerLevel: 25,
+    speed: 2.3,
+    targetPriority: 'any',
+    passiveName: 'Corte Muramasa',
+    passiveDesc: 'Cada tercer golpe inflige daño crítico x2.5 atravesando muros y escudos.',
+    abilityId: 'iaido_slash',
+    abilityName: '⚡ Corte Iaido Relámpago',
+    abilityDesc: '¡Se proyecta en un destello atravesando muros e infligiendo 950 de daño a todos los objetivos en línea!'
+  },
+  shin: {
+    id: 'shin',
+    name: 'Shin "Ojo de Halcón"',
+    title: 'Vigilante Táctico de Azoteas de Tokio',
+    role: 'Francotirador de Ultra-Largo Alcance',
+    rarity: 'epic',
+    stars: 4,
+    avatar: 'assets/images/shin.jpg',
+    icon: '🎯',
+    color: '#0ea5e9',
+    hpBase: 1300,
+    hpPerLevel: 170,
+    dpsBase: 150,
+    dpsPerLevel: 26,
+    speed: 1.9,
+    targetPriority: 'defenses',
+    passiveName: 'Calibre Pesado Perforante',
+    passiveDesc: 'Dispara desde una distancia extrema (rango 6.5) fuera del alcance de la mayoría de defensas.',
+    abilityId: 'orbital_shot',
+    abilityName: '🎯 Disparo Orbital Perforante',
+    abilityDesc: '¡Fija con mira láser la defensa enemiga más peligrosa y la pulveriza con 1,200 de daño directo!'
+  },
+  yukiko: {
+    id: 'yukiko',
+    name: 'Yukiko "La Reina de Nieve"',
+    title: 'Emperatriz de la Cuadrilla de Hokkaido',
+    role: 'Control Glacial & Sanación Boreal',
+    rarity: 'legendary',
+    stars: 5,
+    avatar: 'assets/images/yukiko.jpg',
+    icon: '❄️',
+    color: '#38bdf8',
+    hpBase: 1550,
+    hpPerLevel: 205,
+    dpsBase: 105,
+    dpsPerLevel: 18,
+    speed: 2.1,
+    targetPriority: 'any',
+    passiveName: 'Aura Cero Absoluto',
+    passiveDesc: 'Ralentiza la cadencia de fuego de todas las defensas y enemigos en un 35%.',
+    abilityId: 'blizzard_tempest',
+    abilityName: '❄️ Tempestad Glacial',
+    abilityDesc: '¡Desata una tormenta de hielo que congela defensas en radio 5.5 por 6 seg y cura 600 HP a tropas aliadas!'
+  }
+};
+
+// ==========================================================================
+// JAPAN TERRITORIAL CONQUEST SYSTEM (RISK ARCHITECTURE)
+// ==========================================================================
+
+const JAPAN_REGIONS = {
+  kanto: {
+    id: 'kanto',
+    name: 'Kanto',
+    fullName: 'Gran Kanto (Tokio & Yokohama)',
+    crest: '👑',
+    territories: ['tokyo', 'yokohama', 'chiba'],
+    bonusTitle: '+25% Impuestos de Yenes ¥',
+    bonusDesc: 'Incrementa un +25% los Yenes generados en toda la red territorial.'
+  },
+  chubu: {
+    id: 'chubu',
+    name: 'Chubu',
+    fullName: 'Chubu (Nagoya & Monte Fuji)',
+    crest: '⚡',
+    territories: ['nagoya', 'fuji', 'niigata'],
+    bonusTitle: '+25% Velocidad de Tropas',
+    bonusDesc: 'Todas las tropas y motoristas se desplazan un +25% más velozmente en asaltos.'
+  },
+  kansai: {
+    id: 'kansai',
+    name: 'Kansai',
+    fullName: 'Kansai (Osaka, Kioto & Kobe)',
+    crest: '🥊',
+    territories: ['osaka', 'kyoto', 'kobe'],
+    bonusTitle: '+15% Daño de Toda la Banda',
+    bonusDesc: 'Aumenta un +15% el DPS de todas tus tropas en combate territorial.'
+  },
+  tohoku: {
+    id: 'tohoku',
+    name: 'Tohoku',
+    fullName: 'Tohoku (Sendai & Aomori)',
+    crest: '🛡️',
+    territories: ['sendai', 'aomori'],
+    bonusTitle: '+20% Resistencia de Muros',
+    bonusDesc: 'Tus barricadas y cañones cuentan con un +20% de puntos de vida defensiva.'
+  },
+  hokkaido: {
+    id: 'hokkaido',
+    name: 'Hokkaido',
+    fullName: 'Hokkaido (Sapporo Glacial)',
+    crest: '❄️',
+    territories: ['hakodate', 'sapporo'],
+    bonusTitle: '-30% Tiempo de Reclutamiento',
+    bonusDesc: '¡Acelera un 30% la velocidad de entrenamiento en la cola de reclutamiento!'
+  },
+  chugoku: {
+    id: 'chugoku',
+    name: 'Chugoku',
+    fullName: 'Chugoku (Hiroshima Marítimo)',
+    crest: '⚓',
+    territories: ['okayama', 'hiroshima'],
+    bonusTitle: '+20% Botín de Guerra Extra',
+    bonusDesc: 'Otorga un +20% de botín adicional en todos los asaltos territoriales.'
+  },
+  shikoku: {
+    id: 'shikoku',
+    name: 'Shikoku',
+    fullName: 'Shikoku (Matsuyama & Santuarios)',
+    crest: '🏯',
+    territories: ['matsuyama'],
+    bonusTitle: '+20% Salud de Comandantes',
+    bonusDesc: 'Todos tus líderes supremos obtienen un +20% de salud máxima.'
+  },
+  kyushu: {
+    id: 'kyushu',
+    name: 'Kyushu',
+    fullName: 'Kyushu (Fukuoka & Volcanes)',
+    crest: '🔥',
+    territories: ['fukuoka'],
+    bonusTitle: '+35% Esencia Sombría 🧪',
+    bonusDesc: 'Genera un +35% de producción pasiva de Esencia para tropas de élite.'
+  }
+};
+
+const JAPAN_TERRITORIES_DEF = {
+  tokyo: {
+    id: 'tokyo',
+    name: 'Gran Tokio (Shinjuku)',
+    region: 'kanto',
+    kanji: '東京',
+    owner: 'rayton',
+    gang: 'Cuartel General RAYTON',
+    garrison: 25,
+    difficulty: 1,
+    lootYen: 5000,
+    lootRespect: 3200,
+    lootDark: 250,
+    incomeYen: 180,
+    incomeRespect: 90,
+    coords: { x: 73, y: 56 },
+    connections: ['yokohama', 'chiba', 'fuji', 'niigata'],
+    lore: 'El corazón metropolitano de tu organización. Desde aquí se coordina la conquista de todo Japón.',
+    buildings: [
+      { type: 'hq', x: 8, y: 8, level: 2 },
+      { type: 'ramen', x: 5, y: 8, level: 2 },
+      { type: 'vault', x: 12, y: 8, level: 2 },
+      { type: 'cannon', x: 8, y: 5, level: 2 },
+      { type: 'watchtower', x: 8, y: 12, level: 2 }
+    ]
+  },
+  yokohama: {
+    id: 'yokohama',
+    name: 'Puerto de Yokohama',
+    region: 'kanto',
+    kanji: '横浜',
+    owner: 'enemy',
+    gang: 'Pandilla del Muelle Rojo',
+    garrison: 14,
+    difficulty: 1,
+    lootYen: 7000,
+    lootRespect: 4500,
+    lootDark: 300,
+    incomeYen: 140,
+    incomeRespect: 70,
+    coords: { x: 74, y: 62 },
+    connections: ['tokyo', 'chiba', 'fuji'],
+    lore: 'Punto de entrada de mercancías y astilleros clandestinos con defensas ligeras.',
+    buildings: [
+      { type: 'hq', x: 8, y: 8, level: 1 },
+      { type: 'ramen', x: 5, y: 8, level: 1 },
+      { type: 'vault', x: 11, y: 8, level: 1 },
+      { type: 'cannon', x: 8, y: 5, level: 1 },
+      { type: 'watchtower', x: 8, y: 11, level: 1 },
+      { type: 'spring_trap', x: 6, y: 6, level: 1 },
+      { type: 'wall', x: 4, y: 4, level: 1 }, { type: 'wall', x: 5, y: 4, level: 1 }, { type: 'wall', x: 6, y: 4, level: 1 }
+    ]
+  },
+  chiba: {
+    id: 'chiba',
+    name: 'Distrito Industrial Chiba',
+    region: 'kanto',
+    kanji: '千葉',
+    owner: 'enemy',
+    gang: 'Bōsōzoku de la Bahía',
+    garrison: 16,
+    difficulty: 2,
+    lootYen: 8500,
+    lootRespect: 5200,
+    lootDark: 350,
+    incomeYen: 160,
+    incomeRespect: 80,
+    coords: { x: 80, y: 58 },
+    connections: ['tokyo', 'yokohama'],
+    lore: 'Refinerías y naves industriales tomadas por pandilleros motociclistas.',
+    buildings: [
+      { type: 'hq', x: 8, y: 8, level: 2 },
+      { type: 'cannon', x: 6, y: 6, level: 2 },
+      { type: 'watchtower', x: 10, y: 10, level: 2 },
+      { type: 'mortar', x: 8, y: 11, level: 1 },
+      { type: 'vault', x: 5, y: 8, level: 2 },
+      { type: 'bomb', x: 7, y: 6, level: 1 }
+    ]
+  },
+  fuji: {
+    id: 'fuji',
+    name: 'Santuario Monte Fuji',
+    region: 'chubu',
+    kanji: '富士',
+    owner: 'enemy',
+    gang: 'Guardia Sagrada del Volcán',
+    garrison: 18,
+    difficulty: 2,
+    lootYen: 9500,
+    lootRespect: 5800,
+    lootDark: 400,
+    incomeYen: 170,
+    incomeRespect: 85,
+    coords: { x: 67, y: 57 },
+    connections: ['tokyo', 'yokohama', 'nagoya'],
+    lore: 'Dojos de montaña fortificados en las faldas del volcán sagrado.',
+    buildings: [
+      { type: 'hq', x: 8, y: 8, level: 2 },
+      { type: 'wizard_tower', x: 8, y: 5, level: 1 },
+      { type: 'cannon', x: 5, y: 8, level: 2 },
+      { type: 'watchtower', x: 11, y: 8, level: 2 },
+      { type: 'dojo', x: 8, y: 11, level: 2 }
+    ]
+  },
+  nagoya: {
+    id: 'nagoya',
+    name: 'Autopistas de Nagoya',
+    region: 'chubu',
+    kanji: '名古屋',
+    owner: 'enemy',
+    gang: 'Hermandad del Asfalto',
+    garrison: 20,
+    difficulty: 2,
+    lootYen: 11000,
+    lootRespect: 6800,
+    lootDark: 450,
+    incomeYen: 190,
+    incomeRespect: 95,
+    coords: { x: 61, y: 61 },
+    connections: ['fuji', 'niigata', 'kyoto', 'osaka'],
+    lore: 'Nudo neurálgico de transporte y talleres ilegales que conecta el este y el oeste.',
+    buildings: [
+      { type: 'hq', x: 8, y: 8, level: 2 },
+      { type: 'mortar', x: 8, y: 5, level: 2 },
+      { type: 'cannon', x: 5, y: 11, level: 2 },
+      { type: 'watchtower', x: 11, y: 11, level: 2 },
+      { type: 'vault', x: 5, y: 6, level: 2 }
+    ]
+  },
+  niigata: {
+    id: 'niigata',
+    name: 'Costa Nevada de Niigata',
+    region: 'chubu',
+    kanji: '新潟',
+    owner: 'enemy',
+    gang: 'Bandidos de la Costa Marina',
+    garrison: 22,
+    difficulty: 3,
+    lootYen: 12500,
+    lootRespect: 7500,
+    lootDark: 500,
+    incomeYen: 200,
+    incomeRespect: 100,
+    coords: { x: 68, y: 46 },
+    connections: ['tokyo', 'nagoya', 'sendai'],
+    lore: 'Almacenes helados de arroz y sake defendidos con cañones dobles.',
+    buildings: [
+      { type: 'hq', x: 8, y: 8, level: 3 },
+      { type: 'cannon', x: 6, y: 5, level: 3 },
+      { type: 'cannon', x: 10, y: 5, level: 3 },
+      { type: 'mortar', x: 8, y: 11, level: 2 },
+      { type: 'watchtower', x: 8, y: 6, level: 2 }
+    ]
+  },
+  kyoto: {
+    id: 'kyoto',
+    name: 'Dojos Milenarios de Kioto',
+    region: 'kansai',
+    kanji: '京都',
+    owner: 'enemy',
+    gang: 'Orden de Katana de Kazuki',
+    garrison: 24,
+    difficulty: 3,
+    lootYen: 13500,
+    lootRespect: 8200,
+    lootDark: 600,
+    incomeYen: 220,
+    incomeRespect: 110,
+    coords: { x: 56, y: 57 },
+    connections: ['nagoya', 'osaka', 'kobe'],
+    lore: 'Antiguos santuarios reconvertidos en bastiones de artes marciales de élite.',
+    buildings: [
+      { type: 'hq', x: 8, y: 8, level: 3 },
+      { type: 'wizard_tower', x: 6, y: 6, level: 2 },
+      { type: 'watchtower', x: 10, y: 6, level: 3 },
+      { type: 'cannon', x: 8, y: 11, level: 3 },
+      { type: 'dojo', x: 5, y: 8, level: 3 }
+    ]
+  },
+  osaka: {
+    id: 'osaka',
+    name: 'Sindicato de Osaka (Minami)',
+    region: 'kansai',
+    kanji: '大阪',
+    owner: 'enemy',
+    gang: 'Tigres Callejeros de Daiki',
+    garrison: 28,
+    difficulty: 4,
+    lootYen: 16000,
+    lootRespect: 9800,
+    lootDark: 750,
+    incomeYen: 250,
+    incomeRespect: 125,
+    coords: { x: 54, y: 64 },
+    connections: ['nagoya', 'kyoto', 'kobe', 'matsuyama'],
+    lore: 'Metrópolis mercantil de Dotonbori dominada por cuadrillas de puño de hierro.',
+    buildings: [
+      { type: 'hq', x: 8, y: 8, level: 4 },
+      { type: 'mortar', x: 6, y: 8, level: 2 },
+      { type: 'mortar', x: 10, y: 8, level: 2 },
+      { type: 'cannon', x: 8, y: 5, level: 3 },
+      { type: 'watchtower', x: 8, y: 11, level: 3 },
+      { type: 'vault', x: 5, y: 11, level: 3 }
+    ]
+  },
+  kobe: {
+    id: 'kobe',
+    name: 'Bahía del Dragón de Kobe',
+    region: 'kansai',
+    kanji: '神戸',
+    owner: 'enemy',
+    gang: 'Lobos Portuarios de Kobe',
+    garrison: 22,
+    difficulty: 3,
+    lootYen: 13000,
+    lootRespect: 7900,
+    lootDark: 550,
+    incomeYen: 210,
+    incomeRespect: 105,
+    coords: { x: 50, y: 62 },
+    connections: ['osaka', 'kyoto', 'okayama'],
+    lore: 'Muelles protegidos por anillos de barricadas y morteros de fuego continuo.',
+    buildings: [
+      { type: 'hq', x: 8, y: 8, level: 3 },
+      { type: 'cannon', x: 5, y: 6, level: 3 },
+      { type: 'watchtower', x: 11, y: 6, level: 3 },
+      { type: 'mortar', x: 8, y: 11, level: 2 }
+    ]
+  },
+  sendai: {
+    id: 'sendai',
+    name: 'Fortaleza del Norte de Sendai',
+    region: 'tohoku',
+    kanji: '仙台',
+    owner: 'enemy',
+    gang: 'Guerreros del Trueno Boreal',
+    garrison: 26,
+    difficulty: 3,
+    lootYen: 15000,
+    lootRespect: 9200,
+    lootDark: 700,
+    incomeYen: 230,
+    incomeRespect: 115,
+    coords: { x: 77, y: 41 },
+    connections: ['niigata', 'aomori'],
+    lore: 'Bastión del norte rodeado de densos muros de piedra y vigías implacables.',
+    buildings: [
+      { type: 'hq', x: 8, y: 8, level: 3 },
+      { type: 'watchtower', x: 6, y: 5, level: 3 },
+      { type: 'watchtower', x: 10, y: 5, level: 3 },
+      { type: 'cannon', x: 8, y: 11, level: 3 },
+      { type: 'mortar', x: 8, y: 5, level: 2 }
+    ]
+  },
+  aomori: {
+    id: 'aomori',
+    name: 'Estrecho Helado de Aomori',
+    region: 'tohoku',
+    kanji: '青森',
+    owner: 'enemy',
+    gang: 'Clanes del Viento Helado',
+    garrison: 28,
+    difficulty: 4,
+    lootYen: 17500,
+    lootRespect: 10500,
+    lootDark: 800,
+    incomeYen: 260,
+    incomeRespect: 130,
+    coords: { x: 76, y: 31 },
+    connections: ['sendai', 'hakodate'],
+    lore: 'El paso final hacia el norte helado defendido por torres mágicas y trampas.',
+    buildings: [
+      { type: 'hq', x: 8, y: 8, level: 4 },
+      { type: 'wizard_tower', x: 5, y: 6, level: 2 },
+      { type: 'wizard_tower', x: 11, y: 6, level: 2 },
+      { type: 'cannon', x: 8, y: 11, level: 4 },
+      { type: 'mortar', x: 8, y: 5, level: 3 }
+    ]
+  },
+  hakodate: {
+    id: 'hakodate',
+    name: 'Bastión Costero de Hakodate',
+    region: 'hokkaido',
+    kanji: '函館',
+    owner: 'enemy',
+    gang: 'Guardia del Estrecho Norte',
+    garrison: 30,
+    difficulty: 4,
+    lootYen: 19000,
+    lootRespect: 11800,
+    lootDark: 900,
+    incomeYen: 280,
+    incomeRespect: 140,
+    coords: { x: 77, y: 23 },
+    connections: ['aomori', 'sapporo'],
+    lore: 'Fortaleza estrellada de estilo Goryokaku adaptada a la guerra callejera moderna.',
+    buildings: [
+      { type: 'hq', x: 8, y: 8, level: 4 },
+      { type: 'mortar', x: 6, y: 6, level: 3 },
+      { type: 'mortar', x: 10, y: 6, level: 3 },
+      { type: 'cannon', x: 8, y: 12, level: 4 },
+      { type: 'watchtower', x: 5, y: 10, level: 3 }
+    ]
+  },
+  sapporo: {
+    id: 'sapporo',
+    name: 'Metrópolis Glacial de Sapporo',
+    region: 'hokkaido',
+    kanji: '札幌',
+    owner: 'enemy',
+    gang: 'Reino de Hielo de Yukiko',
+    garrison: 36,
+    difficulty: 5,
+    lootYen: 26000,
+    lootRespect: 16500,
+    lootDark: 1400,
+    incomeYen: 340,
+    incomeRespect: 170,
+    coords: { x: 81, y: 14 },
+    connections: ['hakodate'],
+    lore: 'La capital helada del norte. Una fortaleza monumental armada con cañones y morteros máximos.',
+    buildings: [
+      { type: 'hq', x: 8, y: 8, level: 5 },
+      { type: 'mortar', x: 6, y: 8, level: 3 },
+      { type: 'mortar', x: 10, y: 8, level: 3 },
+      { type: 'wizard_tower', x: 8, y: 5, level: 3 },
+      { type: 'cannon', x: 5, y: 11, level: 4 },
+      { type: 'cannon', x: 11, y: 11, level: 4 },
+      { type: 'watchtower', x: 8, y: 12, level: 4 }
+    ]
+  },
+  okayama: {
+    id: 'okayama',
+    name: 'Ruta de Okayama',
+    region: 'chugoku',
+    kanji: '岡山',
+    owner: 'enemy',
+    gang: 'Jinetes del Viento Interior',
+    garrison: 23,
+    difficulty: 3,
+    lootYen: 14000,
+    lootRespect: 8600,
+    lootDark: 600,
+    incomeYen: 220,
+    incomeRespect: 110,
+    coords: { x: 44, y: 62 },
+    connections: ['kobe', 'hiroshima', 'matsuyama'],
+    lore: 'Castillo negro fortificado que vigila el paso entre el mar interior y las montañas.',
+    buildings: [
+      { type: 'hq', x: 8, y: 8, level: 3 },
+      { type: 'cannon', x: 6, y: 6, level: 3 },
+      { type: 'mortar', x: 8, y: 11, level: 2 },
+      { type: 'watchtower', x: 10, y: 10, level: 3 }
+    ]
+  },
+  hiroshima: {
+    id: 'hiroshima',
+    name: 'Sindicato Marítimo de Hiroshima',
+    region: 'chugoku',
+    kanji: '広島',
+    owner: 'enemy',
+    gang: 'Dragones del Mar Interior',
+    garrison: 28,
+    difficulty: 4,
+    lootYen: 18000,
+    lootRespect: 11000,
+    lootDark: 850,
+    incomeYen: 270,
+    incomeRespect: 135,
+    coords: { x: 37, y: 64 },
+    connections: ['okayama', 'fukuoka'],
+    lore: 'Poderoso cuartel costero defendido por veteranos curtidos en batallas navales y callejeras.',
+    buildings: [
+      { type: 'hq', x: 8, y: 8, level: 4 },
+      { type: 'mortar', x: 6, y: 7, level: 3 },
+      { type: 'cannon', x: 10, y: 7, level: 4 },
+      { type: 'wizard_tower', x: 8, y: 11, level: 2 },
+      { type: 'watchtower', x: 5, y: 10, level: 3 }
+    ]
+  },
+  matsuyama: {
+    id: 'matsuyama',
+    name: 'Isla Fortaleza de Shikoku',
+    region: 'shikoku',
+    kanji: '四国',
+    owner: 'enemy',
+    gang: 'Cuadrilla de las 4 Provincias',
+    garrison: 25,
+    difficulty: 3,
+    lootYen: 15500,
+    lootRespect: 9500,
+    lootDark: 700,
+    incomeYen: 240,
+    incomeRespect: 120,
+    coords: { x: 45, y: 72 },
+    connections: ['osaka', 'okayama', 'fukuoka'],
+    lore: 'La isla inexpugnable rodeada por corrientes marinas rápidas y baluartes dobles.',
+    buildings: [
+      { type: 'hq', x: 8, y: 8, level: 3 },
+      { type: 'cannon', x: 6, y: 6, level: 3 },
+      { type: 'watchtower', x: 10, y: 6, level: 3 },
+      { type: 'mortar', x: 8, y: 11, level: 2 }
+    ]
+  },
+  fukuoka: {
+    id: 'fukuoka',
+    name: 'Cuna Bōsōzoku de Fukuoka',
+    region: 'kyushu',
+    kanji: '福岡',
+    owner: 'enemy',
+    gang: 'Legión de Acero de Kyushu',
+    garrison: 34,
+    difficulty: 5,
+    lootYen: 24000,
+    lootRespect: 15000,
+    lootDark: 1300,
+    incomeYen: 320,
+    incomeRespect: 160,
+    coords: { x: 26, y: 68 },
+    connections: ['hiroshima', 'matsuyama'],
+    lore: 'La capital del sur y cuna legendaria de las mayores bandas de motociclistas de Japón.',
+    buildings: [
+      { type: 'hq', x: 8, y: 8, level: 5 },
+      { type: 'mortar', x: 6, y: 8, level: 3 },
+      { type: 'mortar', x: 10, y: 8, level: 3 },
+      { type: 'cannon', x: 8, y: 5, level: 4 },
+      { type: 'cannon', x: 8, y: 11, level: 4 },
+      { type: 'wizard_tower', x: 5, y: 6, level: 3 },
+      { type: 'watchtower', x: 11, y: 6, level: 4 }
+    ]
+  }
+};
+
+// Legacy compatibility alias
 const HERO_REN = {
-  id: 'hero_ren',
-  name: 'Ren "Ray" Kazuma',
-  icon: '👑',
-  avatar: 'assets/images/ren.jpg',
-  hp: 1350,
-  maxHp: 1350,
-  dps: 80,
+  id: 'ren',
+  name: LEADERS_DATA.ren.name,
+  icon: LEADERS_DATA.ren.icon,
+  avatar: LEADERS_DATA.ren.avatar,
+  hp: LEADERS_DATA.ren.hpBase,
+  maxHp: LEADERS_DATA.ren.hpBase,
+  dps: LEADERS_DATA.ren.dpsBase,
   speed: 2.1,
   targetPriority: 'any',
-  desc: '初代総長 • Líder Supremo de RAYTON. Posee la devastadora Patada Nuclear activa.'
+  desc: LEADERS_DATA.ren.title
 };
 
 // Rival Bases for Raids
@@ -639,7 +1493,8 @@ function showToast(msg) {
 class ClashGame {
   constructor() {
     this.mode = 'base'; // 'base', 'raid', or 'defense'
-    this.theme = 'village'; // 'village' (Lush Emerald Grass) or 'urban' (Tokyo Asphalt)
+    this.theme = 'urban'; // 'urban' (Tokyo Asphalt & Concrete) or 'village' (Lush Emerald Grass)
+    this.weather = 'rain'; // 'rain' (Tokyo Rain), 'sakura' (Cherry Blossoms), 'neon' (Cyber Haze), 'clear'
     this.yen = 5400;
     this.maxYen = 12000;
     this.respect = 3800;
@@ -651,7 +1506,23 @@ class ClashGame {
     this.builders = 2;
     this.freeBuilders = 2;
     this.clanTroops = 4;
-    
+
+    // Recruitment Queue with Real-Time Progress Bar
+    this.trainingQueue = [];
+
+    // Japan Territorial Conquest (RISK System)
+    this.japanTerritories = {};
+    for (const [id, def] of Object.entries(JAPAN_TERRITORIES_DEF)) {
+      this.japanTerritories[id] = {
+        owner: def.owner,
+        garrison: def.garrison,
+        conqueredAt: def.owner === 'rayton' ? Date.now() : null
+      };
+    }
+    this.selectedRiskTerritory = 'yokohama';
+    this.japanTaxesAccumulated = { yen: 0, respect: 0 };
+    this.lastTaxTick = Date.now();
+
     // Buildings in Player's Base
     this.buildings = [
       { id: 'b_hq', type: 'hq', x: 7, y: 7, level: 1, currentHp: 1600, maxHp: 1600 },
@@ -678,13 +1549,13 @@ class ClashGame {
       { id: 'w_5', type: 'wall', x: 3, y: 4, level: 1, currentHp: 850, maxHp: 850 }
     ];
 
-    // Natural Village Obstacles (Troncos, Rocas, Arbustos de Gemas)
+    // Urban City Obstacles (Escombros, Chatarra, Barriles, Cajas y Alijos)
     this.obstacles = [
-      { id: 'obs_1', type: 'tree_trunk', x: 2, y: 6 },
-      { id: 'obs_2', type: 'rock_boulder', x: 14, y: 3 },
-      { id: 'obs_3', type: 'gem_bush', x: 13, y: 13 },
-      { id: 'obs_4', type: 'pine_tree', x: 2, y: 14 },
-      { id: 'obs_5', type: 'tree_trunk', x: 6, y: 2 }
+      { id: 'obs_1', type: 'concrete_block', x: 2, y: 6 },
+      { id: 'obs_2', type: 'scrap_metal', x: 14, y: 3 },
+      { id: 'obs_3', type: 'oil_barrel', x: 13, y: 13 },
+      { id: 'obs_4', type: 'cargo_crate', x: 2, y: 14 },
+      { id: 'obs_5', type: 'gem_stash', x: 6, y: 2 }
     ];
 
     // Army Inventory (Normal + Dark Elixir Troops)
@@ -708,7 +1579,7 @@ class ClashGame {
       freeze: 2
     };
 
-    // Wandering Villagers in base (Aldeanos)
+    // Wandering Villagers in base (Aldeanos y miembros de cuadrilla)
     this.villagers = [
       { x: 7, y: 7, targetX: 4, targetY: 7, speed: 0.015, icon: '🚶' },
       { x: 11, y: 11, targetX: 7, targetY: 4, speed: 0.012, icon: '👘' },
@@ -741,9 +1612,181 @@ class ClashGame {
     this.selectedDeployTroop = null;
     this.selectedDeploySpell = null;
 
+    // Tokyo Gang Leaders Collection (12 Commanders)
+    this.activeLeaderId = 'ren';
+    this.leaders = {
+      ren: { unlocked: true, level: 1, shards: 0 },
+      kaito: { unlocked: false, level: 1, shards: 0 },
+      aoi: { unlocked: false, level: 1, shards: 0 },
+      tora: { unlocked: false, level: 1, shards: 0 },
+      ryu: { unlocked: false, level: 1, shards: 0 },
+      kurogane: { unlocked: false, level: 1, shards: 0 },
+      daiki: { unlocked: false, level: 1, shards: 0 },
+      gen: { unlocked: false, level: 1, shards: 0 },
+      hana: { unlocked: false, level: 1, shards: 0 },
+      kazuki: { unlocked: false, level: 1, shards: 0 },
+      shin: { unlocked: false, level: 1, shards: 0 },
+      yukiko: { unlocked: false, level: 1, shards: 0 }
+    };
+
     this.loadState();
     this.startProductionLoop();
     this.startVillagerLoop();
+  }
+
+  getActiveLeader() {
+    const data = LEADERS_DATA[this.activeLeaderId] || LEADERS_DATA.ren;
+    const state = this.leaders[this.activeLeaderId] || { unlocked: true, level: 1, shards: 0 };
+    const level = state.level || 1;
+    const hp = data.hpBase + (level - 1) * data.hpPerLevel;
+    const dps = data.dpsBase + (level - 1) * data.dpsPerLevel;
+    const shardsNeeded = level * 5;
+    return {
+      ...data,
+      level: level,
+      shards: state.shards || 0,
+      unlocked: state.unlocked,
+      hp: hp,
+      maxHp: hp,
+      dps: dps,
+      shardsNeeded: shardsNeeded
+    };
+  }
+
+  getLeaderInfo(leaderId) {
+    const data = LEADERS_DATA[leaderId];
+    if (!data) return null;
+    const state = this.leaders[leaderId] || { unlocked: false, level: 1, shards: 0 };
+    const level = state.level || 1;
+    const hp = data.hpBase + (level - 1) * data.hpPerLevel;
+    const dps = data.dpsBase + (level - 1) * data.dpsPerLevel;
+    const shardsNeeded = level * 5;
+    const upgradeCostRespect = level * 1000;
+    return {
+      ...data,
+      level: level,
+      shards: state.shards || 0,
+      unlocked: state.unlocked,
+      hp: hp,
+      maxHp: hp,
+      dps: dps,
+      shardsNeeded: shardsNeeded,
+      upgradeCostRespect: upgradeCostRespect,
+      isActive: this.activeLeaderId === leaderId
+    };
+  }
+
+  setActiveLeader(leaderId) {
+    if (!LEADERS_DATA[leaderId]) return;
+    if (!this.leaders[leaderId] || !this.leaders[leaderId].unlocked) {
+      showToast('¡Debes reclutar a este líder en el Gacha antes de asignarlo!');
+      return;
+    }
+    this.activeLeaderId = leaderId;
+    window.soundEngine.playFanfareLevelUp();
+    showToast(`👑 ¡${LEADERS_DATA[leaderId].name} asignado como Comandante Supremo de RAYTON!`);
+    this.saveState();
+    updateUI();
+    if (typeof renderGachaModal === 'function') renderGachaModal();
+  }
+
+  upgradeLeader(leaderId) {
+    const info = this.getLeaderInfo(leaderId);
+    if (!info || !info.unlocked) return;
+    if (info.level >= 10) {
+      showToast('¡Este líder ya ha alcanzado el Nivel Máximo (Nv. 10)!');
+      return;
+    }
+    if (info.shards < info.shardsNeeded) {
+      showToast(`¡Necesitas ${info.shardsNeeded - info.shards} fragmentos más para mejorar a este líder!`);
+      return;
+    }
+    if (this.respect < info.upgradeCostRespect) {
+      showToast(`¡Respeto insuficiente! Necesitas ${info.upgradeCostRespect.toLocaleString()} 🔥`);
+      return;
+    }
+
+    this.respect -= info.upgradeCostRespect;
+    this.leaders[leaderId].shards -= info.shardsNeeded;
+    this.leaders[leaderId].level += 1;
+
+    window.soundEngine.playFanfareLevelUp();
+    showToast(`⚡ ¡${info.name} ascendió a Nivel ${this.leaders[leaderId].level}! +HP y +DPS aumentados.`);
+    this.saveState();
+    updateUI();
+    if (typeof renderGachaModal === 'function') renderGachaModal();
+  }
+
+  rollGacha(pullCount, currency) {
+    const singleCostGems = 50;
+    const multiCostGems = 450;
+    const singleCostRespect = 2500;
+    const multiCostRespect = 22500;
+
+    let totalCost = 0;
+    if (currency === 'gems') {
+      totalCost = pullCount === 1 ? singleCostGems : multiCostGems;
+      if (this.gems < totalCost) {
+        showToast(`¡Gemas insuficientes! Necesitas ${totalCost} 💎 Gemas de Honor.`);
+        return null;
+      }
+      this.gems -= totalCost;
+    } else {
+      totalCost = pullCount === 1 ? singleCostRespect : multiCostRespect;
+      if (this.respect < totalCost) {
+        showToast(`¡Respeto insuficiente! Necesitas ${totalCost.toLocaleString()} 🔥 de Respeto.`);
+        return null;
+      }
+      this.respect -= totalCost;
+    }
+
+    const results = [];
+    if (window.soundEngine.playGachaRoll) window.soundEngine.playGachaRoll();
+
+    for (let i = 0; i < pullCount; i++) {
+      const allKeys = Object.keys(LEADERS_DATA);
+      const legendaries = allKeys.filter(k => LEADERS_DATA[k].rarity === 'legendary');
+      const epics = allKeys.filter(k => LEADERS_DATA[k].rarity === 'epic');
+
+      let pickedKey = 'ren';
+      if (Math.random() < 0.28) {
+        pickedKey = legendaries[Math.floor(Math.random() * legendaries.length)];
+      } else {
+        pickedKey = epics[Math.floor(Math.random() * epics.length)];
+      }
+
+      // Multi-pull guaranteed 5-star
+      if (pullCount === 10 && i === 9 && !results.some(r => r.rarity === 'legendary')) {
+        pickedKey = legendaries[Math.floor(Math.random() * legendaries.length)];
+      }
+
+      const leaderData = LEADERS_DATA[pickedKey];
+      const state = this.leaders[pickedKey];
+      let isNew = false;
+      let shardsAwarded = 0;
+
+      if (!state.unlocked) {
+        state.unlocked = true;
+        isNew = true;
+        shardsAwarded = 0;
+      } else {
+        isNew = false;
+        shardsAwarded = leaderData.rarity === 'legendary' ? 6 : 4;
+        state.shards += shardsAwarded;
+      }
+
+      results.push({
+        leader: leaderData,
+        isNew: isNew,
+        shardsAwarded: shardsAwarded,
+        rarity: leaderData.rarity,
+        stars: leaderData.stars
+      });
+    }
+
+    this.saveState();
+    updateUI();
+    return results;
   }
 
   addFloatingText(text, x, y, color = '#fbbf24') {
@@ -780,6 +1823,7 @@ class ClashGame {
     try {
       const data = {
         theme: this.theme,
+        weather: this.weather,
         yen: this.yen,
         respect: this.respect,
         darkElixir: this.darkElixir,
@@ -789,7 +1833,13 @@ class ClashGame {
         obstacles: this.obstacles,
         army: this.army,
         spells: this.spells,
-        clanTroops: this.clanTroops
+        clanTroops: this.clanTroops,
+        activeLeaderId: this.activeLeaderId,
+        leaders: this.leaders,
+        trainingQueue: this.trainingQueue,
+        japanTerritories: this.japanTerritories,
+        japanTaxesAccumulated: this.japanTaxesAccumulated,
+        selectedRiskTerritory: this.selectedRiskTerritory
       };
       localStorage.setItem('rayton_clash_data', JSON.stringify(data));
     } catch (e) {
@@ -802,7 +1852,8 @@ class ClashGame {
       const saved = localStorage.getItem('rayton_clash_data');
       if (saved) {
         const parsed = JSON.parse(saved);
-        this.theme = parsed.theme ?? this.theme;
+        this.theme = parsed.theme ?? 'urban';
+        this.weather = parsed.weather ?? 'rain';
         this.yen = parsed.yen ?? this.yen;
         this.respect = parsed.respect ?? this.respect;
         this.darkElixir = parsed.darkElixir ?? this.darkElixir;
@@ -813,6 +1864,35 @@ class ClashGame {
         if (parsed.army) this.army = Object.assign({}, this.army, parsed.army);
         if (parsed.spells) this.spells = Object.assign({}, this.spells, parsed.spells);
         if (parsed.clanTroops !== undefined) this.clanTroops = parsed.clanTroops;
+        if (parsed.activeLeaderId && LEADERS_DATA[parsed.activeLeaderId]) {
+          this.activeLeaderId = parsed.activeLeaderId;
+        }
+        if (parsed.trainingQueue) this.trainingQueue = parsed.trainingQueue;
+        if (parsed.japanTerritories) {
+          this.japanTerritories = Object.assign({}, this.japanTerritories, parsed.japanTerritories);
+        }
+        if (parsed.japanTaxesAccumulated) {
+          this.japanTaxesAccumulated = parsed.japanTaxesAccumulated;
+        }
+        if (parsed.selectedRiskTerritory) {
+          this.selectedRiskTerritory = parsed.selectedRiskTerritory;
+        }
+        if (parsed.leaders) {
+          this.leaders = Object.assign({
+            ren: { unlocked: true, level: 1, shards: 0 },
+            kaito: { unlocked: false, level: 1, shards: 0 },
+            aoi: { unlocked: false, level: 1, shards: 0 },
+            tora: { unlocked: false, level: 1, shards: 0 },
+            ryu: { unlocked: false, level: 1, shards: 0 },
+            kurogane: { unlocked: false, level: 1, shards: 0 },
+            daiki: { unlocked: false, level: 1, shards: 0 },
+            gen: { unlocked: false, level: 1, shards: 0 },
+            hana: { unlocked: false, level: 1, shards: 0 },
+            kazuki: { unlocked: false, level: 1, shards: 0 },
+            shin: { unlocked: false, level: 1, shards: 0 },
+            yukiko: { unlocked: false, level: 1, shards: 0 }
+          }, parsed.leaders);
+        }
       }
     } catch (e) {
       console.warn('LocalStorage load failed', e);
@@ -821,12 +1901,39 @@ class ClashGame {
 
   resetGame() {
     localStorage.removeItem('rayton_clash_data');
-    this.theme = 'village';
+    this.theme = 'urban';
+    this.weather = 'rain';
     this.yen = 5400;
     this.respect = 3800;
     this.darkElixir = 750;
     this.gems = 320;
     this.trophies = 480;
+    this.activeLeaderId = 'ren';
+    this.trainingQueue = [];
+    this.japanTerritories = {};
+    for (const [id, def] of Object.entries(JAPAN_TERRITORIES_DEF)) {
+      this.japanTerritories[id] = {
+        owner: def.owner,
+        garrison: def.garrison,
+        conqueredAt: def.owner === 'rayton' ? Date.now() : null
+      };
+    }
+    this.selectedRiskTerritory = 'yokohama';
+    this.japanTaxesAccumulated = { yen: 0, respect: 0 };
+    this.leaders = {
+      ren: { unlocked: true, level: 1, shards: 0 },
+      kaito: { unlocked: false, level: 1, shards: 0 },
+      aoi: { unlocked: false, level: 1, shards: 0 },
+      tora: { unlocked: false, level: 1, shards: 0 },
+      ryu: { unlocked: false, level: 1, shards: 0 },
+      kurogane: { unlocked: false, level: 1, shards: 0 },
+      daiki: { unlocked: false, level: 1, shards: 0 },
+      gen: { unlocked: false, level: 1, shards: 0 },
+      hana: { unlocked: false, level: 1, shards: 0 },
+      kazuki: { unlocked: false, level: 1, shards: 0 },
+      shin: { unlocked: false, level: 1, shards: 0 },
+      yukiko: { unlocked: false, level: 1, shards: 0 }
+    };
     this.army = {
       brawler: 16,
       archer: 12,
@@ -864,15 +1971,251 @@ class ClashGame {
       { id: 'w_5', type: 'wall', x: 3, y: 4, level: 1, currentHp: 850, maxHp: 850 }
     ];
     this.obstacles = [
-      { id: 'obs_1', type: 'tree_trunk', x: 2, y: 6 },
-      { id: 'obs_2', type: 'rock_boulder', x: 14, y: 3 },
-      { id: 'obs_3', type: 'gem_bush', x: 13, y: 13 },
-      { id: 'obs_4', type: 'pine_tree', x: 2, y: 14 },
-      { id: 'obs_5', type: 'tree_trunk', x: 6, y: 2 }
+      { id: 'obs_1', type: 'concrete_block', x: 2, y: 6 },
+      { id: 'obs_2', type: 'scrap_metal', x: 14, y: 3 },
+      { id: 'obs_3', type: 'oil_barrel', x: 13, y: 13 },
+      { id: 'obs_4', type: 'cargo_crate', x: 2, y: 14 },
+      { id: 'obs_5', type: 'gem_stash', x: 6, y: 2 }
     ];
     this.saveState();
     updateUI();
-    showToast('¡Aldea mítica de RAYTON restablecida por completo!');
+    showToast('¡Distrito urbano de RAYTON restablecido por completo!');
+  }
+
+  // ------------------------------------------------------------------------
+  // JAPAN TERRITORIAL CONQUEST (RISK SYSTEM) METHODS
+  // ------------------------------------------------------------------------
+
+  getConquestCount() {
+    let count = 0;
+    for (const [id, t] of Object.entries(this.japanTerritories)) {
+      if (t.owner === 'rayton') count++;
+    }
+    return count;
+  }
+
+  getConquestPct() {
+    const total = Object.keys(JAPAN_TERRITORIES_DEF).length;
+    return Math.round((this.getConquestCount() / total) * 100);
+  }
+
+  isRegionFullyOwned(regionId) {
+    const region = JAPAN_REGIONS[regionId];
+    if (!region) return false;
+    return region.territories.every(tid => this.japanTerritories[tid] && this.japanTerritories[tid].owner === 'rayton');
+  }
+
+  getActiveRegionalBonuses() {
+    const bonuses = [];
+    for (const [rid, rdef] of Object.entries(JAPAN_REGIONS)) {
+      if (this.isRegionFullyOwned(rid)) {
+        bonuses.push(rdef);
+      }
+    }
+    return bonuses;
+  }
+
+  conquerTerritory(territoryId) {
+    const def = JAPAN_TERRITORIES_DEF[territoryId];
+    if (!def) return;
+    if (!this.japanTerritories[territoryId]) {
+      this.japanTerritories[territoryId] = { owner: 'enemy', garrison: def.garrison };
+    }
+    const wasAlreadyOwned = this.japanTerritories[territoryId].owner === 'rayton';
+    this.japanTerritories[territoryId].owner = 'rayton';
+    this.japanTerritories[territoryId].conqueredAt = Date.now();
+    this.japanTerritories[territoryId].garrison = Math.max(15, this.japanTerritories[territoryId].garrison);
+
+    if (!wasAlreadyOwned) {
+      if (window.soundEngine.playConquestFanfare) window.soundEngine.playConquestFanfare();
+      showToast(`🗾 ¡PROVINCIA CONQUISTADA: ${def.name.toUpperCase()}! ¡El imperio de RAYTON se expande!`);
+      this.saveState();
+
+      // Check for Total Japan Conquest (100% Risk)
+      if (this.getConquestCount() >= Object.keys(JAPAN_TERRITORIES_DEF).length) {
+        setTimeout(() => {
+          this.triggerShogunTotalVictory();
+        }, 1200);
+      }
+    }
+  }
+
+  triggerShogunTotalVictory() {
+    if (window.soundEngine.playConquestFanfare) window.soundEngine.playConquestFanfare();
+    const modal = document.getElementById('japan-conquest-victory-modal');
+    if (modal) {
+      modal.classList.remove('hidden');
+      modal.style.display = 'flex';
+    }
+    this.gems += 1000;
+    this.yen = Math.min(this.maxYen, this.yen + 150000);
+    this.respect = Math.min(this.maxRespect, this.respect + 80000);
+    this.saveState();
+    updateUI();
+  }
+
+  collectJapanTaxes() {
+    const amountYen = Math.round(this.japanTaxesAccumulated.yen || 0);
+    const amountRespect = Math.round(this.japanTaxesAccumulated.respect || 0);
+    if (amountYen <= 0 && amountRespect <= 0) {
+      showToast('No hay tributos acumulados todavía. Tus territorios generan impuestos continuamente.');
+      return;
+    }
+
+    this.yen = Math.min(this.maxYen, this.yen + amountYen);
+    this.respect = Math.min(this.maxRespect, this.respect + amountRespect);
+    this.japanTaxesAccumulated = { yen: 0, respect: 0 };
+    window.soundEngine.playCoinCollect();
+    this.addFloatingText(`+¥${amountYen.toLocaleString()}`, window.innerWidth / 2, window.innerHeight / 2, '#fbbf24');
+    showToast(`💰 ¡Tributos Recaudados! +¥ ${amountYen.toLocaleString()} | +${amountRespect.toLocaleString()} 🔥`);
+    this.saveState();
+    updateUI();
+    if (typeof renderJapanRiskMap === 'function') renderJapanRiskMap();
+  }
+
+  reinforceTerritory(territoryId) {
+    const t = this.japanTerritories[territoryId];
+    if (!t || t.owner !== 'rayton') {
+      showToast('¡Solo puedes reforzar provincias dominadas por tu banda!');
+      return;
+    }
+    if (this.getArmyCount() < 5) {
+      showToast('¡Necesitas al menos 5 tropas en tus campamentos para transferir guarnición!');
+      return;
+    }
+    let transferred = 0;
+    for (const [id, count] of Object.entries(this.army)) {
+      const take = Math.min(count, 5 - transferred);
+      this.army[id] -= take;
+      transferred += take;
+      if (transferred >= 5) break;
+    }
+    t.garrison += 5;
+    window.soundEngine.playDeploy();
+    showToast(`🛡️ ¡Guarnición reforzada! +5 defensores estacionados en ${JAPAN_TERRITORIES_DEF[territoryId].name}`);
+    this.saveState();
+    updateUI();
+    if (typeof renderJapanRiskMap === 'function') renderJapanRiskMap();
+  }
+
+  // ------------------------------------------------------------------------
+  // RECRUITMENT QUEUE WITH TIME METHODS
+  // ------------------------------------------------------------------------
+
+  enqueueTroop(troopId, isDark = false) {
+    const t = TROOP_TYPES[troopId];
+    if (!t) return;
+    const queuedHousing = this.trainingQueue.reduce((sum, item) => {
+      const def = TROOP_TYPES[item.troopId];
+      return sum + (def ? def.housing : 1);
+    }, 0);
+
+    if (this.getArmyCount() + queuedHousing + t.housing > this.getArmyCapacity()) {
+      showToast('¡Campamentos y cola de reclutamiento al máximo de capacidad!');
+      return;
+    }
+
+    if (isDark) {
+      if (this.darkElixir < t.costDark) {
+        showToast('¡No tienes suficiente Esencia Sombría 🧪!');
+        return;
+      }
+      this.darkElixir -= t.costDark;
+    } else {
+      if (this.respect < t.costRespect) {
+        showToast('¡No tienes suficiente Respeto 🔥!');
+        return;
+      }
+      this.respect -= t.costRespect;
+    }
+
+    // Regional bonus: Hokkaido gives -30% training time!
+    let durationSeconds = t.trainTime || 5;
+    if (this.isRegionFullyOwned('hokkaido')) {
+      durationSeconds = Math.max(1, Math.round(durationSeconds * 0.7));
+    }
+
+    const durationMs = durationSeconds * 1000;
+    const newItem = {
+      queueId: Date.now() + Math.random(),
+      troopId: troopId,
+      isDark: isDark,
+      costRespect: t.costRespect || 0,
+      costDark: t.costDark || 0,
+      totalMs: durationMs,
+      remainingMs: durationMs
+    };
+
+    this.trainingQueue.push(newItem);
+    if (window.soundEngine.playRecruitStart) window.soundEngine.playRecruitStart();
+    showToast(`⏳ Reclutando ${t.name}... (${durationSeconds}s)`);
+    this.saveState();
+    updateUI();
+    if (typeof renderBarracks === 'function') renderBarracks(isDark ? 'dark' : 'troops');
+  }
+
+  updateTrainingQueue(dt) {
+    if (!this.trainingQueue || this.trainingQueue.length === 0) return;
+    const active = this.trainingQueue[0];
+    active.remainingMs -= dt;
+
+    if (active.remainingMs <= 0) {
+      const t = TROOP_TYPES[active.troopId];
+      this.army[active.troopId] = (this.army[active.troopId] || 0) + 1;
+      this.trainingQueue.shift();
+
+      if (window.soundEngine.playRecruitFinish) window.soundEngine.playRecruitFinish();
+      this.addFloatingText(`+1 ${t ? t.icon : '🥋'} ¡Listo!`, canvas.width / 2, canvas.height / 3, '#10b981');
+      showToast(`✅ ¡${t ? t.name : 'Tropa'} reclutado y listo para la guerra!`);
+      this.saveState();
+      updateUI();
+
+      const barracksModal = document.getElementById('barracks-modal');
+      if (barracksModal && !barracksModal.classList.contains('hidden') && typeof renderRecruitmentQueue === 'function') {
+        renderRecruitmentQueue();
+      }
+    } else {
+      const barracksModal = document.getElementById('barracks-modal');
+      if (barracksModal && !barracksModal.classList.contains('hidden') && typeof renderRecruitmentQueue === 'function') {
+        renderRecruitmentQueue();
+      }
+    }
+  }
+
+  speedUpTrainingWithGems() {
+    if (this.trainingQueue.length === 0) return;
+    if (this.gems < 2) {
+      showToast('¡Necesitas al menos 2 Gemas de Honor 💎 para acelerar la cola!');
+      return;
+    }
+    this.gems -= 2;
+    this.trainingQueue.forEach(item => {
+      this.army[item.troopId] = (this.army[item.troopId] || 0) + 1;
+    });
+    const totalTrained = this.trainingQueue.length;
+    this.trainingQueue = [];
+    if (window.soundEngine.playFanfareLevelUp) window.soundEngine.playFanfareLevelUp();
+    showToast(`⚡ ¡Aceleración completada! ${totalTrained} tropas listas al instante.`);
+    this.saveState();
+    updateUI();
+    if (typeof renderRecruitmentQueue === 'function') renderRecruitmentQueue();
+    if (typeof renderBarracks === 'function') renderBarracks('troops');
+  }
+
+  cancelTrainingQueueItem(queueId) {
+    const idx = this.trainingQueue.findIndex(q => q.queueId === queueId);
+    if (idx === -1) return;
+    const item = this.trainingQueue[idx];
+    if (item.isDark) {
+      this.darkElixir = Math.min(this.maxDarkElixir, this.darkElixir + item.costDark);
+    } else {
+      this.respect = Math.min(this.maxRespect, this.respect + item.costRespect);
+    }
+    this.trainingQueue.splice(idx, 1);
+    showToast('Reclutamiento cancelado. Recursos reembolsados.');
+    this.saveState();
+    updateUI();
+    if (typeof renderRecruitmentQueue === 'function') renderRecruitmentQueue();
   }
 
   startProductionLoop() {
@@ -887,8 +2230,29 @@ class ClashGame {
           b.stored = Math.min(300, (b.stored || 0) + (5 * b.level));
         }
       });
+
+      // Accumulate Japan Regional Taxes continuously
+      let taxIncYen = 0;
+      let taxIncRespect = 0;
+      for (const [id, state] of Object.entries(this.japanTerritories)) {
+        if (state.owner === 'rayton' && JAPAN_TERRITORIES_DEF[id]) {
+          const tDef = JAPAN_TERRITORIES_DEF[id];
+          taxIncYen += (tDef.incomeYen || 150) * 0.08;
+          taxIncRespect += (tDef.incomeRespect || 75) * 0.08;
+        }
+      }
+      if (this.isRegionFullyOwned('kanto')) taxIncYen *= 1.25;
+
+      this.japanTaxesAccumulated.yen = (this.japanTaxesAccumulated.yen || 0) + taxIncYen;
+      this.japanTaxesAccumulated.respect = (this.japanTaxesAccumulated.respect || 0) + taxIncRespect;
+
       updateUI();
     }, 2500);
+
+    // Live Recruitment Queue Tick Loop (Runs every 200ms)
+    setInterval(() => {
+      this.updateTrainingQueue(200);
+    }, 200);
 
     // Random obstacle respawn (like Clash of Clans)
     setInterval(() => {
@@ -1057,6 +2421,26 @@ class ClashGame {
     }
   }
 
+  toggleWeather() {
+    const modes = ['rain', 'sakura', 'neon', 'clear'];
+    const curIdx = modes.indexOf(this.weather || 'rain');
+    this.weather = modes[(curIdx + 1) % modes.length];
+    if (window.soundEngine && window.soundEngine.playWeatherSwitch) {
+      window.soundEngine.playWeatherSwitch();
+    }
+    const weatherIcons = { rain: '🌧️', sakura: '🌸', neon: '⚡', clear: '☀️' };
+    const weatherNames = {
+      rain: '🌧️ Lluvia Callejera Tokio (Asfalto Mojado y Reflejos)',
+      sakura: '🌸 Brisa Nocturna Sakura (Pétalos de Cerezo Flotantes)',
+      neon: '⚡ Noche Cibernética Neón (Aura Violeta y Resplandor)',
+      clear: '☀️ Cielo Despejado de Metrópolis'
+    };
+    const btn = document.getElementById('btn-weather-toggle');
+    if (btn) btn.textContent = weatherIcons[this.weather] || '🌧️';
+    showToast(weatherNames[this.weather] || 'Clima modificado');
+    this.saveState();
+  }
+
   requestClanTroops() {
     window.soundEngine.playFanfareLevelUp();
     this.army.brawler = (this.army.brawler || 0) + 3;
@@ -1211,23 +2595,29 @@ function drawObstacle(obs) {
 }
 
 // Draw Building
+// ==========================================================================
+// GEOMETRIC 2.5D ARCHITECTURAL BUILDING MODELS (NO CUBES!)
+// ==========================================================================
+
 function drawBuilding(bldg, isRaid = false) {
   const def = BUILDING_TYPES[bldg.type];
   if (!def) return;
 
-  const pt = gridToScreen(bldg.x, bldg.y);
   const w = def.w;
   const h = def.h;
+  const origin = gridToScreen(bldg.x, bldg.y);
+  const rightCorner = gridToScreen(bldg.x + w, bldg.y);
+  const bottomCorner = gridToScreen(bldg.x + w, bldg.y + h);
+  const leftCorner = gridToScreen(bldg.x, bldg.y + h);
+  const centerPt = gridToScreen(bldg.x + w / 2, bldg.y + h / 2);
+  const cx = centerPt.x;
+  const cy = centerPt.y;
 
-  // Selected Building Bounding Box & Ground Aura
+  // 1. Selected Building Bounding Box & Ground Aura
   if (!isRaid && game.selectedBuilding && game.selectedBuilding.id === bldg.id) {
     ctx.save();
     ctx.strokeStyle = '#fbbf24';
     ctx.lineWidth = 2.5;
-    const origin = gridToScreen(bldg.x, bldg.y);
-    const rightCorner = gridToScreen(bldg.x + w, bldg.y);
-    const bottomCorner = gridToScreen(bldg.x + w, bldg.y + h);
-    const leftCorner = gridToScreen(bldg.x, bldg.y + h);
     ctx.beginPath();
     ctx.moveTo(origin.x, origin.y);
     ctx.lineTo(rightCorner.x, rightCorner.y);
@@ -1240,147 +2630,1025 @@ function drawBuilding(bldg, isRaid = false) {
     ctx.restore();
   }
 
-  // Shadow
+  // 2. Realistic Ground Shadow
   ctx.save();
   ctx.fillStyle = 'rgba(0, 0, 0, 0.45)';
   ctx.beginPath();
-  const shadowPt = gridToScreen(bldg.x + w / 2, bldg.y + h / 2);
-  ctx.ellipse(shadowPt.x, shadowPt.y + (h * TILE_H) / 2, (w * TILE_W) / 2.2, (h * TILE_H) / 3, 0, 0, Math.PI * 2);
+  ctx.ellipse(cx, cy + (h * TILE_H) / 2.4, (w * TILE_W) / 2.1, (h * TILE_H) / 3, 0, 0, Math.PI * 2);
   ctx.fill();
   ctx.restore();
 
-  // Building Isometric Base Box
-  const origin = gridToScreen(bldg.x, bldg.y);
-  const bottomCorner = gridToScreen(bldg.x + w, bldg.y + h);
-  const rightCorner = gridToScreen(bldg.x + w, bldg.y);
-  const leftCorner = gridToScreen(bldg.x, bldg.y + h);
+  // 3. RENDER CUSTOM GEOMETRIC MODEL BASED ON BUILDING TYPE
+  const bType = bldg.type;
 
-  const heightOffset = bldg.type === 'wall' ? 18 : 
-                       bldg.type === 'watchtower' ? 55 : 
-                       bldg.type === 'wizard_tower' ? 58 :
-                       bldg.type === 'air_defense' ? 46 :
-                       bldg.type === 'cannon' ? 36 :
-                       bldg.type === 'mortar' ? 42 :
-                       bldg.type === 'dark_drill' ? 44 :
-                       bldg.type === 'dark_vault' ? 48 :
-                       bldg.type === 'clan_castle' ? 60 :
-                       bldg.type === 'hero_altar' ? 32 :
-                       bldg.type === 'spring_trap' || bldg.type === 'bomb' ? 8 :
-                       bldg.type === 'hq' ? 65 : 40;
+  // ------------------------------------------------------------------------
+  // A. HQ / CUARTEL GENERAL (PAGODA FORTALEZA URBANA TOKIO)
+  // ------------------------------------------------------------------------
+  if (bType === 'hq') {
+    const baseH = 22;
+    const midH = 48;
+    const topH = 74;
 
-  // Top Surface
-  ctx.beginPath();
-  ctx.moveTo(origin.x, origin.y - heightOffset);
-  ctx.lineTo(rightCorner.x, rightCorner.y - heightOffset);
-  ctx.lineTo(bottomCorner.x, bottomCorner.y - heightOffset);
-  ctx.lineTo(leftCorner.x, leftCorner.y - heightOffset);
-  ctx.closePath();
-
-  // Colors based on building type (Rich Fantasy Delinquent Aesthetic)
-  if (bldg.type === 'hq') ctx.fillStyle = '#b45309';
-  else if (bldg.type === 'watchtower') ctx.fillStyle = '#1e293b';
-  else if (bldg.type === 'wizard_tower') ctx.fillStyle = '#312e81';
-  else if (bldg.type === 'air_defense') ctx.fillStyle = '#065f46';
-  else if (bldg.type === 'cannon') ctx.fillStyle = '#334155';
-  else if (bldg.type === 'mortar') ctx.fillStyle = '#7f1d1d';
-  else if (bldg.type === 'dark_drill') ctx.fillStyle = '#581c87';
-  else if (bldg.type === 'dark_vault') ctx.fillStyle = '#2e1065';
-  else if (bldg.type === 'wall') ctx.fillStyle = '#475569';
-  else if (bldg.type === 'ramen') ctx.fillStyle = '#d97706';
-  else if (bldg.type === 'dojo') ctx.fillStyle = '#c2410c';
-  else if (bldg.type === 'camp') ctx.fillStyle = '#166534';
-  else if (bldg.type === 'clan_castle') ctx.fillStyle = '#1e1b4b';
-  else if (bldg.type === 'hero_altar') ctx.fillStyle = '#78350f';
-  else if (bldg.type === 'spell_factory') ctx.fillStyle = '#581c87';
-  else if (bldg.type === 'spring_trap' || bldg.type === 'bomb') ctx.fillStyle = '#52525b';
-  else ctx.fillStyle = '#1e293b';
-
-  ctx.fill();
-  ctx.strokeStyle = '#f59e0b';
-  ctx.lineWidth = 1.5;
-  ctx.stroke();
-
-  // Left Face
-  ctx.beginPath();
-  ctx.moveTo(leftCorner.x, leftCorner.y - heightOffset);
-  ctx.lineTo(bottomCorner.x, bottomCorner.y - heightOffset);
-  ctx.lineTo(bottomCorner.x, bottomCorner.y);
-  ctx.lineTo(leftCorner.x, leftCorner.y);
-  ctx.closePath();
-  ctx.fillStyle = 'rgba(0,0,0,0.35)';
-  ctx.fill();
-  ctx.stroke();
-
-  // Right Face
-  ctx.beginPath();
-  ctx.moveTo(rightCorner.x, rightCorner.y - heightOffset);
-  ctx.lineTo(bottomCorner.x, bottomCorner.y - heightOffset);
-  ctx.lineTo(bottomCorner.x, bottomCorner.y);
-  ctx.lineTo(rightCorner.x, rightCorner.y);
-  ctx.closePath();
-  ctx.fillStyle = 'rgba(0,0,0,0.55)';
-  ctx.fill();
-  ctx.stroke();
-
-  // Building Icon & Level
-  const centerPt = gridToScreen(bldg.x + w / 2, bldg.y + h / 2);
-  ctx.font = `${Math.min(32, 16 + w * 5)}px sans-serif`;
-  ctx.textAlign = 'center';
-  ctx.textBaseline = 'middle';
-  ctx.fillText(def.icon, centerPt.x, centerPt.y - heightOffset / 1.5);
-
-  // Special Visual: Wizard Tower Pyrotechnics
-  if (bldg.type === 'wizard_tower') {
-    const sparkY = centerPt.y - heightOffset - 8;
-    ctx.font = '10px sans-serif';
-    ctx.fillText('✨', centerPt.x + 8 * Math.cos(Date.now() / 200), sparkY + 4 * Math.sin(Date.now() / 200));
-  }
-
-  // Special Visual: Dark Drill Bubbling Glow
-  if (bldg.type === 'dark_drill') {
-    const bubY = centerPt.y - heightOffset - 6;
-    ctx.fillStyle = 'rgba(192, 132, 252, 0.35)';
+    // Stone rampart foundation (Shiro-kabe)
+    ctx.fillStyle = '#334155';
+    ctx.strokeStyle = '#1e293b';
+    ctx.lineWidth = 1.5;
     ctx.beginPath();
-    ctx.arc(centerPt.x, bubY, 8 + Math.sin(Date.now() / 180) * 2, 0, Math.PI * 2);
+    ctx.moveTo(origin.x, origin.y - baseH);
+    ctx.lineTo(rightCorner.x, rightCorner.y - baseH);
+    ctx.lineTo(bottomCorner.x, bottomCorner.y - baseH);
+    ctx.lineTo(leftCorner.x, leftCorner.y - baseH);
+    ctx.closePath();
     ctx.fill();
-  }
+    ctx.stroke();
 
-  // Special Visual: Campfire in Camp with Roaming Troops!
-  if (bldg.type === 'camp') {
-    const fireY = centerPt.y - heightOffset - 4;
-    ctx.fillStyle = 'rgba(249, 115, 22, 0.4)';
+    // Foundation side faces
+    ctx.fillStyle = '#1e293b';
     ctx.beginPath();
-    ctx.arc(centerPt.x, fireY, 14 + Math.sin(Date.now() / 150) * 3, 0, Math.PI * 2);
+    ctx.moveTo(leftCorner.x, leftCorner.y - baseH);
+    ctx.lineTo(bottomCorner.x, bottomCorner.y - baseH);
+    ctx.lineTo(bottomCorner.x, bottomCorner.y);
+    ctx.lineTo(leftCorner.x, leftCorner.y);
+    ctx.closePath();
     ctx.fill();
 
+    ctx.fillStyle = '#0f172a';
+    ctx.beginPath();
+    ctx.moveTo(rightCorner.x, rightCorner.y - baseH);
+    ctx.lineTo(bottomCorner.x, bottomCorner.y - baseH);
+    ctx.lineTo(bottomCorner.x, bottomCorner.y);
+    ctx.lineTo(rightCorner.x, rightCorner.y);
+    ctx.closePath();
+    ctx.fill();
+
+    // Double entrance doors with iron crossbars & studs
+    ctx.fillStyle = '#78350f';
+    ctx.fillRect(cx - 10, cy - baseH + 2, 20, 14);
+    ctx.strokeStyle = '#d97706';
+    ctx.lineWidth = 1;
+    ctx.strokeRect(cx - 10, cy - baseH + 2, 20, 14);
+    ctx.fillStyle = '#fbbf24';
+    ctx.fillRect(cx - 1, cy - baseH + 7, 2, 4);
+
+    // Tier 1 Timber Walls (Red lacquer & Gold Shoji Grid)
+    ctx.fillStyle = '#991b1b';
+    ctx.beginPath();
+    ctx.moveTo(origin.x + 8, origin.y - midH);
+    ctx.lineTo(rightCorner.x - 8, rightCorner.y - midH);
+    ctx.lineTo(bottomCorner.x - 8, bottomCorner.y - midH);
+    ctx.lineTo(leftCorner.x + 8, leftCorner.y - midH);
+    ctx.closePath();
+    ctx.fill();
+
+    // Flared Curved Pagoda Eaves (Tier 1 Irimoya Roof)
+    ctx.fillStyle = '#1e1b4b';
+    ctx.strokeStyle = '#fbbf24';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(cx, cy - midH - 12);
+    ctx.quadraticCurveTo(cx - 42, cy - midH + 4, cx - 48, cy - midH + 2);
+    ctx.lineTo(cx + 48, cy - midH + 2);
+    ctx.quadraticCurveTo(cx + 42, cy - midH + 4, cx, cy - midH - 12);
+    ctx.closePath();
+    ctx.fill();
+    ctx.stroke();
+
+    // Tier 2 Tower Room
+    ctx.fillStyle = '#b45309';
+    ctx.fillRect(cx - 16, cy - topH + 8, 32, 18);
+    ctx.strokeStyle = '#fbbf24';
+    ctx.strokeRect(cx - 16, cy - topH + 8, 32, 18);
+
+    // Shoji Windows
+    ctx.fillStyle = '#fef3c7';
+    ctx.fillRect(cx - 11, cy - topH + 11, 8, 8);
+    ctx.fillRect(cx + 3, cy - topH + 11, 8, 8);
+
+    // Top Pagoda Roof with flared hip
+    ctx.fillStyle = '#0f172a';
+    ctx.strokeStyle = '#f59e0b';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(cx, cy - topH - 16);
+    ctx.quadraticCurveTo(cx - 30, cy - topH + 2, cx - 34, cy - topH);
+    ctx.lineTo(cx + 34, cy - topH);
+    ctx.quadraticCurveTo(cx + 30, cy - topH + 2, cx, cy - topH - 16);
+    ctx.closePath();
+    ctx.fill();
+    ctx.stroke();
+
+    // Golden Roof Ridge Ornament (Shachihoko) & Gang War Banner
+    ctx.fillStyle = '#fbbf24';
+    ctx.beginPath();
+    ctx.arc(cx, cy - topH - 18, 5, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Flagpole with waving RAYTON war flag
+    ctx.strokeStyle = '#cbd5e1';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(cx, cy - topH - 18);
+    ctx.lineTo(cx, cy - topH - 36);
+    ctx.stroke();
+
+    const flagWave = Math.sin(Date.now() / 180) * 3;
+    ctx.fillStyle = '#ef4444';
+    ctx.beginPath();
+    ctx.moveTo(cx, cy - topH - 36);
+    ctx.lineTo(cx + 16, cy - topH - 32 + flagWave);
+    ctx.lineTo(cx, cy - topH - 26);
+    ctx.closePath();
+    ctx.fill();
+    ctx.font = 'bold 8px Russo One, sans-serif';
+    ctx.fillStyle = '#fff';
+    ctx.fillText('雷', cx + 6, cy - topH - 30 + flagWave * 0.5);
+  }
+
+  // ------------------------------------------------------------------------
+  // B. CAÑÓN DE ASEDIO (CYLINDRICAL TURRET & TAPERED GUN BARREL)
+  // ------------------------------------------------------------------------
+  else if (bType === 'cannon') {
+    // Cast-iron circular turntable base
+    ctx.save();
+    ctx.fillStyle = '#334155';
+    ctx.strokeStyle = '#64748b';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.ellipse(cx, cy, 26, 14, 0, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.stroke();
+
+    // Rivet studs around base
+    for (let a = 0; a < Math.PI * 2; a += Math.PI / 4) {
+      const rx = cx + Math.cos(a) * 20;
+      const ry = cy + Math.sin(a) * 10;
+      ctx.fillStyle = '#fbbf24';
+      ctx.beginPath();
+      ctx.arc(rx, ry, 1.8, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    // Heavy dark steel carriage brackets
+    ctx.fillStyle = '#1e293b';
+    ctx.fillRect(cx - 14, cy - 14, 8, 14);
+    ctx.fillRect(cx + 6, cy - 14, 8, 14);
+
+    // Cannon Barrel (Angled upwards with 3D metallic gradient)
+    const barrelAngle = -0.55; // ~32 degrees upwards
+    ctx.save();
+    ctx.translate(cx, cy - 8);
+    ctx.rotate(barrelAngle);
+
+    // Barrel Body
+    const grad = ctx.createLinearGradient(0, -7, 0, 7);
+    grad.addColorStop(0, '#94a3b8');
+    grad.addColorStop(0.4, '#475569');
+    grad.addColorStop(1, '#0f172a');
+    ctx.fillStyle = grad;
+    ctx.fillRect(-8, -6, 34, 12);
+
+    // Brass Muzzle Band
+    ctx.fillStyle = '#d97706';
+    ctx.fillRect(22, -7.5, 4, 15);
+
+    // Dark Bore Hole
+    ctx.fillStyle = '#020617';
+    ctx.beginPath();
+    ctx.ellipse(26, 0, 2.5, 6, 0, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.restore();
+
+    // Trunnion axle cap
+    ctx.fillStyle = '#f59e0b';
+    ctx.beginPath();
+    ctx.arc(cx - 10, cy - 8, 4, 0, Math.PI * 2);
+    ctx.arc(cx + 10, cy - 8, 4, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.restore();
+  }
+
+  // ------------------------------------------------------------------------
+  // C. TORRE DE VIGÍAS (4-LEGGED WOODEN TRESTLE SCAFFOLDING TOWER)
+  // ------------------------------------------------------------------------
+  else if (bType === 'watchtower') {
+    const towerH = 55;
+    const p1 = gridToScreen(bldg.x + 0.3, bldg.y + 0.3);
+    const p2 = gridToScreen(bldg.x + w - 0.3, bldg.y + 0.3);
+    const p3 = gridToScreen(bldg.x + w - 0.3, bldg.y + h - 0.3);
+    const p4 = gridToScreen(bldg.x + 0.3, bldg.y + h - 0.3);
+
+    // Corner concrete footings
+    ctx.fillStyle = '#64748b';
+    [p1, p2, p3, p4].forEach(p => {
+      ctx.beginPath();
+      ctx.ellipse(p.x, p.y, 5, 3, 0, 0, Math.PI * 2);
+      ctx.fill();
+    });
+
+    // 4 Angled Stilt Legs
+    const deckPt = { x: cx, y: cy - towerH };
+    ctx.strokeStyle = '#78350f';
+    ctx.lineWidth = 3.5;
+    ctx.beginPath();
+    ctx.moveTo(p1.x, p1.y); ctx.lineTo(cx - 14, cy - towerH + 2);
+    ctx.moveTo(p2.x, p2.y); ctx.lineTo(cx + 14, cy - towerH + 2);
+    ctx.moveTo(p4.x, p4.y); ctx.lineTo(cx - 16, cy - towerH + 4);
+    ctx.moveTo(p3.x, p3.y); ctx.lineTo(cx + 16, cy - towerH + 4);
+    ctx.stroke();
+
+    // Diagonal X-Truss Braces
+    ctx.strokeStyle = '#b45309';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    // Mid level cross
+    const midY = cy - towerH / 2;
+    ctx.moveTo(p4.x, p4.y - 4); ctx.lineTo(cx + 14, midY);
+    ctx.moveTo(p3.x, p3.y - 4); ctx.lineTo(cx - 14, midY);
+    ctx.stroke();
+
+    // Elevated Wooden Timber Deck
+    ctx.fillStyle = '#92400e';
+    ctx.strokeStyle = '#451a03';
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    ctx.ellipse(cx, cy - towerH, 22, 11, 0, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.stroke();
+
+    // Crenellated Parapet Guardrail
+    ctx.strokeStyle = '#78350f';
+    ctx.lineWidth = 2;
+    for (let a = 0; a < Math.PI * 2; a += Math.PI / 3) {
+      const rx = cx + Math.cos(a) * 20;
+      const ry = (cy - towerH) + Math.sin(a) * 9;
+      ctx.strokeRect(rx - 2, ry - 10, 4, 10);
+    }
+
+    // Archer Sentinel standing inside
     ctx.font = '16px sans-serif';
-    ctx.fillText('🔥', centerPt.x, fireY);
+    ctx.textAlign = 'center';
+    ctx.fillText('🏹', cx, cy - towerH - 8);
 
+    // 4 Canopy Posts & Pagoda Roof
+    ctx.strokeStyle = '#78350f';
+    ctx.lineWidth = 2;
+    ctx.strokeRect(cx - 12, cy - towerH - 24, 24, 14);
+
+    ctx.fillStyle = '#1e293b';
+    ctx.strokeStyle = '#fbbf24';
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    ctx.moveTo(cx, cy - towerH - 34);
+    ctx.lineTo(cx - 24, cy - towerH - 22);
+    ctx.lineTo(cx + 24, cy - towerH - 22);
+    ctx.closePath();
+    ctx.fill();
+    ctx.stroke();
+  }
+
+  // ------------------------------------------------------------------------
+  // D. MORTERO DE CÓCTELES (HEAVY DOME CAULDRON & WIDE TUBE)
+  // ------------------------------------------------------------------------
+  else if (bType === 'mortar') {
+    // Cast-iron base disc with radial cooling fins
+    ctx.fillStyle = '#1e293b';
+    ctx.strokeStyle = '#475569';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.ellipse(cx, cy, 26, 14, 0, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.stroke();
+
+    // Cauldron Dome
+    ctx.fillStyle = '#334155';
+    ctx.beginPath();
+    ctx.arc(cx, cy - 4, 16, Math.PI, 0);
+    ctx.closePath();
+    ctx.fill();
+
+    // Wide-bore Mortar Tube angled 45 degrees
+    ctx.save();
+    ctx.translate(cx, cy - 8);
+    ctx.rotate(-0.85); // 48 degrees upward
+    const gradM = ctx.createLinearGradient(0, -9, 0, 9);
+    gradM.addColorStop(0, '#64748b');
+    gradM.addColorStop(0.5, '#1e293b');
+    gradM.addColorStop(1, '#0f172a');
+    ctx.fillStyle = gradM;
+    ctx.fillRect(-10, -9, 28, 18);
+
+    // Thick reinforced lip
+    ctx.fillStyle = '#94a3b8';
+    ctx.fillRect(16, -11, 4, 22);
+
+    // Dark Hollow Bore
+    ctx.fillStyle = '#020617';
+    ctx.beginPath();
+    ctx.ellipse(20, 0, 3, 9, 0, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.restore();
+
+    // Side stack of round demolition shells & molotovs
+    ctx.fillStyle = '#ef4444';
+    ctx.beginPath();
+    ctx.arc(cx + 14, cy + 4, 4, 0, Math.PI * 2);
+    ctx.arc(cx + 18, cy + 1, 4, 0, Math.PI * 2);
+    ctx.arc(cx + 16, cy - 3, 3.5, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  // ------------------------------------------------------------------------
+  // E. TORRE DE MAGOS (SPIRALING STONE MASONRY & FLOATING CRYSTAL)
+  // ------------------------------------------------------------------------
+  else if (bType === 'wizard_tower') {
+    const tH = 58;
+
+    // Stone Plinth
+    ctx.fillStyle = '#312e81';
+    ctx.strokeStyle = '#4338ca';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.ellipse(cx, cy, 24, 12, 0, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.stroke();
+
+    // Tapering Stone Tower Trunk with layered steps
+    ctx.fillStyle = '#1e1b4b';
+    ctx.beginPath();
+    ctx.moveTo(cx - 18, cy - 2);
+    ctx.lineTo(cx - 12, cy - tH + 6);
+    ctx.lineTo(cx + 12, cy - tH + 6);
+    ctx.lineTo(cx + 18, cy - 2);
+    ctx.closePath();
+    ctx.fill();
+
+    // Spiral arcane bands
+    ctx.strokeStyle = '#818cf8';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(cx - 16, cy - 10); ctx.lineTo(cx + 14, cy - 20);
+    ctx.moveTo(cx - 14, cy - 26); ctx.lineTo(cx + 12, cy - 36);
+    ctx.stroke();
+
+    // Flared Stone Balcony with Battlements
+    ctx.fillStyle = '#312e81';
+    ctx.strokeStyle = '#c084fc';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.ellipse(cx, cy - tH + 4, 18, 9, 0, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.stroke();
+
+    // Glowing Arcane Runes
+    ctx.font = '10px sans-serif';
+    ctx.fillStyle = '#e879f9';
+    ctx.fillText('ᚱ ᛟ ᛉ', cx, cy - tH + 2);
+
+    // Floating Rotating Magical Crystal Orb
+    const crystalY = cy - tH - 12 + Math.sin(Date.now() / 220) * 4;
+    const crystalRot = (Date.now() / 600) % (Math.PI * 2);
+
+    // Glow Aura
+    const glow = ctx.createRadialGradient(cx, crystalY, 2, cx, crystalY, 18);
+    glow.addColorStop(0, 'rgba(192, 132, 252, 0.9)');
+    glow.addColorStop(0.5, 'rgba(147, 51, 234, 0.4)');
+    glow.addColorStop(1, 'rgba(147, 51, 234, 0)');
+    ctx.fillStyle = glow;
+    ctx.beginPath();
+    ctx.arc(cx, crystalY, 18, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Octahedral Crystal Spire
+    ctx.save();
+    ctx.translate(cx, crystalY);
+    ctx.rotate(crystalRot);
+    ctx.fillStyle = '#f0abfc';
+    ctx.strokeStyle = '#ffffff';
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    ctx.moveTo(0, -9);
+    ctx.lineTo(6, 0);
+    ctx.lineTo(0, 9);
+    ctx.lineTo(-6, 0);
+    ctx.closePath();
+    ctx.fill();
+    ctx.stroke();
+    ctx.restore();
+  }
+
+  // ------------------------------------------------------------------------
+  // F. DEFENSA AÉREA (TRIPOD MOUNT & QUAD-ROCKET LAUNCHER POD)
+  // ------------------------------------------------------------------------
+  else if (bType === 'air_defense') {
+    // Heavy steel tripod base
+    ctx.strokeStyle = '#065f46';
+    ctx.lineWidth = 4;
+    ctx.beginPath();
+    ctx.moveTo(cx, cy - 4); ctx.lineTo(cx - 20, cy + 6);
+    ctx.moveTo(cx, cy - 4); ctx.lineTo(cx + 20, cy + 6);
+    ctx.moveTo(cx, cy - 4); ctx.lineTo(cx, cy - 14);
+    ctx.stroke();
+
+    // Turret center swivel
+    ctx.fillStyle = '#047857';
+    ctx.beginPath();
+    ctx.arc(cx, cy - 6, 8, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Quad Rocket Launcher Pod Assembly (Angled 45 deg)
+    ctx.save();
+    ctx.translate(cx, cy - 14);
+    ctx.rotate(-0.75); // 45 deg upward
+
+    // Box Pod Frame
+    ctx.fillStyle = '#064e3b';
+    ctx.strokeStyle = '#10b981';
+    ctx.lineWidth = 1.5;
+    ctx.fillRect(-8, -12, 26, 24);
+    ctx.strokeRect(-8, -12, 26, 24);
+
+    // 4 Rocket Launch Tubes with Red Warheads
+    const tubePositions = [
+      { y: -7 }, { y: -2 }, { y: 3 }, { y: 8 }
+    ];
+    tubePositions.forEach(pos => {
+      // Tube
+      ctx.fillStyle = '#022c22';
+      ctx.fillRect(0, pos.y - 2.5, 18, 5);
+      // Red Warhead Tip
+      ctx.fillStyle = '#ef4444';
+      ctx.beginPath();
+      ctx.moveTo(18, pos.y - 2.5);
+      ctx.lineTo(24, pos.y);
+      ctx.lineTo(18, pos.y + 2.5);
+      ctx.closePath();
+      ctx.fill();
+    });
+    ctx.restore();
+
+    // Miniature Rotating Radar Antenna
+    const radarAngle = (Date.now() / 400) % (Math.PI * 2);
+    ctx.strokeStyle = '#34d399';
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    ctx.arc(cx - 10, cy - 24, 7, radarAngle, radarAngle + Math.PI);
+    ctx.stroke();
+  }
+
+  // ------------------------------------------------------------------------
+  // G. DESTILADOR OSCURO (OIL DERRICK LATTICE & PUMPJACK WALKING BEAM)
+  // ------------------------------------------------------------------------
+  else if (bType === 'dark_drill') {
+    // Heavy steel frame pad
+    ctx.fillStyle = '#2e1065';
+    ctx.fillRect(cx - 22, cy - 6, 44, 12);
+    ctx.strokeStyle = '#c084fc';
+    ctx.lineWidth = 1.5;
+    ctx.strokeRect(cx - 22, cy - 6, 44, 12);
+
+    // A-Frame Derrick Lattice
+    ctx.strokeStyle = '#581c87';
+    ctx.lineWidth = 2.5;
+    ctx.beginPath();
+    ctx.moveTo(cx - 16, cy); ctx.lineTo(cx, cy - 38);
+    ctx.moveTo(cx + 16, cy); ctx.lineTo(cx, cy - 38);
+    ctx.stroke();
+
+    // Horizontal truss
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    ctx.moveTo(cx - 10, cy - 18); ctx.lineTo(cx + 10, cy - 18);
+    ctx.stroke();
+
+    // Oscillating Pumpjack Walking Beam
+    const beamOsc = Math.sin(Date.now() / 320) * 9;
+    ctx.save();
+    ctx.translate(cx, cy - 38);
+    ctx.strokeStyle = '#a855f7';
+    ctx.lineWidth = 4;
+    ctx.beginPath();
+    ctx.moveTo(-18, beamOsc);
+    ctx.lineTo(18, -beamOsc);
+    ctx.stroke();
+
+    // Counterweight Head
+    ctx.fillStyle = '#3b0764';
+    ctx.fillRect(-22, beamOsc - 4, 8, 8);
+    ctx.restore();
+
+    // Glass Observation Vat with bubbling Dark Elixir
+    ctx.fillStyle = 'rgba(15, 23, 42, 0.7)';
+    ctx.fillRect(cx + 10, cy - 24, 12, 22);
+    ctx.strokeStyle = '#c084fc';
+    ctx.lineWidth = 1;
+    ctx.strokeRect(cx + 10, cy - 24, 12, 22);
+
+    // Glowing Purple Liquid Inside
+    const fluidLevel = 14 + Math.sin(Date.now() / 250) * 2;
+    ctx.fillStyle = '#a855f7';
+    ctx.fillRect(cx + 11, cy - 2 - fluidLevel, 10, fluidLevel);
+  }
+
+  // ------------------------------------------------------------------------
+  // H. DEPÓSITO OSCURO (OCTAGONAL BUNKER & SWIRLING GLASS SPHERE)
+  // ------------------------------------------------------------------------
+  else if (bType === 'dark_vault') {
+    // Octagonal Bunker Base with hazard warning stripes
+    ctx.fillStyle = '#1e1b4b';
+    ctx.strokeStyle = '#4c1d95';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.ellipse(cx, cy, 26, 14, 0, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.stroke();
+
+    // Hazard yellow/black collar
+    ctx.strokeStyle = '#eab308';
+    ctx.lineWidth = 2;
+    ctx.setLineDash([4, 4]);
+    ctx.beginPath();
+    ctx.ellipse(cx, cy, 22, 11, 0, 0, Math.PI * 2);
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    // Glass Containment Sphere with Swirling Dark Elixir
+    const sphereY = cy - 18;
+    const sphereRadius = 16;
+    const sphereGrad = ctx.createRadialGradient(cx - 4, sphereY - 4, 2, cx, sphereY, sphereRadius);
+    sphereGrad.addColorStop(0, '#e879f9');
+    sphereGrad.addColorStop(0.6, '#7e22ce');
+    sphereGrad.addColorStop(1, '#2e1065');
+
+    ctx.fillStyle = sphereGrad;
+    ctx.beginPath();
+    ctx.arc(cx, sphereY, sphereRadius, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.strokeStyle = '#c084fc';
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+    // Specular glass shine
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.55)';
+    ctx.beginPath();
+    ctx.ellipse(cx - 5, sphereY - 6, 5, 3, -0.6, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  // ------------------------------------------------------------------------
+  // I. BÓVEDA DE YENES (ARMORED REINFORCED BANK VAULT & GOLD STACKS)
+  // ------------------------------------------------------------------------
+  else if (bType === 'vault') {
+    const vH = 34;
+
+    // Armored Steel Isometric Base
+    ctx.fillStyle = '#1e293b';
+    ctx.strokeStyle = '#f59e0b';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(origin.x, origin.y - vH);
+    ctx.lineTo(rightCorner.x, rightCorner.y - vH);
+    ctx.lineTo(bottomCorner.x, bottomCorner.y - vH);
+    ctx.lineTo(leftCorner.x, leftCorner.y - vH);
+    ctx.closePath();
+    ctx.fill();
+    ctx.stroke();
+
+    // Side faces
+    ctx.fillStyle = '#0f172a';
+    ctx.beginPath();
+    ctx.moveTo(leftCorner.x, leftCorner.y - vH);
+    ctx.lineTo(bottomCorner.x, bottomCorner.y - vH);
+    ctx.lineTo(bottomCorner.x, bottomCorner.y);
+    ctx.lineTo(leftCorner.x, leftCorner.y);
+    ctx.closePath();
+    ctx.fill();
+
+    // Giant Circular Bank Vault Door
+    ctx.fillStyle = '#475569';
+    ctx.strokeStyle = '#fbbf24';
+    ctx.lineWidth = 2.5;
+    ctx.beginPath();
+    ctx.arc(cx - 4, cy - vH + 10, 14, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.stroke();
+
+    // Vault Door Spoke Wheel Handle
+    ctx.strokeStyle = '#fbbf24';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(cx - 10, cy - vH + 10); ctx.lineTo(cx + 2, cy - vH + 10);
+    ctx.moveTo(cx - 4, cy - vH + 4); ctx.lineTo(cx - 4, cy - vH + 16);
+    ctx.stroke();
+
+    // Digital Keypad
+    ctx.fillStyle = '#10b981';
+    ctx.fillRect(cx + 12, cy - vH + 6, 4, 6);
+
+    // Stacks of Golden Yen Bullion Bars
+    ctx.fillStyle = '#f59e0b';
+    ctx.strokeStyle = '#78350f';
+    ctx.lineWidth = 0.8;
+    for (let r = 0; r < 2; r++) {
+      for (let c = 0; c < 3; c++) {
+        const bx = cx - 18 + c * 7;
+        const by = cy + 2 - r * 4;
+        ctx.fillRect(bx, by, 6, 3);
+        ctx.strokeRect(bx, by, 6, 3);
+      }
+    }
+  }
+
+  // ------------------------------------------------------------------------
+  // J. PUESTO DE RAMEN (TRADITIONAL WOODEN YATAI WITH NOREN & LANTERNS)
+  // ------------------------------------------------------------------------
+  else if (bType === 'ramen') {
+    // Cedar Platform
+    ctx.fillStyle = '#92400e';
+    ctx.fillRect(cx - 22, cy - 4, 44, 8);
+    ctx.strokeStyle = '#451a03';
+    ctx.lineWidth = 1.5;
+    ctx.strokeRect(cx - 22, cy - 4, 44, 8);
+
+    // 4 Wooden Pillars
+    ctx.fillStyle = '#78350f';
+    ctx.fillRect(cx - 20, cy - 32, 4, 28);
+    ctx.fillRect(cx + 16, cy - 32, 4, 28);
+
+    // Traditional Fabric Noren Curtains (Red and White with Kanji)
+    ctx.fillStyle = '#dc2626';
+    ctx.fillRect(cx - 18, cy - 28, 36, 12);
+    ctx.fillStyle = '#ffffff';
+    ctx.font = 'bold 8px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('ラーメン', cx, cy - 20);
+
+    // Shaded Timber Awning Roof
+    ctx.fillStyle = '#451a03';
+    ctx.strokeStyle = '#d97706';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(cx, cy - 38);
+    ctx.lineTo(cx - 26, cy - 28);
+    ctx.lineTo(cx + 26, cy - 28);
+    ctx.closePath();
+    ctx.fill();
+    ctx.stroke();
+
+    // Two Glowing Red Paper Chochin Lanterns (🏮)
+    ctx.fillStyle = '#ef4444';
+    ctx.beginPath();
+    ctx.arc(cx - 22, cy - 18, 5, 0, Math.PI * 2);
+    ctx.arc(cx + 22, cy - 18, 5, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.fillStyle = '#fef08a';
+    ctx.font = '8px sans-serif';
+    ctx.fillText('🏮', cx - 22, cy - 17);
+    ctx.fillText('🏮', cx + 22, cy - 17);
+
+    // Steaming Bowl of Ramen on Counter
+    ctx.font = '14px sans-serif';
+    ctx.fillText('🍜', cx, cy - 8);
+  }
+
+  // ------------------------------------------------------------------------
+  // K. DOJO / BARRACKS (MARTIAL ARTS HALL WITH SHOJI & TRAINING RACK)
+  // ------------------------------------------------------------------------
+  else if (bType === 'dojo' || bType === 'barracks') {
+    const dH = 36;
+
+    // Timber foundation veranda
+    ctx.fillStyle = '#78350f';
+    ctx.fillRect(cx - 26, cy - 6, 52, 10);
+    ctx.strokeStyle = '#451a03';
+    ctx.strokeRect(cx - 26, cy - 6, 52, 10);
+
+    // Main Hall Walls
+    ctx.fillStyle = '#451a03';
+    ctx.fillRect(cx - 22, cy - dH + 6, 44, 26);
+
+    // Sliding Shoji Paper Screens (Grid)
+    ctx.fillStyle = '#fef3c7';
+    ctx.fillRect(cx - 18, cy - dH + 10, 36, 18);
+    ctx.strokeStyle = '#78350f';
+    ctx.lineWidth = 1;
+    ctx.strokeRect(cx - 18, cy - dH + 10, 36, 18);
+    // Shoji lattice lines
+    ctx.beginPath();
+    ctx.moveTo(cx, cy - dH + 10); ctx.lineTo(cx, cy - dH + 28);
+    ctx.moveTo(cx - 18, cy - dH + 19); ctx.lineTo(cx + 18, cy - dH + 19);
+    ctx.stroke();
+
+    // Flared Tiled Hip-and-Gable Roof (Irimoya style)
+    ctx.fillStyle = '#1e293b';
+    ctx.strokeStyle = '#fbbf24';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(cx, cy - dH - 12);
+    ctx.quadraticCurveTo(cx - 30, cy - dH + 2, cx - 34, cy - dH);
+    ctx.lineTo(cx + 34, cy - dH);
+    ctx.quadraticCurveTo(cx + 30, cy - dH + 2, cx, cy - dH - 12);
+    ctx.closePath();
+    ctx.fill();
+    ctx.stroke();
+
+    // Weapons Rack on Veranda (Katanas & Bats)
+    ctx.strokeStyle = '#e2e8f0';
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    ctx.moveTo(cx - 16, cy + 2); ctx.lineTo(cx - 10, cy - 8);
+    ctx.moveTo(cx - 12, cy + 2); ctx.lineTo(cx - 6, cy - 8);
+    ctx.stroke();
+  }
+
+  // ------------------------------------------------------------------------
+  // L. CAMPAMENTO MILITAR (CIRCULAR ENCAMPMENT, CANVAS TENTS & CAMPFIRE)
+  // ------------------------------------------------------------------------
+  else if (bType === 'camp') {
+    // Packed-dirt circle
+    ctx.fillStyle = '#451a03';
+    ctx.strokeStyle = '#78350f';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.ellipse(cx, cy, 28, 15, 0, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.stroke();
+
+    // Two A-Frame Canvas Military Tents
+    ctx.fillStyle = '#166534';
+    ctx.strokeStyle = '#22c55e';
+    ctx.lineWidth = 1.5;
+    // Left Tent
+    ctx.beginPath();
+    ctx.moveTo(cx - 16, cy - 22);
+    ctx.lineTo(cx - 26, cy - 8);
+    ctx.lineTo(cx - 6, cy - 8);
+    ctx.closePath();
+    ctx.fill();
+    ctx.stroke();
+
+    // Right Tent
+    ctx.beginPath();
+    ctx.moveTo(cx + 16, cy - 20);
+    ctx.lineTo(cx + 6, cy - 6);
+    ctx.lineTo(cx + 26, cy - 6);
+    ctx.closePath();
+    ctx.fill();
+    ctx.stroke();
+
+    // Central Stone Campfire with Glowing Embers & Animated Flame
+    ctx.fillStyle = '#1e293b';
+    ctx.beginPath();
+    ctx.ellipse(cx, cy + 2, 7, 4, 0, 0, Math.PI * 2);
+    ctx.fill();
+
+    const firePulse = Math.sin(Date.now() / 140) * 3;
+    ctx.fillStyle = '#f97316';
+    ctx.beginPath();
+    ctx.arc(cx, cy - 2 + firePulse * 0.3, 5 + firePulse * 0.5, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.font = '14px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('🔥', cx, cy - 3);
+
+    // Roaming Delinquents in Camp
     const troopKeys = Object.keys(game.army).filter(k => game.army[k] > 0);
     troopKeys.slice(0, 3).forEach((tk, idx) => {
-      const angle = (Date.now() / 1200) + (idx * (Math.PI * 2 / 3));
-      const tx = centerPt.x + Math.cos(angle) * 22;
-      const ty = centerPt.y - heightOffset + Math.sin(angle) * 10;
-      ctx.font = '13px sans-serif';
+      const angle = (Date.now() / 1400) + (idx * (Math.PI * 2 / 3));
+      const tx = cx + Math.cos(angle) * 18;
+      const ty = cy + Math.sin(angle) * 8;
+      ctx.font = '11px sans-serif';
       ctx.fillText(TROOP_TYPES[tk].icon, tx, ty);
     });
   }
 
-  // Special Visual: Hero Ren on Hero Altar
-  if (bldg.type === 'hero_altar' && !isRaid) {
-    const heroY = centerPt.y - heightOffset - 12;
-    ctx.font = '18px sans-serif';
-    ctx.fillText('👑', centerPt.x, heroY - 8);
-    ctx.font = 'bold 9px Russo One, sans-serif';
-    ctx.fillStyle = '#fbbf24';
-    ctx.fillText('REN', centerPt.x, heroY + 8);
+  // ------------------------------------------------------------------------
+  // M. BARRICADA DE ACERO (URBAN CONCRETE BARRIER WITH HAZARD STRIPES)
+  // ------------------------------------------------------------------------
+  else if (bType === 'wall') {
+    const wallH = 18;
+    // Concrete Jersey Barrier Structure
+    ctx.fillStyle = '#475569';
+    ctx.strokeStyle = '#1e293b';
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    ctx.moveTo(origin.x, origin.y - wallH);
+    ctx.lineTo(rightCorner.x, rightCorner.y - wallH);
+    ctx.lineTo(bottomCorner.x, bottomCorner.y - wallH);
+    ctx.lineTo(leftCorner.x, leftCorner.y - wallH);
+    ctx.closePath();
+    ctx.fill();
+    ctx.stroke();
+
+    // Side face
+    ctx.fillStyle = '#334155';
+    ctx.beginPath();
+    ctx.moveTo(leftCorner.x, leftCorner.y - wallH);
+    ctx.lineTo(bottomCorner.x, bottomCorner.y - wallH);
+    ctx.lineTo(bottomCorner.x, bottomCorner.y);
+    ctx.lineTo(leftCorner.x, leftCorner.y);
+    ctx.closePath();
+    ctx.fill();
+
+    // Hazard yellow/black chevron warning stripes on front
+    ctx.save();
+    ctx.strokeStyle = '#eab308';
+    ctx.lineWidth = 3;
+    for (let s = -10; s <= 10; s += 8) {
+      ctx.beginPath();
+      ctx.moveTo(cx + s - 3, cy - wallH + 4);
+      ctx.lineTo(cx + s + 3, cy + 2);
+      ctx.stroke();
+    }
+    ctx.restore();
+
+    // Steel rebar / razor spikes on top
+    ctx.strokeStyle = '#cbd5e1';
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    ctx.moveTo(cx - 8, cy - wallH); ctx.lineTo(cx - 8, cy - wallH - 5);
+    ctx.moveTo(cx, cy - wallH); ctx.lineTo(cx, cy - wallH - 6);
+    ctx.moveTo(cx + 8, cy - wallH); ctx.lineTo(cx + 8, cy - wallH - 5);
+    ctx.stroke();
   }
 
-  // Level Badge
-  if (bldg.type !== 'spring_trap' && bldg.type !== 'bomb') {
-    ctx.font = 'bold 10px Russo One, sans-serif';
+  // ------------------------------------------------------------------------
+  // N. TRAMPA DE RESORTE (RECESSED STEEL PLATE WITH COMPRESSION COILS)
+  // ------------------------------------------------------------------------
+  else if (bType === 'spring_trap') {
+    // Metallic recessed frame
+    ctx.fillStyle = '#334155';
+    ctx.strokeStyle = '#64748b';
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    ctx.ellipse(cx, cy, 14, 8, 0, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.stroke();
+
+    // Checkered steel treadplate trigger
+    ctx.fillStyle = '#1e293b';
+    ctx.fillRect(cx - 8, cy - 4, 16, 8);
+    ctx.strokeStyle = '#38bdf8';
+    ctx.strokeRect(cx - 8, cy - 4, 16, 8);
+
+    // Heavy Coiled Springs Underneath
+    ctx.strokeStyle = '#94a3b8';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(cx - 6, cy); ctx.lineTo(cx - 4, cy - 3); ctx.lineTo(cx - 2, cy); ctx.lineTo(cx, cy - 3);
+    ctx.stroke();
+  }
+
+  // ------------------------------------------------------------------------
+  // O. BOMBA OCULTA (CAST-IRON MINE WITH LED & BURNING FUSE)
+  // ------------------------------------------------------------------------
+  else if (bType === 'bomb') {
+    // Spiked cast-iron sphere embedded in ground
+    ctx.fillStyle = '#0f172a';
+    ctx.strokeStyle = '#ef4444';
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    ctx.arc(cx, cy - 2, 9, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.stroke();
+
+    // Flashing red sensor LED
+    const ledBlink = Math.floor(Date.now() / 250) % 2 === 0;
+    ctx.fillStyle = ledBlink ? '#ef4444' : '#7f1d1d';
+    ctx.beginPath();
+    ctx.arc(cx, cy - 2, 2.5, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Burning Spark Fuse
+    ctx.strokeStyle = '#f59e0b';
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    ctx.moveTo(cx, cy - 11);
+    ctx.quadraticCurveTo(cx + 4, cy - 15, cx + 8, cy - 14);
+    ctx.stroke();
+
+    // Spark
+    ctx.fillStyle = '#fde047';
+    ctx.beginPath();
+    ctx.arc(cx + 8, cy - 14, 2 + Math.random() * 1.5, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  // ------------------------------------------------------------------------
+  // P. ALTAR DE HÉROE (TWO-TIERED MARBLE PODIUM, CARPET & DELINQUENT THRONE)
+  // ------------------------------------------------------------------------
+  else if (bType === 'hero_altar') {
+    // Tier 1 Marble Dais
+    ctx.fillStyle = '#e2e8f0';
+    ctx.strokeStyle = '#fbbf24';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.ellipse(cx, cy, 26, 14, 0, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.stroke();
+
+    // Tier 2 Raised Dais
+    ctx.fillStyle = '#cbd5e1';
+    ctx.beginPath();
+    ctx.ellipse(cx, cy - 6, 18, 9, 0, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Crimson Velvet Carpet Runner
+    ctx.fillStyle = '#991b1b';
+    ctx.fillRect(cx - 6, cy - 12, 12, 18);
+
+    // Carved Delinquent Throne
+    ctx.fillStyle = '#78350f';
+    ctx.fillRect(cx - 10, cy - 26, 20, 16);
+    ctx.strokeStyle = '#fbbf24';
+    ctx.lineWidth = 1.5;
+    ctx.strokeRect(cx - 10, cy - 26, 20, 16);
+
+    // Ren Crown Emblem
+    ctx.font = '16px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('👑', cx, cy - 20);
+    ctx.font = 'bold 9px Russo One, sans-serif';
     ctx.fillStyle = '#fbbf24';
-    ctx.fillText(`Nv.${bldg.level || 1}`, centerPt.x, centerPt.y - heightOffset - 8);
+    ctx.fillText('REN', cx, cy - 30);
+  }
+
+  // ------------------------------------------------------------------------
+  // Q. DEFAULT / CLAN CASTLE / SPELL FACTORY
+  // ------------------------------------------------------------------------
+  else {
+    const genH = 42;
+    ctx.fillStyle = '#1e293b';
+    ctx.strokeStyle = '#fbbf24';
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    ctx.moveTo(origin.x, origin.y - genH);
+    ctx.lineTo(rightCorner.x, rightCorner.y - genH);
+    ctx.lineTo(bottomCorner.x, bottomCorner.y - genH);
+    ctx.lineTo(leftCorner.x, leftCorner.y - genH);
+    ctx.closePath();
+    ctx.fill();
+    ctx.stroke();
+
+    ctx.fillStyle = '#0f172a';
+    ctx.beginPath();
+    ctx.moveTo(leftCorner.x, leftCorner.y - genH);
+    ctx.lineTo(bottomCorner.x, bottomCorner.y - genH);
+    ctx.lineTo(bottomCorner.x, bottomCorner.y);
+    ctx.lineTo(leftCorner.x, leftCorner.y);
+    ctx.closePath();
+    ctx.fill();
+
+    ctx.font = '24px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText(def.icon, cx, cy - genH / 1.6);
+  }
+
+  // Level Badge (On all permanent structures)
+  if (bldg.type !== 'spring_trap' && bldg.type !== 'bomb' && bldg.type !== 'wall') {
+    const badgeY = cy - 48;
+    ctx.save();
+    ctx.fillStyle = 'rgba(15, 23, 42, 0.85)';
+    ctx.strokeStyle = '#fbbf24';
+    ctx.lineWidth = 1.2;
+    ctx.beginPath();
+    ctx.roundRect(cx - 14, badgeY - 8, 28, 14, 4);
+    ctx.fill();
+    ctx.stroke();
+    ctx.font = 'bold 9px Russo One, sans-serif';
+    ctx.fillStyle = '#fbbf24';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(`Nv.${bldg.level || 1}`, cx, badgeY - 1);
+    ctx.restore();
+  }
+
+  // 4. FLOATING RECRUITMENT BADGE OVER BARRACKS / DOJO
+  if ((bldg.type === 'dojo' || bldg.type === 'barracks') && !isRaid && game.trainingQueue && game.trainingQueue.length > 0) {
+    const activeItem = game.trainingQueue[0];
+    const troopDef = TROOP_TYPES[activeItem.troopId];
+    const badgeY = cy - 56;
+    ctx.save();
+    ctx.fillStyle = 'rgba(15, 23, 42, 0.9)';
+    ctx.strokeStyle = '#38bdf8';
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    ctx.roundRect(cx - 28, badgeY - 12, 56, 20, 6);
+    ctx.fill();
+    ctx.stroke();
+
+    // Progress bar inside badge
+    const pct = Math.min(1, Math.max(0, 1 - (activeItem.remainingMs / activeItem.totalMs)));
+    ctx.fillStyle = '#38bdf8';
+    ctx.fillRect(cx - 26, badgeY + 4, 52 * pct, 3);
+
+    ctx.font = 'bold 10px sans-serif';
+    ctx.fillStyle = '#ffffff';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    const remainingSecs = Math.ceil(activeItem.remainingMs / 1000);
+    ctx.fillText(`${troopDef ? troopDef.icon : '⚔️'} ${remainingSecs}s (${game.trainingQueue.length})`, cx, badgeY - 3);
+    ctx.restore();
   }
 
   // Freeze Visual Effect (Spell Freeze CoC)
@@ -1390,15 +3658,12 @@ function drawBuilding(bldg, isRaid = false) {
     ctx.strokeStyle = '#38bdf8';
     ctx.lineWidth = 2.5;
     ctx.beginPath();
-    ctx.moveTo(origin.x, origin.y - heightOffset);
-    ctx.lineTo(rightCorner.x, rightCorner.y - heightOffset);
-    ctx.lineTo(bottomCorner.x, bottomCorner.y);
-    ctx.lineTo(leftCorner.x, leftCorner.y);
-    ctx.closePath();
+    ctx.arc(cx, cy - 20, 32, 0, Math.PI * 2);
     ctx.fill();
     ctx.stroke();
-    ctx.font = '18px sans-serif';
-    ctx.fillText('❄️', centerPt.x, centerPt.y - heightOffset - 18);
+    ctx.font = '22px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('❄️', cx, cy - 20);
     ctx.restore();
   }
 
@@ -1406,8 +3671,8 @@ function drawBuilding(bldg, isRaid = false) {
   if (isRaid || (bldg.currentHp && bldg.currentHp < bldg.maxHp)) {
     const hpPct = Math.max(0, bldg.currentHp / bldg.maxHp);
     const barW = Math.max(34, w * 18);
-    const barX = centerPt.x - barW / 2;
-    const barY = centerPt.y - heightOffset - 22;
+    const barX = cx - barW / 2;
+    const barY = cy - 60;
 
     ctx.fillStyle = 'rgba(0,0,0,0.7)';
     ctx.fillRect(barX - 1, barY - 1, barW + 2, 6);
@@ -1418,10 +3683,120 @@ function drawBuilding(bldg, isRaid = false) {
 
   // Floating Collection Icon (In Base Mode)
   if (!isRaid && bldg.stored && bldg.stored > 25) {
-    const iconY = centerPt.y - heightOffset - 24 + Math.sin(Date.now() / 250) * 4;
+    const iconY = cy - 68 + Math.sin(Date.now() / 250) * 4;
     ctx.font = '18px sans-serif';
+    ctx.textAlign = 'center';
     const collectIcon = bldg.type === 'ramen' ? '🪙' : bldg.type === 'dojo' ? '🔥' : '🧪';
-    ctx.fillText(collectIcon, centerPt.x, iconY);
+    ctx.fillText(collectIcon, cx, iconY);
+  }
+}
+
+// ==========================================================================
+// DYNAMIC METROPOLIS WEATHER & ATMOSPHERE SYSTEM
+// ==========================================================================
+
+const WEATHER_PARTICLE_COUNT = 80;
+const weatherParticles = [];
+for (let i = 0; i < WEATHER_PARTICLE_COUNT; i++) {
+  weatherParticles.push({
+    x: Math.random() * 1600,
+    y: Math.random() * 1000,
+    speed: 6 + Math.random() * 8,
+    len: 12 + Math.random() * 16,
+    sway: Math.random() * Math.PI * 2,
+    size: 2.5 + Math.random() * 3.5,
+    rot: Math.random() * Math.PI * 2
+  });
+}
+const weatherSplashes = [];
+
+function renderAtmosphericWeather(ctx) {
+  const wMode = game.weather || 'rain';
+  if (wMode === 'clear') return;
+
+  const width = canvas.width;
+  const height = canvas.height;
+
+  if (wMode === 'rain') {
+    ctx.save();
+    ctx.strokeStyle = 'rgba(147, 197, 253, 0.42)';
+    ctx.lineWidth = 1.4;
+    ctx.beginPath();
+    weatherParticles.forEach(p => {
+      ctx.moveTo(p.x, p.y);
+      ctx.lineTo(p.x - 3.5, p.y + p.len);
+      p.x -= 1.2;
+      p.y += p.speed;
+      if (p.y > height) {
+        p.y = -10;
+        p.x = Math.random() * (width + 120);
+        if (Math.random() < 0.28) {
+          weatherSplashes.push({ x: p.x, y: Math.random() * height, r: 1, alpha: 0.65 });
+        }
+      }
+      if (p.x < -20) p.x = width + 20;
+    });
+    ctx.stroke();
+
+    // Render asphalt ripple splashes
+    for (let i = weatherSplashes.length - 1; i >= 0; i--) {
+      const s = weatherSplashes[i];
+      ctx.strokeStyle = `rgba(186, 230, 253, ${s.alpha * 0.45})`;
+      ctx.lineWidth = 1.0;
+      ctx.beginPath();
+      ctx.ellipse(s.x, s.y, s.r * 2.2, s.r * 0.9, 0, 0, Math.PI * 2);
+      ctx.stroke();
+      s.r += 0.38;
+      s.alpha -= 0.038;
+      if (s.alpha <= 0) weatherSplashes.splice(i, 1);
+    }
+    ctx.restore();
+  } else if (wMode === 'sakura') {
+    ctx.save();
+    weatherParticles.forEach(p => {
+      p.y += 1.4;
+      p.x += Math.sin(p.sway + Date.now() / 700) * 0.9 + 0.35;
+      p.rot += 0.02;
+      if (p.y > height) {
+        p.y = -10;
+        p.x = Math.random() * width;
+      }
+      if (p.x > width + 20) p.x = -10;
+
+      ctx.save();
+      ctx.translate(p.x, p.y);
+      ctx.rotate(p.rot);
+      ctx.fillStyle = 'rgba(244, 114, 182, 0.85)';
+      ctx.beginPath();
+      ctx.ellipse(0, 0, p.size, p.size * 0.55, 0, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
+    });
+    ctx.restore();
+  } else if (wMode === 'neon') {
+    ctx.save();
+    // Ambient cyberpunk neon gradient
+    const neonGrad = ctx.createRadialGradient(width / 2, height / 2, 60, width / 2, height / 2, width * 0.75);
+    neonGrad.addColorStop(0, 'rgba(168, 85, 247, 0.07)');
+    neonGrad.addColorStop(0.5, 'rgba(6, 182, 212, 0.05)');
+    neonGrad.addColorStop(1, 'rgba(0, 0, 0, 0.18)');
+    ctx.fillStyle = neonGrad;
+    ctx.fillRect(0, 0, width, height);
+
+    // Floating cyber dust motes
+    ctx.fillStyle = 'rgba(6, 182, 212, 0.55)';
+    weatherParticles.slice(0, 35).forEach(p => {
+      p.y -= 0.6;
+      p.x += Math.sin(p.sway + Date.now() / 900) * 0.5;
+      if (p.y < 0) {
+        p.y = height + 10;
+        p.x = Math.random() * width;
+      }
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, 1.5, 0, Math.PI * 2);
+      ctx.fill();
+    });
+    ctx.restore();
   }
 }
 
@@ -1433,11 +3808,11 @@ function render() {
   const isDefense = game.mode === 'defense';
   const isVillage = game.theme === 'village';
 
-  // Draw Grid Turf
+  // Draw Grid Turf (Asphalt Gray City or Mythical Village)
   for (let gx = 0; gx < GRID_SIZE; gx++) {
     for (let gy = 0; gy < GRID_SIZE; gy++) {
       const isPerimeter = gx === 0 || gy === 0 || gx === GRID_SIZE - 1 || gy === GRID_SIZE - 1;
-      
+
       let tileColor;
       let borderColor;
 
@@ -1448,11 +3823,32 @@ function render() {
         tileColor = (gx + gy) % 2 === 0 ? '#2e7d32' : '#338a37';
         borderColor = 'rgba(255, 255, 255, 0.06)';
       } else {
-        tileColor = (gx + gy) % 2 === 0 ? '#121624' : '#161a2b';
-        borderColor = 'rgba(255,255,255,0.04)';
+        // Tokyo Urban City: High quality asphalt & concrete slabs
+        const isStreet = gx === 6 || gx === 17 || gy === 6 || gy === 17;
+        if (isStreet) {
+          tileColor = (gx + gy) % 2 === 0 ? '#1e2129' : '#242731';
+          borderColor = 'rgba(255, 255, 255, 0.08)';
+        } else {
+          tileColor = (gx + gy) % 2 === 0 ? '#2b2e38' : '#333744';
+          borderColor = 'rgba(255, 255, 255, 0.04)';
+        }
       }
 
       drawTile(gx, gy, tileColor, borderColor);
+
+      // Urban City Street Markings (Dashed lines / pedestrian crossings on streets)
+      if (!isVillage && !isRaid) {
+        const isStreetIntersection = (gx === 6 || gx === 17) && (gy === 6 || gy === 17);
+        if (isStreetIntersection) {
+          const pt = gridToScreen(gx + 0.5, gy + 0.5);
+          ctx.save();
+          ctx.fillStyle = 'rgba(250, 204, 21, 0.45)'; // Yellow urban junction marker
+          ctx.beginPath();
+          ctx.arc(pt.x, pt.y, 3, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.restore();
+        }
+      }
     }
   }
 
@@ -1477,14 +3873,45 @@ function render() {
     ctx.restore();
   }
 
-  // Draw Perimeter Forest Border (In Village Mode)
-  if (isVillage && !isRaid && !isDefense) {
-    for (let i = 0; i < GRID_SIZE; i += 2) {
-      const p1 = gridToScreen(i, 0);
-      const p2 = gridToScreen(i, GRID_SIZE - 1);
-      ctx.font = '16px sans-serif';
-      ctx.fillText(i % 4 === 0 ? '🌲' : '🪨', p1.x, p1.y - 6);
-      ctx.fillText(i % 4 === 0 ? '🌲' : '🏮', p2.x, p2.y - 6);
+  // Draw Perimeter Urban City or Forest Border
+  if (!isRaid && !isDefense) {
+    if (isVillage) {
+      // Village Pine & Rock perimeter
+      for (let i = 0; i < GRID_SIZE; i += 2) {
+        const p1 = gridToScreen(i, 0);
+        const p2 = gridToScreen(i, GRID_SIZE - 1);
+        ctx.font = '16px sans-serif';
+        ctx.fillText(i % 4 === 0 ? '🌲' : '🪨', p1.x, p1.y - 6);
+        ctx.fillText(i % 4 === 0 ? '🌲' : '🏮', p2.x, p2.y - 6);
+      }
+    } else {
+      // Tokyo Urban Metropolis City Perimeter (Streetlamps with light cones, barriers, dumpsters)
+      for (let i = 0; i < GRID_SIZE; i += 2) {
+        const p1 = gridToScreen(i, 0);
+        const p2 = gridToScreen(i, GRID_SIZE - 1);
+        const p3 = gridToScreen(0, i);
+        const p4 = gridToScreen(GRID_SIZE - 1, i);
+
+        // Streetlamp soft yellow light aura
+        if (i % 6 === 0) {
+          ctx.save();
+          const lightGrad = ctx.createRadialGradient(p1.x, p1.y, 2, p1.x, p1.y, 24);
+          lightGrad.addColorStop(0, 'rgba(253, 224, 71, 0.25)');
+          lightGrad.addColorStop(1, 'rgba(253, 224, 71, 0)');
+          ctx.fillStyle = lightGrad;
+          ctx.beginPath();
+          ctx.arc(p1.x, p1.y, 24, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.restore();
+        }
+
+        ctx.font = '15px sans-serif';
+        ctx.textAlign = 'center';
+        const topProp = i % 6 === 0 ? '🏮' : (i % 4 === 0 ? '🚧' : '🛑');
+        const btmProp = i % 6 === 0 ? '🏮' : (i % 4 === 0 ? '🗑️' : '🚏');
+        ctx.fillText(topProp, p1.x, p1.y - 6);
+        ctx.fillText(btmProp, p2.x, p2.y - 6);
+      }
     }
   }
 
@@ -1567,11 +3994,11 @@ function render() {
       if (game.movingBuilding && b.id === game.movingBuilding.id) return false;
       const bdef = BUILDING_TYPES[b.type];
       return !(previewBldg.x + w <= b.x || previewBldg.x >= b.x + bdef.w ||
-               previewBldg.y + h <= b.y || previewBldg.y >= b.y + bdef.h);
+        previewBldg.y + h <= b.y || previewBldg.y >= b.y + bdef.h);
     });
 
-    const isInside = previewBldg.x >= 1 && previewBldg.y >= 1 && 
-                     previewBldg.x + w <= GRID_SIZE - 1 && previewBldg.y + h <= GRID_SIZE - 1;
+    const isInside = previewBldg.x >= 1 && previewBldg.y >= 1 &&
+      previewBldg.x + w <= GRID_SIZE - 1 && previewBldg.y + h <= GRID_SIZE - 1;
 
     const isValid = !collides && isInside;
 
@@ -1586,6 +4013,9 @@ function render() {
     drawBuilding(previewBldg, false);
     ctx.restore();
   }
+
+  // Render Dynamic Atmospheric Weather (Rain, Sakura petals, Cyber Neon haze)
+  renderAtmosphericWeather(ctx);
 
   requestAnimationFrame(render);
 }
@@ -1617,6 +4047,7 @@ class RaidSession {
     this.maxLootDark = baseDef.lootDark || 350;
 
     this.timeLeft = 180; // 3 minutes
+    this.speedMultiplier = 1; // 1x, 2x, 4x speed
     this.isOver = false;
 
     // Instantiate Enemy Buildings
@@ -1685,59 +4116,446 @@ class RaidSession {
     });
   }
 
-  deployHero(gx, gy) {
+  deployLeader(gx, gy) {
     this.hasDeployedAtLeastOne = true;
-    window.soundEngine.playHeroRoar();
-    this.heroRen = {
-      id: 'hero_ren_' + Date.now(),
-      type: 'hero_ren',
-      name: HERO_REN.name,
-      icon: HERO_REN.icon,
+    const leader = game.getActiveLeader();
+
+    if (leader.id === 'kaito' && window.soundEngine.playWhistle) {
+      window.soundEngine.playWhistle();
+    } else if (leader.id === 'aoi' && window.soundEngine.playHealChime) {
+      window.soundEngine.playHealChime();
+    } else if (leader.id === 'tora' && window.soundEngine.playBerserkerRoar) {
+      window.soundEngine.playBerserkerRoar();
+    } else if (leader.id === 'kurogane' && window.soundEngine.playTeleportShadow) {
+      window.soundEngine.playTeleportShadow();
+    } else {
+      window.soundEngine.playHeroRoar();
+    }
+
+    this.leaderUnit = {
+      id: 'leader_' + leader.id + '_' + Date.now(),
+      leaderId: leader.id,
+      type: 'leader',
+      name: leader.name,
+      icon: leader.icon,
+      avatar: leader.avatar,
+      color: leader.color,
       x: gx,
       y: gy,
-      hp: HERO_REN.hp,
-      maxHp: HERO_REN.maxHp,
-      dps: HERO_REN.dps,
-      speed: HERO_REN.speed,
-      targetPriority: 'any',
-      range: 0.9,
+      hp: leader.hp,
+      maxHp: leader.hp,
+      dps: leader.dps,
+      speed: leader.speed,
+      targetPriority: leader.targetPriority,
+      range: leader.id === 'tora' ? 1.0 : (leader.id === 'kurogane' ? 0.8 : 0.9),
       lastAttack: 0,
       isHero: true,
-      usedAbility: false
+      usedAbility: false,
+      jumpsWalls: leader.id === 'ryu',
+      invulnerableUntil: 0,
+      lastPassiveTick: 0
     };
-    this.troops.push(this.heroRen);
+    this.heroRen = this.leaderUnit; // Legacy alias
+    this.troops.push(this.leaderUnit);
 
-    const heroBtn = document.getElementById('hero-ability-button-wrap');
-    if (heroBtn) {
-      heroBtn.classList.remove('hidden');
-      heroBtn.style.display = 'block';
+    // ========================================================
+    // PASSIVE SPECIAL ABILITY ON SPAWN
+    // ========================================================
+    if (leader.id === 'kaito') {
+      // Kaito Shiro: "¡A la Carga, Escuadrón!" -> Spawns with full army bodyguard (6 Novatos + 3 Arqueras)
+      for (let i = 0; i < 6; i++) {
+        const ox = (Math.random() - 0.5) * 1.6;
+        const oy = (Math.random() - 0.5) * 1.6;
+        this.deployTroop('brawler', gx + ox, gy + oy);
+      }
+      for (let i = 0; i < 3; i++) {
+        const ox = (Math.random() - 0.5) * 2.0;
+        const oy = (Math.random() - 0.5) * 2.0;
+        this.deployTroop('archer', gx + ox, gy + oy);
+      }
+      game.addFloatingText('🪭 ¡ESCUADRÓN KAITO!', gx, gy, '#06b6d4');
+      showToast('🪭 ¡Kaito Shiro entra en combate escoltado por un batallón de 6 Novatos y 3 Arqueras!');
+    } else if (leader.id === 'ren') {
+      game.addFloatingText('👑 ¡PRESENCIA SUPREMA!', gx, gy, '#f59e0b');
+      showToast('👑 ¡Ren Kazuma desata su Presencia (+20% Daño a Aliados en Combate)!');
+    } else if (leader.id === 'aoi') {
+      game.addFloatingText('💚 ¡AURA SANADORA!', gx, gy, '#10b981');
+      showToast('💚 ¡Aoi activa su Aura Sanadora Sagrada (+40 HP/s continua en área)!');
+    } else if (leader.id === 'tora') {
+      game.addFloatingText('🐯 ¡DEMOLICIÓN x3!', gx, gy, '#ef4444');
+      showToast('🐯 ¡Tora "El Destructor" entra al asalto con daño x3 contra muros y defensas!');
+    } else if (leader.id === 'ryu') {
+      game.addFloatingText('🏍️ ¡BŌSŌZOKU!', gx, gy, '#f97316');
+      showToast('🏍️ ¡Ryu salta muros a toda velocidad con su bólido bicilíndrico!');
+    } else if (leader.id === 'kurogane') {
+      game.addFloatingText('🐍 ¡ROBO DE VIDA 35%!', gx, gy, '#8b5cf6');
+      showToast('🐍 ¡Kurogane acecha en las sombras drenando un 35% de vida al golpear!');
     }
-    showToast('👑 ¡Ren Kazuma ha pisado el campo de batalla! ¡Patada Nuclear lista!');
+
+    // Configure Floating Ability Button for this specific active leader
+    const heroBtnWrap = document.getElementById('hero-ability-button-wrap');
+    const heroBtn = document.getElementById('btn-hero-ability');
+    if (heroBtnWrap && heroBtn) {
+      heroBtn.classList.remove('used');
+      const avatarImg = heroBtn.querySelector('.hero-ability-avatar');
+      if (avatarImg) avatarImg.src = leader.avatar;
+      const titleSpan = heroBtn.querySelector('.hero-ability-title');
+      if (titleSpan) titleSpan.textContent = leader.abilityName.toUpperCase();
+      const descSpan = heroBtn.querySelector('.hero-ability-desc');
+      if (descSpan) descSpan.textContent = leader.passiveName;
+      heroBtn.title = `${leader.abilityName}: ${leader.abilityDesc}`;
+      heroBtnWrap.classList.remove('hidden');
+      heroBtnWrap.style.display = 'block';
+    }
   }
 
-  activateHeroAbility() {
-    if (!this.heroRen || this.heroRen.usedAbility || this.heroRen.hp <= 0) return;
-    this.heroRen.usedAbility = true;
+  // Backwards compatibility alias
+  deployHero(gx, gy) {
+    this.deployLeader(gx, gy);
+  }
 
-    this.heroRen.hp = Math.min(this.heroRen.maxHp, this.heroRen.hp + 600);
-    this.heroRen.dps *= 1.8;
-    this.heroRen.speed *= 1.4;
+  activateLeaderAbility() {
+    if (!this.leaderUnit || this.leaderUnit.usedAbility || this.leaderUnit.hp <= 0) return;
+    this.leaderUnit.usedAbility = true;
 
-    window.soundEngine.playHeroRoar();
-
-    for (let i = 0; i < 4; i++) {
-      const offsetX = (Math.random() - 0.5) * 1.5;
-      const offsetY = (Math.random() - 0.5) * 1.5;
-      this.deployTroop('brawler', this.heroRen.x + offsetX, this.heroRen.y + offsetY);
-    }
-
+    const leaderId = this.leaderUnit.leaderId;
     const heroBtn = document.getElementById('btn-hero-ability');
     if (heroBtn) {
       heroBtn.classList.add('used');
-      heroBtn.title = 'Habilidad ya utilizada';
+      heroBtn.title = 'Habilidad ya utilizada en este asalto';
     }
 
-    showToast('⚡ ¡¡PATADA NUCLEAR ACTIVADA!! ¡Ren desata furia y llama refuerzos!');
+    // 1. Ren Kazuma: Patada Nuclear
+    if (leaderId === 'ren') {
+      window.soundEngine.playHeroRoar();
+      this.leaderUnit.hp = Math.min(this.leaderUnit.maxHp, this.leaderUnit.hp + 700);
+      this.leaderUnit.dps *= 2.0;
+      this.leaderUnit.speed *= 1.4;
+
+      for (let i = 0; i < 4; i++) {
+        const ox = (Math.random() - 0.5) * 1.5;
+        const oy = (Math.random() - 0.5) * 1.5;
+        this.deployTroop('brawler', this.leaderUnit.x + ox, this.leaderUnit.y + oy);
+      }
+
+      this.buildings.forEach(b => {
+        if (!b.destroyed && Math.hypot(b.x - this.leaderUnit.x, b.y - this.leaderUnit.y) < 3.2) {
+          this.applyDamageToBuilding(b, 450);
+        }
+      });
+
+      for (let i = 0; i < 18; i++) {
+        this.particles.push({
+          x: this.leaderUnit.x + (Math.random() - 0.5) * 2.5,
+          y: this.leaderUnit.y + (Math.random() - 0.5) * 2.5,
+          life: 25,
+          color: '#f59e0b'
+        });
+      }
+      game.addFloatingText('⚡ PATADA NUCLEAR!', this.leaderUnit.x, this.leaderUnit.y, '#f59e0b');
+      showToast('⚡ ¡¡PATADA NUCLEAR ACTIVADA!! ¡Ren desata furia, cura +700 HP y llama a 4 Novatos!');
+    }
+
+    // 2. Kaito Shiro: Refuerzo Táctico (4 Molotov + 1 Tanque)
+    else if (leaderId === 'kaito') {
+      if (window.soundEngine.playWhistle) window.soundEngine.playWhistle();
+      else window.soundEngine.playBattleHorn();
+
+      this.leaderUnit.hp = Math.min(this.leaderUnit.maxHp, this.leaderUnit.hp + 500);
+
+      for (let i = 0; i < 4; i++) {
+        const ox = (Math.random() - 0.5) * 1.6;
+        const oy = (Math.random() - 0.5) * 1.6;
+        this.deployTroop('molotov', this.leaderUnit.x + ox, this.leaderUnit.y + oy);
+      }
+      this.deployTroop('tank', this.leaderUnit.x + 0.6, this.leaderUnit.y + 0.6);
+
+      for (let i = 0; i < 16; i++) {
+        this.particles.push({
+          x: this.leaderUnit.x + (Math.random() - 0.5) * 2.2,
+          y: this.leaderUnit.y + (Math.random() - 0.5) * 2.2,
+          life: 25,
+          color: '#06b6d4'
+        });
+      }
+      game.addFloatingText('🚩 REFUERZO TÁCTICO!', this.leaderUnit.x, this.leaderUnit.y, '#06b6d4');
+      showToast('🚩 ¡REFUERZO TÁCTICO! ¡Kaito ha llamado a 4 Lanzadores de Molotov y 1 Tanque con Viga!');
+    }
+
+    // 3. Aoi "La Curandera": Inyección Adrenalina Divina (+800 HP & Inmunidad Dorada 3.5s)
+    else if (leaderId === 'aoi') {
+      if (window.soundEngine.playHealChime) window.soundEngine.playHealChime();
+      else window.soundEngine.playVictory();
+
+      this.leaderUnit.hp = Math.min(this.leaderUnit.maxHp, this.leaderUnit.hp + 800);
+      this.leaderUnit.invulnerableUntil = Date.now() + 3500;
+
+      let healedCount = 0;
+      this.troops.forEach(troop => {
+        if (troop.hp > 0 && Math.hypot(troop.x - this.leaderUnit.x, troop.y - this.leaderUnit.y) <= 5.5) {
+          troop.hp = Math.min(troop.maxHp, troop.hp + 800);
+          troop.invulnerableUntil = Date.now() + 3500;
+          game.addFloatingText('+800 HP 🛡️ INMUNE', troop.x, troop.y, '#10b981');
+          healedCount++;
+        }
+      });
+
+      for (let i = 0; i < 24; i++) {
+        this.particles.push({
+          x: this.leaderUnit.x + (Math.random() - 0.5) * 3.5,
+          y: this.leaderUnit.y + (Math.random() - 0.5) * 3.5,
+          life: 35,
+          color: '#10b981'
+        });
+      }
+      game.addFloatingText('💉 ADRENALINA DIVINA!', this.leaderUnit.x, this.leaderUnit.y, '#10b981');
+      showToast(`💉 ¡ADRENALINA DIVINA! ¡Aoi cura +800 HP y otorga Invulnerabilidad Dorada de 3.5s a ${healedCount} aliados!`);
+    }
+
+    // 4. Tora "El Destructor": Furia Berserker & Terremoto
+    else if (leaderId === 'tora') {
+      if (window.soundEngine.playBerserkerRoar) window.soundEngine.playBerserkerRoar();
+      else window.soundEngine.playHeroRoar();
+
+      this.leaderUnit.hp = Math.min(this.leaderUnit.maxHp, this.leaderUnit.hp + 800);
+      this.leaderUnit.dps *= 2.5;
+      this.leaderUnit.speed *= 1.8;
+      this.leaderUnit.isBerserk = true;
+
+      // Terremoto: Daña defensas en radio 4.2 y las aturde 3.5s
+      this.buildings.forEach(b => {
+        if (!b.destroyed && Math.hypot(b.x - this.leaderUnit.x, b.y - this.leaderUnit.y) <= 4.2) {
+          this.applyDamageToBuilding(b, 350);
+          b.frozenUntil = Date.now() + 3500;
+        }
+      });
+
+      for (let i = 0; i < 22; i++) {
+        this.particles.push({
+          x: this.leaderUnit.x + (Math.random() - 0.5) * 3.0,
+          y: this.leaderUnit.y + (Math.random() - 0.5) * 3.0,
+          life: 30,
+          color: '#ef4444'
+        });
+      }
+      game.addFloatingText('🔥 FURIA BERSERKER!', this.leaderUnit.x, this.leaderUnit.y, '#ef4444');
+      showToast('🔥 ¡FURIA BERSERKER! ¡Tora entra en frenesí x2.5 DPS y hace temblar la tierra aturdiendo defensas!');
+    }
+
+    // 5. Ryu "El Dragón Bōsōzoku": Embestida Nitro & Rastro de Fuego
+    else if (leaderId === 'ryu') {
+      window.soundEngine.playBattleHorn();
+      this.leaderUnit.speed *= 1.6;
+
+      if (this.leaderUnit.target && !this.leaderUnit.target.destroyed) {
+        this.applyDamageToBuilding(this.leaderUnit.target, 600);
+      } else {
+        const nearest = this.buildings.find(b => !b.destroyed && Math.hypot(b.x - this.leaderUnit.x, b.y - this.leaderUnit.y) < 4.0);
+        if (nearest) this.applyDamageToBuilding(nearest, 600);
+      }
+
+      for (let i = 0; i < 20; i++) {
+        this.particles.push({
+          x: this.leaderUnit.x + (Math.random() - 0.5) * 2.5,
+          y: this.leaderUnit.y + (Math.random() - 0.5) * 2.5,
+          life: 35,
+          color: '#f97316'
+        });
+      }
+      game.addFloatingText('🏍️ NITRO BLAZE!', this.leaderUnit.x, this.leaderUnit.y, '#f97316');
+      showToast('🏍️ ¡EMBESTIDA NITRO! ¡Ryu asesta 600 de daño de choque a máxima aceleración!');
+    }
+
+    // 6. Kurogane "La Serpiente": Paso Sombrío (Teleport tras la defensa más fuerte)
+    else if (leaderId === 'kurogane') {
+      if (window.soundEngine.playTeleportShadow) window.soundEngine.playTeleportShadow();
+      else window.soundEngine.playSpellCast();
+
+      const defenseBldgs = this.buildings.filter(b => !b.destroyed && (b.type === 'cannon' || b.type === 'watchtower' || b.type === 'wizard_tower' || b.type === 'mortar' || b.type === 'air_defense' || b.type === 'hq'));
+      const primeTarget = defenseBldgs.sort((a, b) => (b.level * 1000 + b.currentHp) - (a.level * 1000 + a.currentHp))[0];
+
+      if (primeTarget) {
+        this.leaderUnit.x = primeTarget.x;
+        this.leaderUnit.y = primeTarget.y;
+        this.applyDamageToBuilding(primeTarget, 800);
+        this.leaderUnit.hp = Math.min(this.leaderUnit.maxHp, this.leaderUnit.hp + 450);
+        game.addFloatingText('🌑 -800 CRÍTICO!', primeTarget.x, primeTarget.y, '#8b5cf6');
+      }
+
+      for (let i = 0; i < 20; i++) {
+        this.particles.push({
+          x: this.leaderUnit.x + (Math.random() - 0.5) * 2.0,
+          y: this.leaderUnit.y + (Math.random() - 0.5) * 2.0,
+          life: 30,
+          color: '#8b5cf6'
+        });
+      }
+      game.addFloatingText('🌑 PASO SOMBRÍO!', this.leaderUnit.x, this.leaderUnit.y, '#8b5cf6');
+      showToast('🌑 ¡PASO SOMBRÍO! ¡Kurogane se teletransporta tras la defensa enemiga asestando 800 de daño crítico!');
+    }
+
+    // 7. Daiki "El Puño de Acero": Impacto Sísmico & Escudo de Titanio
+    else if (leaderId === 'daiki') {
+      if (window.soundEngine.playSteelImpact) window.soundEngine.playSteelImpact();
+      else window.soundEngine.playPunch();
+
+      this.leaderUnit.hp = Math.min(this.leaderUnit.maxHp + 1000, this.leaderUnit.hp + 1000);
+      this.leaderUnit.speed *= 1.4;
+
+      // Terremoto que demuele murallas y defensas en radio 3.5
+      this.buildings.forEach(b => {
+        if (!b.destroyed && Math.hypot(b.x - this.leaderUnit.x, b.y - this.leaderUnit.y) <= 3.5) {
+          const dmg = b.type === 'wall' ? 1400 : 850;
+          this.applyDamageToBuilding(b, dmg);
+        }
+      });
+
+      for (let i = 0; i < 24; i++) {
+        this.particles.push({
+          x: this.leaderUnit.x + (Math.random() - 0.5) * 3.5,
+          y: this.leaderUnit.y + (Math.random() - 0.5) * 3.5,
+          life: 30,
+          color: '#eab308'
+        });
+      }
+      game.addFloatingText('🥊 IMPACTO SÍSMICO!', this.leaderUnit.x, this.leaderUnit.y, '#eab308');
+      showToast('🥊 ¡IMPACTO SÍSMICO! ¡Daiki asesta 850 de daño, pulveriza muros y activa un escudo protector!');
+    }
+
+    // 8. Gen "El Artificiero": Lluvia de Napalm Pirotécnica
+    else if (leaderId === 'gen') {
+      if (window.soundEngine.playBombBarrage) window.soundEngine.playBombBarrage();
+      else window.soundEngine.playExplosion();
+
+      const aliveDefenses = this.buildings.filter(b => !b.destroyed);
+      for (let i = 0; i < 5; i++) {
+        const target = aliveDefenses[Math.floor(Math.random() * aliveDefenses.length)];
+        if (target) {
+          this.applyDamageToBuilding(target, 500);
+          for (let p = 0; p < 8; p++) {
+            this.particles.push({
+              x: target.x + (Math.random() - 0.5) * 2,
+              y: target.y + (Math.random() - 0.5) * 2,
+              life: 35,
+              color: '#ef4444'
+            });
+          }
+        }
+      }
+      game.addFloatingText('💣 LLUVIA DE NAPALM!', this.leaderUnit.x, this.leaderUnit.y, '#ef4444');
+      showToast('💣 ¡LLUVIA DE NAPALM! ¡Gen lanza 5 bombas incendiarias simultáneas devastando las defensas!');
+    }
+
+    // 9. Hana "La Rosa Letal": Vórtice de Cuchillas & Evasión Fantasma
+    else if (leaderId === 'hana') {
+      if (window.soundEngine.playKatanaSlash) window.soundEngine.playKatanaSlash();
+      else window.soundEngine.playWhistle();
+
+      this.leaderUnit.speed *= 2.0;
+      this.leaderUnit.isInvulnerableUntil = Date.now() + 4500;
+
+      this.buildings.forEach(b => {
+        if (!b.destroyed && Math.hypot(b.x - this.leaderUnit.x, b.y - this.leaderUnit.y) <= 3.2) {
+          this.applyDamageToBuilding(b, 650);
+        }
+      });
+
+      for (let i = 0; i < 22; i++) {
+        this.particles.push({
+          x: this.leaderUnit.x + (Math.random() - 0.5) * 2.5,
+          y: this.leaderUnit.y + (Math.random() - 0.5) * 2.5,
+          life: 30,
+          color: '#ec4899'
+        });
+      }
+      game.addFloatingText('🌸 VÓRTICE DE CUCHILLAS!', this.leaderUnit.x, this.leaderUnit.y, '#ec4899');
+      showToast('🌸 ¡VÓRTICE DE CUCHILLAS! ¡Hana se vuelve inmune durante 4.5s y causa 650 de daño en área!');
+    }
+
+    // 10. Kazuki "El Filo Nocturno": Corte Iaido Relámpago
+    else if (leaderId === 'kazuki') {
+      if (window.soundEngine.playKatanaSlash) window.soundEngine.playKatanaSlash();
+      else window.soundEngine.playPunch();
+
+      // Corte en línea hacia el objetivo
+      this.buildings.forEach(b => {
+        if (!b.destroyed && Math.hypot(b.x - this.leaderUnit.x, b.y - this.leaderUnit.y) <= 4.5) {
+          this.applyDamageToBuilding(b, 950);
+        }
+      });
+
+      for (let i = 0; i < 20; i++) {
+        this.particles.push({
+          x: this.leaderUnit.x + (Math.random() - 0.5) * 4.0,
+          y: this.leaderUnit.y + (Math.random() - 0.5) * 2.0,
+          life: 25,
+          color: '#6366f1'
+        });
+      }
+      game.addFloatingText('⚡ CORTE IAIDO!', this.leaderUnit.x, this.leaderUnit.y, '#6366f1');
+      showToast('⚡ ¡CORTE IAIDO! ¡Kazuki desenvaina en un destello fulminante asestando 950 de daño crítico!');
+    }
+
+    // 11. Shin "Ojo de Halcón": Disparo Orbital Perforante
+    else if (leaderId === 'shin') {
+      if (window.soundEngine.playSniperShot) window.soundEngine.playSniperShot();
+      else window.soundEngine.playExplosion();
+
+      const defenseBldgs = this.buildings.filter(b => !b.destroyed && (b.type === 'cannon' || b.type === 'watchtower' || b.type === 'wizard_tower' || b.type === 'mortar' || b.type === 'hq'));
+      const highThreat = defenseBldgs.sort((a, b) => b.currentHp - a.currentHp)[0];
+
+      if (highThreat) {
+        this.applyDamageToBuilding(highThreat, 1200);
+        for (let i = 0; i < 16; i++) {
+          this.particles.push({
+            x: highThreat.x + (Math.random() - 0.5) * 1.5,
+            y: highThreat.y + (Math.random() - 0.5) * 1.5,
+            life: 30,
+            color: '#0ea5e9'
+          });
+        }
+        game.addFloatingText('🎯 -1200 SNIPER!', highThreat.x, highThreat.y, '#0ea5e9');
+        showToast(`🎯 ¡DISPARO ORBITAL! ¡Shin fulmina la defensa enemiga más peligrosa con 1,200 de daño!`);
+      } else {
+        game.addFloatingText('🎯 DISPARO!', this.leaderUnit.x, this.leaderUnit.y, '#0ea5e9');
+      }
+    }
+
+    // 12. Yukiko "La Reina de Nieve": Tempestad Glacial
+    else if (leaderId === 'yukiko') {
+      if (window.soundEngine.playIceStorm) window.soundEngine.playIceStorm();
+      else window.soundEngine.playFreezeSpell();
+
+      this.buildings.forEach(b => {
+        if (!b.destroyed && Math.hypot(b.x - this.leaderUnit.x, b.y - this.leaderUnit.y) <= 5.5) {
+          b.frozenUntil = Date.now() + 6000;
+        }
+      });
+
+      let healedCount = 0;
+      this.troops.forEach(tr => {
+        if (!tr.destroyed) {
+          tr.hp = Math.min(tr.maxHp, tr.hp + 600);
+          healedCount++;
+        }
+      });
+
+      for (let i = 0; i < 28; i++) {
+        this.particles.push({
+          x: this.leaderUnit.x + (Math.random() - 0.5) * 5.0,
+          y: this.leaderUnit.y + (Math.random() - 0.5) * 5.0,
+          life: 40,
+          color: '#38bdf8'
+        });
+      }
+      game.addFloatingText('❄️ TEMPESTAD GLACIAL!', this.leaderUnit.x, this.leaderUnit.y, '#38bdf8');
+      showToast(`❄️ ¡TEMPESTAD GLACIAL! ¡Yukiko congela defensas en 5.5 casillas por 6s y cura +600 HP a ${healedCount} aliados!`);
+    }
+  }
+
+  // Backwards compatibility alias
+  activateHeroAbility() {
+    this.activateLeaderAbility();
   }
 
   castSpell(spellType, gx, gy) {
@@ -1799,6 +4617,30 @@ class RaidSession {
     const now = Date.now();
     this.activeSpells = this.activeSpells.filter(s => s.expiresAt > now);
 
+    // Check Ren Kazuma +20% damage aura
+    const isRenAlive = this.leaderUnit && this.leaderUnit.hp > 0 && this.leaderUnit.leaderId === 'ren';
+
+    // Check Aoi "La Curandera" +40 HP/s healing aura (heals troops in 4.5 tiles every 1s)
+    if (this.leaderUnit && this.leaderUnit.hp > 0 && this.leaderUnit.leaderId === 'aoi') {
+      if (!this.leaderUnit.lastPassiveTick || now - this.leaderUnit.lastPassiveTick > 1000) {
+        this.leaderUnit.lastPassiveTick = now;
+        this.troops.forEach(t => {
+          if (t.hp > 0 && Math.hypot(t.x - this.leaderUnit.x, t.y - this.leaderUnit.y) <= 4.5) {
+            if (t.hp < t.maxHp) {
+              t.hp = Math.min(t.maxHp, t.hp + 40);
+              game.addFloatingText('+40 HP', t.x, t.y, '#10b981');
+              this.particles.push({
+                x: t.x + (Math.random() - 0.5) * 0.8,
+                y: t.y + (Math.random() - 0.5) * 0.8,
+                life: 18,
+                color: '#10b981'
+              });
+            }
+          }
+        });
+      }
+    }
+
     // 1. Update Troops AI
     this.troops.forEach(troop => {
       if (troop.hp <= 0) return;
@@ -1812,7 +4654,8 @@ class RaidSession {
         }
       });
 
-      const effectiveDps = isRaged ? troop.dps * 1.65 : troop.dps;
+      let effectiveDps = isRaged ? troop.dps * 1.65 : troop.dps;
+      if (isRenAlive) effectiveDps *= 1.20; // Ren passive: +20% damage aura
       const effectiveSpeed = isRaged ? troop.speed * 1.4 : troop.speed;
 
       if (!troop.target || troop.target.destroyed) {
@@ -1832,7 +4675,8 @@ class RaidSession {
       const dist = Math.hypot(dx, dy);
 
       if (dist > troop.range) {
-        const step = (effectiveSpeed * 0.035);
+        // Deliberate, tactical marching speed (smooth, readable combat pacing)
+        const step = (effectiveSpeed * 0.0135);
         troop.x += (dx / dist) * step;
         troop.y += (dy / dist) * step;
 
@@ -1848,7 +4692,20 @@ class RaidSession {
             game.addFloatingText('👺 ROBO x2!', troop.target.x + tw / 2, troop.target.y + th / 2, '#10b981');
           }
 
+          // Tora "El Destructor" Passive: x3 damage vs walls and defensive structures
+          if (troop.leaderId === 'tora' && (troop.target.type === 'wall' || troop.target.type === 'cannon' || troop.target.type === 'watchtower' || troop.target.type === 'wizard_tower' || troop.target.type === 'mortar' || troop.target.type === 'air_defense')) {
+            dmg *= 3;
+            game.addFloatingText('🐯 DEMOLICIÓN x3!', troop.target.x + tw / 2, troop.target.y + th / 2, '#ef4444');
+          }
+
           this.applyDamageToBuilding(troop.target, dmg);
+
+          // Kurogane "La Serpiente" Passive: 35% Life Steal
+          if (troop.leaderId === 'kurogane') {
+            const drained = Math.round(dmg * 0.35);
+            troop.hp = Math.min(troop.maxHp, troop.hp + drained);
+            game.addFloatingText(`+${drained} 🩸`, troop.x, troop.y, '#8b5cf6');
+          }
 
           if (troop.type === 'archer') {
             window.soundEngine.playArrowShoot();
@@ -1892,7 +4749,7 @@ class RaidSession {
             startX: b.x + 1, startY: b.y + 1,
             x: b.x + 1, y: b.y + 1,
             targetTroop: targetTroop,
-            speed: 0.22,
+            speed: 0.14,
             damage: 32 * b.level
           });
         }
@@ -1906,7 +4763,7 @@ class RaidSession {
             startX: b.x + 1, startY: b.y + 1,
             x: b.x + 1, y: b.y + 1,
             targetTroop: targetTroop,
-            speed: 0.26,
+            speed: 0.16,
             isArrow: true,
             damage: 28 * b.level
           });
@@ -1923,7 +4780,7 @@ class RaidSession {
             targetX: targetTroop.x,
             targetY: targetTroop.y,
             isSplash: true,
-            speed: 0.16,
+            speed: 0.12,
             damage: 42 * b.level
           });
         }
@@ -1937,7 +4794,7 @@ class RaidSession {
             startX: b.x + 1, startY: b.y + 1,
             x: b.x + 1, y: b.y + 1,
             targetTroop: flyingTarget,
-            speed: 0.32,
+            speed: 0.18,
             damage: 85 * b.level
           });
         }
@@ -1970,8 +4827,12 @@ class RaidSession {
           window.soundEngine.playExplosion();
           this.troops.forEach(t => {
             if (Math.hypot(t.x - p.targetX, t.y - p.targetY) < 2.2) {
-              t.hp -= p.damage;
-              game.addFloatingText(`-${Math.round(p.damage)}`, t.x, t.y, '#f59e0b');
+              if (t.invulnerableUntil && t.invulnerableUntil > now) {
+                game.addFloatingText('🛡️ INMUNE', t.x, t.y, '#facc15');
+              } else {
+                t.hp -= p.damage;
+                game.addFloatingText(`-${Math.round(p.damage)}`, t.x, t.y, '#f59e0b');
+              }
             }
           });
           p.dead = true;
@@ -1988,8 +4849,12 @@ class RaidSession {
         const dy = p.targetTroop.y - p.y;
         const dist = Math.hypot(dx, dy);
         if (dist < 0.25) {
-          p.targetTroop.hp -= p.damage;
-          game.addFloatingText(`-${Math.round(p.damage)}`, p.targetTroop.x, p.targetTroop.y, '#f59e0b');
+          if (p.targetTroop.invulnerableUntil && p.targetTroop.invulnerableUntil > now) {
+            game.addFloatingText('🛡️ INMUNE', p.targetTroop.x, p.targetTroop.y, '#facc15');
+          } else {
+            p.targetTroop.hp -= p.damage;
+            game.addFloatingText(`-${Math.round(p.damage)}`, p.targetTroop.x, p.targetTroop.y, '#f59e0b');
+          }
           p.dead = true;
         } else {
           p.x += (dx / dist) * p.speed;
@@ -2021,8 +4886,8 @@ class RaidSession {
     }
 
     // Check if player deployed troops and all troops died with none left to deploy
-    const totalRemainingToDeploy = Object.values(game.army).reduce((a, b) => a + b, 0) + (this.heroRen ? 0 : 1);
-    if (this.hasDeployedAtLeastOne && this.troops.length === 0 && (!this.heroRen || this.heroRen.hp <= 0) && totalRemainingToDeploy === 0 && !this.victoryTriggered) {
+    const totalRemainingToDeploy = Object.values(game.army).reduce((a, b) => a + b, 0) + (this.leaderUnit ? 0 : 1);
+    if (this.hasDeployedAtLeastOne && this.troops.length === 0 && (!this.leaderUnit || this.leaderUnit.hp <= 0) && totalRemainingToDeploy === 0 && !this.victoryTriggered) {
       this.victoryTriggered = true;
       setTimeout(() => {
         this.endRaid(false);
@@ -2037,6 +4902,10 @@ class RaidSession {
       const d = Math.hypot(troop.x - b.x, troop.y - b.y);
 
       if (b.type === 'spring_trap' && d < 0.75) {
+        if (troop.invulnerableUntil && troop.invulnerableUntil > Date.now()) {
+          game.addFloatingText('🛡️ INMUNE', troop.x, troop.y, '#facc15');
+          return;
+        }
         b.destroyed = true;
         window.soundEngine.playSpringTrap();
         troop.hp = 0;
@@ -2047,8 +4916,12 @@ class RaidSession {
         window.soundEngine.playExplosion();
         this.troops.forEach(t => {
           if (Math.hypot(t.x - b.x, t.y - b.y) < 2.0) {
-            t.hp -= 150;
-            game.addFloatingText('-150', t.x, t.y, '#ef4444');
+            if (t.invulnerableUntil && t.invulnerableUntil > Date.now()) {
+              game.addFloatingText('🛡️ INMUNE', t.x, t.y, '#facc15');
+            } else {
+              t.hp -= 150;
+              game.addFloatingText('-150', t.x, t.y, '#ef4444');
+            }
           }
         });
         showToast('💣 ¡Bomba oculta detonada!');
@@ -2207,8 +5080,23 @@ class RaidSession {
     if (tEl) tEl.textContent = `${mins}:${secs}`;
   }
 
+  toggleSpeed() {
+    const speeds = [1, 2, 4];
+    const idx = speeds.indexOf(this.speedMultiplier || 1);
+    this.speedMultiplier = speeds[(idx + 1) % speeds.length];
+    if (window.soundEngine && window.soundEngine.playSpeedSwitch) {
+      window.soundEngine.playSpeedSwitch();
+    }
+    const btn = document.getElementById('btn-raid-speed');
+    if (btn) btn.textContent = `⚡ ${this.speedMultiplier}x`;
+    showToast(`⚡ Velocidad de combate: ${this.speedMultiplier}x`);
+  }
+
   renderCombat(ctx) {
-    this.updateCombat();
+    const loops = this.speedMultiplier || 1;
+    for (let l = 0; l < loops; l++) {
+      this.updateCombat();
+    }
 
     this.activeSpells.forEach(s => {
       const pt = gridToScreen(s.x, s.y);
@@ -2226,11 +5114,45 @@ class RaidSession {
     this.troops.forEach(t => {
       const pt = gridToScreen(t.x, t.y);
 
+      // Leader Aura
+      if (t.isHero) {
+        ctx.save();
+        ctx.lineWidth = 2.5;
+        let ringColor = 'rgba(245, 158, 11, 0.55)';
+        if (t.leaderId === 'aoi') ringColor = 'rgba(16, 185, 129, 0.65)';
+        else if (t.leaderId === 'kaito') ringColor = 'rgba(6, 182, 212, 0.65)';
+        else if (t.leaderId === 'tora') ringColor = 'rgba(239, 68, 68, 0.65)';
+        else if (t.leaderId === 'ryu') ringColor = 'rgba(249, 115, 22, 0.65)';
+        else if (t.leaderId === 'kurogane') ringColor = 'rgba(139, 92, 246, 0.65)';
+        ctx.strokeStyle = ringColor;
+        ctx.fillStyle = ringColor.replace('0.65', '0.14').replace('0.55', '0.14');
+        ctx.beginPath();
+        const pulse = 1 + Math.sin(Date.now() / 240) * 0.16;
+        ctx.ellipse(pt.x, pt.y + 4, 18 * pulse, 9 * pulse, 0, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.stroke();
+        ctx.restore();
+      }
+
       // Shadow
       ctx.fillStyle = 'rgba(0,0,0,0.4)';
       ctx.beginPath();
       ctx.ellipse(pt.x, pt.y + 4, 10, 5, 0, 0, Math.PI * 2);
       ctx.fill();
+
+      // Golden Invulnerability Shield (from Aoi's Divine Adrenaline)
+      if (t.invulnerableUntil && t.invulnerableUntil > Date.now()) {
+        ctx.save();
+        ctx.strokeStyle = '#facc15';
+        ctx.fillStyle = 'rgba(253, 224, 71, 0.22)';
+        ctx.lineWidth = 2.8;
+        ctx.beginPath();
+        const drawYShield = t.isFlying ? pt.y - 24 : pt.y - 12;
+        ctx.arc(pt.x, drawYShield, 22, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.stroke();
+        ctx.restore();
+      }
 
       // Troop Icon
       ctx.font = t.isHero ? '28px sans-serif' : (t.isFlying ? '26px sans-serif' : '20px sans-serif');
@@ -2325,6 +5247,26 @@ class RaidSession {
     game.darkElixir = Math.min(game.maxDarkElixir, game.darkElixir + bonusDark);
     game.saveState();
 
+    // Check if this was a Risk Japan Territorial Conquest Raid!
+    if (this.baseDef && this.baseDef.territoryId && this.stars > 0) {
+      game.conquerTerritory(this.baseDef.territoryId);
+      const conquestBanner = document.getElementById('victory-conquest-banner');
+      const conquestTitle = document.getElementById('v-conquest-title');
+      const conquestSub = document.getElementById('v-conquest-sub');
+      if (conquestBanner) {
+        if (conquestTitle) conquestTitle.textContent = `¡${(JAPAN_TERRITORIES_DEF[this.baseDef.territoryId]?.name || 'PROVINCIA').toUpperCase()} CONQUISTADA!`;
+        if (conquestSub) conquestSub.textContent = `Dominio de Japón ampliado al ${game.getConquestPct()}% (${game.getConquestCount()}/16 Provincias)`;
+        conquestBanner.classList.remove('hidden');
+        conquestBanner.style.display = 'flex';
+      }
+    } else {
+      const conquestBanner = document.getElementById('victory-conquest-banner');
+      if (conquestBanner) {
+        conquestBanner.classList.add('hidden');
+        conquestBanner.style.display = 'none';
+      }
+    }
+
     window.soundEngine.playVictory();
 
     const modal = document.getElementById('raid-victory-modal');
@@ -2345,7 +5287,7 @@ class RaidSession {
     document.getElementById('victory-pct').textContent = `${this.damagePct}%`;
     document.getElementById('victory-yen').textContent = `+¥ ${bonusYen.toLocaleString()}`;
     document.getElementById('victory-respect').textContent = `+${bonusRespect.toLocaleString()} 🔥`;
-    
+
     const vDark = document.getElementById('victory-dark');
     if (vDark) vDark.textContent = `+${bonusDark.toLocaleString()} 🧪`;
     const vGems = document.getElementById('victory-gems');
@@ -2387,6 +5329,7 @@ class DefenseSession {
   constructor(playerBuildings) {
     this.totalWaves = 3;
     this.currentWave = 1;
+    this.speedMultiplier = 1; // 1x, 2x, 4x simulation speed
     this.isOver = false;
     this.waveSpawned = false;
 
@@ -2434,20 +5377,22 @@ class DefenseSession {
       }
     }
 
-    // Hero Ren Altar Defender
+    // Active Leader Altar Defender
     const altar = this.buildings.find(b => b.type === 'hero_altar' && !b.destroyed);
     if (altar) {
+      const leader = game.getActiveLeader();
       this.alliedTroops.push({
-        id: 'def_hero_ren',
-        type: 'hero_ren',
-        name: 'Ren Kazuma (Defensor)',
-        icon: '👑',
+        id: 'def_leader_' + leader.id,
+        leaderId: leader.id,
+        type: 'leader',
+        name: `${leader.name} (Defensor)`,
+        icon: leader.icon,
         x: altar.x + 1,
         y: altar.y + 1,
-        hp: HERO_REN.hp,
-        maxHp: HERO_REN.maxHp,
-        dps: HERO_REN.dps,
-        speed: HERO_REN.speed,
+        hp: leader.hp,
+        maxHp: leader.hp,
+        dps: leader.dps,
+        speed: leader.speed,
         range: 1.0,
         lastAttack: 0,
         isHero: true,
@@ -2818,8 +5763,23 @@ class DefenseSession {
     if (countEl) countEl.textContent = this.enemies.length;
   }
 
+  toggleSpeed() {
+    const speeds = [1, 2, 4];
+    const idx = speeds.indexOf(this.speedMultiplier || 1);
+    this.speedMultiplier = speeds[(idx + 1) % speeds.length];
+    if (window.soundEngine && window.soundEngine.playSpeedSwitch) {
+      window.soundEngine.playSpeedSwitch();
+    }
+    const btn = document.getElementById('btn-defense-speed');
+    if (btn) btn.textContent = `⚡ ${this.speedMultiplier}x`;
+    showToast(`⚡ Velocidad de asedio: ${this.speedMultiplier}x`);
+  }
+
   renderDefense(ctx) {
-    this.updateDefense();
+    const loops = this.speedMultiplier || 1;
+    for (let l = 0; l < loops; l++) {
+      this.updateDefense();
+    }
 
     // Render Enemies
     this.enemies.forEach(e => {
@@ -2924,6 +5884,70 @@ function updateUI() {
   document.getElementById('btn-sub-trained').textContent = `${game.getArmyCount()}/${game.getArmyCapacity()} Tropas`;
   document.getElementById('gems-count').textContent = game.gems;
   document.getElementById('hq-level-indicator').textContent = `SEDE NIVEL ${game.getHqLevel()}`;
+
+  const activeL = game.getActiveLeader();
+  const leaderSub = document.getElementById('btn-sub-leader-name');
+  if (leaderSub && activeL) {
+    leaderSub.textContent = `${activeL.name.split(' ')[0]} (Nv. ${activeL.level})`;
+  }
+
+  const hudJapanPct = document.getElementById('hud-japan-conquest-pct');
+  if (hudJapanPct) {
+    hudJapanPct.textContent = `${game.getConquestPct()}%`;
+  }
+
+  updateQuickObjective();
+}
+
+function updateQuickObjective() {
+  const pill = document.getElementById('quick-objective-pill');
+  if (!pill || pill.dataset.dismissed === 'true') return;
+
+  const descEl = document.getElementById('obj-desc');
+  const btnEl = document.getElementById('btn-obj-action');
+  if (!descEl || !btnEl) return;
+
+  const yenMills = game.buildings.filter(b => b.type === 'yen_post');
+  const dojos = game.buildings.filter(b => b.type === 'dojo');
+  const armyCount = game.getArmyCount();
+  const conquestPct = game.getConquestPct();
+
+  if (yenMills.length === 0) {
+    descEl.textContent = 'Construye un Puesto de Yenes para producir fondos de banda.';
+    btnEl.textContent = 'Construir';
+    btnEl.onclick = () => {
+      renderShopCatalog('resources');
+      document.getElementById('shop-modal').classList.remove('hidden');
+    };
+  } else if (dojos.length === 0) {
+    descEl.textContent = 'Construye un Dojo para producir Respeto (fuerza de reclutamiento).';
+    btnEl.textContent = 'Construir';
+    btnEl.onclick = () => {
+      renderShopCatalog('resources');
+      document.getElementById('shop-modal').classList.remove('hidden');
+    };
+  } else if (armyCount < 10) {
+    descEl.textContent = 'Recluta al menos 10 pandilleros en el Cuartel para tu ejército.';
+    btnEl.textContent = 'Entrenar';
+    btnEl.onclick = () => {
+      renderBarracks('troops');
+      document.getElementById('barracks-modal').classList.remove('hidden');
+    };
+  } else if (conquestPct < 15) {
+    descEl.textContent = '¡Tienes tropas listas! Conquista una nueva provincia en el Mapa de Japón.';
+    btnEl.textContent = 'Guerra';
+    btnEl.onclick = () => {
+      renderWarMap();
+      showWarTab('japan');
+      document.getElementById('war-map-modal').classList.remove('hidden');
+    };
+  } else {
+    descEl.textContent = 'Toca tus defensas y Sede Central para subirlas de nivel.';
+    btnEl.textContent = 'Base';
+    btnEl.onclick = () => {
+      showToast('💡 Toca cualquier edificio para ver opciones de mejora.');
+    };
+  }
 }
 
 // ==========================================================================
@@ -3159,6 +6183,9 @@ function renderBarracks(tab = currentBarracksTab) {
   const darkBalEl = document.getElementById('modal-dark-balance');
   if (darkBalEl) darkBalEl.textContent = `${game.darkElixir.toLocaleString()} 🧪`;
 
+  // Always render the Live Recruitment Queue on top!
+  renderRecruitmentQueue();
+
   if (tab === 'troops') {
     // Regular troops trained with Respect
     for (const [id, t] of Object.entries(TROOP_TYPES)) {
@@ -3169,6 +6196,7 @@ function renderBarracks(tab = currentBarracksTab) {
       const currentQty = game.army[id] || 0;
       const canTrain = game.respect >= t.costRespect && (game.getArmyCount() + t.housing) <= game.getArmyCapacity();
 
+      // Show real-time train duration
       card.innerHTML = `
         <div class="train-header">
           <span class="train-icon">${t.icon}</span>
@@ -3176,6 +6204,7 @@ function renderBarracks(tab = currentBarracksTab) {
             <h4 class="train-name">${t.name} (x${currentQty})</h4>
             <div class="train-stats">
               <span>HP: ${t.hp} | DPS: ${t.dps} | Espacio: ${t.housing}</span>
+              <span class="train-time-badge" style="color: #38bdf8; margin-left: 6px;">⏱️ ${t.trainTime}s</span>
             </div>
           </div>
         </div>
@@ -3183,7 +6212,7 @@ function renderBarracks(tab = currentBarracksTab) {
         <div class="train-action-row">
           <span class="train-cost">${t.costRespect} 🔥</span>
           <button class="btn btn-gold btn-sm btn-train-troop" data-id="${id}" ${!canTrain ? 'disabled' : ''}>
-            + Entrenar
+            + Reclutar (${t.trainTime}s)
           </button>
         </div>
       `;
@@ -3211,6 +6240,7 @@ function renderBarracks(tab = currentBarracksTab) {
             <h4 class="train-name">${t.name} (x${currentQty})</h4>
             <div class="train-stats">
               <span>HP: ${t.hp} | DPS: ${t.dps} | Espacio: ${t.housing}</span>
+              <span class="train-time-badge" style="color: #c084fc; margin-left: 6px;">⏱️ ${t.trainTime}s</span>
             </div>
           </div>
         </div>
@@ -3218,7 +6248,7 @@ function renderBarracks(tab = currentBarracksTab) {
         <div class="train-action-row">
           <span class="train-cost" style="color: #c084fc;">${t.costDark} 🧪</span>
           <button class="btn btn-purple btn-sm btn-train-dark-troop" data-id="${id}" ${!canTrain ? 'disabled' : ''}>
-            + Reclutar Élite
+            + Reclutar Élite (${t.trainTime}s)
           </button>
         </div>
       `;
@@ -3265,44 +6295,109 @@ function renderBarracks(tab = currentBarracksTab) {
   }
 }
 
-function trainTroop(id) {
-  const t = TROOP_TYPES[id];
-  if (!t) return;
-  if (game.respect < t.costRespect) {
-    showToast('¡No tienes suficiente Respeto 🔥!');
-    return;
-  }
-  if (game.getArmyCount() + t.housing > game.getArmyCapacity()) {
-    showToast('¡Campamentos llenos! Construye o mejora más campamentos.');
+// ==========================================================================
+// RECRUITMENT QUEUE WITH REAL-TIME PROGRESS BAR & COUNTDOWN
+// ==========================================================================
+
+function renderRecruitmentQueue() {
+  const container = document.getElementById('recruitment-queue-container');
+  if (!container) return;
+
+  const queue = game.trainingQueue || [];
+  if (queue.length === 0) {
+    container.innerHTML = `
+      <div class="queue-empty-state">
+        <span class="queue-empty-icon">⏳</span>
+        <div class="queue-empty-text">
+          <h4 style="margin: 0; font-family: var(--font-display); font-size: 0.95rem; color: #fff;">Cola de Reclutamiento Disponible</h4>
+          <p style="margin: 2px 0 0 0; font-size: 0.78rem; color: var(--text-muted);">Selecciona tropas para entrenarlas en tiempo real con barra de progreso.</p>
+        </div>
+      </div>
+    `;
     return;
   }
 
-  game.respect -= t.costRespect;
-  game.army[id] = (game.army[id] || 0) + 1;
-  window.soundEngine.playCoinCollect();
-  game.saveState();
-  updateUI();
-  renderBarracks('troops');
+  const active = queue[0];
+  const activeDef = TROOP_TYPES[active.troopId];
+  const activeSecs = Math.max(1, Math.ceil(active.remainingMs / 1000));
+  const progressPct = Math.min(100, Math.max(0, ((active.totalMs - active.remainingMs) / active.totalMs) * 100));
+
+  let queuedHtml = '';
+  if (queue.length > 1) {
+    queuedHtml = `
+      <div class="queue-subsequent-list" style="margin-top: 10px; display: flex; align-items: center; gap: 8px;">
+        <span class="queue-subsequent-label" style="font-size: 0.75rem; color: var(--text-muted);">En espera (${queue.length - 1}):</span>
+        <div class="queue-items-strip" style="display: flex; gap: 6px; flex-wrap: wrap;">
+          ${queue.slice(1).map((item) => {
+      const def = TROOP_TYPES[item.troopId];
+      return `
+              <div class="queue-sub-badge" style="background: rgba(15, 23, 42, 0.85); border: 1px solid rgba(255,255,255,0.15); border-radius: 6px; padding: 3px 6px; display: flex; align-items: center; gap: 4px;" title="${def ? def.name : 'Tropa'}">
+                <span class="sub-icon">${def ? def.icon : '⚔️'}</span>
+                <button class="btn-cancel-queue-item" data-qid="${item.queueId}" style="background: none; border: none; color: #ef4444; font-size: 0.75rem; cursor: pointer; padding: 0 2px;" title="Cancelar y reembolsar">✕</button>
+              </div>
+            `;
+    }).join('')}
+        </div>
+      </div>
+    `;
+  }
+
+  container.innerHTML = `
+    <div class="queue-active-card">
+      <div class="queue-active-header" style="display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 8px;">
+        <div class="queue-active-info" style="display: flex; align-items: center; gap: 10px;">
+          <span class="queue-active-icon" style="font-size: 1.8rem;">${activeDef ? activeDef.icon : '🥋'}</span>
+          <div>
+            <h4 class="queue-active-name" style="margin: 0; font-family: var(--font-display); font-size: 0.95rem; color: var(--gold-bright);">Entrenando: ${activeDef ? activeDef.name : 'Tropa'}</h4>
+            <span class="queue-countdown" id="queue-active-timer" style="font-size: 0.8rem; color: #38bdf8;">⏱️ ${activeSecs}s restantes (${Math.round(progressPct)}%)</span>
+          </div>
+        </div>
+        <div class="queue-actions-inline" style="display: flex; gap: 8px;">
+          <button class="btn btn-outline btn-xs" id="btn-cancel-active-training" data-qid="${active.queueId}" title="Cancelar y recuperar recursos" style="padding: 4px 8px; font-size: 0.75rem;">
+            ✕ Cancelar
+          </button>
+          <button class="btn btn-gold btn-xs" id="btn-speedup-training" style="padding: 4px 10px; font-size: 0.75rem;">
+            ⚡ Acelerar (2 💎)
+          </button>
+        </div>
+      </div>
+      <div class="queue-progress-track" style="height: 6px; background: rgba(0,0,0,0.5); border-radius: 3px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1);">
+        <div class="queue-progress-fill" style="width: ${progressPct}%; height: 100%; background: linear-gradient(90deg, #38bdf8, #fbbf24); transition: width 0.2s linear;"></div>
+      </div>
+    </div>
+    ${queuedHtml}
+  `;
+
+  const speedBtn = container.querySelector('#btn-speedup-training');
+  if (speedBtn) {
+    speedBtn.addEventListener('click', () => {
+      game.speedUpTrainingWithGems();
+    });
+  }
+
+  const cancelActiveBtn = container.querySelector('#btn-cancel-active-training');
+  if (cancelActiveBtn) {
+    cancelActiveBtn.addEventListener('click', (e) => {
+      const qid = parseFloat(e.currentTarget.getAttribute('data-qid'));
+      game.cancelTrainingQueueItem(qid);
+    });
+  }
+
+  container.querySelectorAll('.btn-cancel-queue-item').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const qid = parseFloat(e.currentTarget.getAttribute('data-qid'));
+      game.cancelTrainingQueueItem(qid);
+    });
+  });
+}
+
+function trainTroop(id) {
+  game.enqueueTroop(id, false);
 }
 
 function trainDarkTroop(id) {
-  const t = TROOP_TYPES[id];
-  if (!t) return;
-  if (game.darkElixir < t.costDark) {
-    showToast('¡No tienes suficiente Esencia Sombría 🧪!');
-    return;
-  }
-  if (game.getArmyCount() + t.housing > game.getArmyCapacity()) {
-    showToast('¡Campamentos llenos! Construye o mejora más campamentos.');
-    return;
-  }
-
-  game.darkElixir -= t.costDark;
-  game.army[id] = (game.army[id] || 0) + 1;
-  window.soundEngine.playCoinCollect();
-  game.saveState();
-  updateUI();
-  renderBarracks('dark');
+  game.enqueueTroop(id, true);
 }
 
 function brewSpell(id) {
@@ -3322,8 +6417,15 @@ function brewSpell(id) {
   renderBarracks('spells');
 }
 
-// Render War Map (Campaign & Multiplayer Rival Search)
+// ==========================================================================
+// JAPAN RISK CONQUEST SYSTEM (STRATEGIC MAP & PROVINCE WAR)
+// ==========================================================================
+
 function renderWarMap() {
+  // Always update Japan Risk map as primary mode
+  renderJapanRiskMap();
+
+  // Campaign bases
   const container = document.getElementById('rival-bases-container');
   if (container) {
     container.innerHTML = '';
@@ -3354,6 +6456,241 @@ function renderWarMap() {
   renderMultiplayerPanel();
 }
 
+function renderJapanRiskMap() {
+  const conquestCount = game.getConquestCount();
+  const conquestPct = game.getConquestPct();
+  const totalTerritories = Object.keys(JAPAN_TERRITORIES_DEF).length;
+
+  // Top Dominion stats
+  const progText = document.getElementById('japan-risk-progress-text');
+  if (progText) progText.textContent = `${conquestCount} / ${totalTerritories} Provincias (${conquestPct}%)`;
+
+  const progFill = document.getElementById('japan-risk-progress-fill');
+  if (progFill) progFill.style.width = `${conquestPct}%`;
+
+  const hudPct = document.getElementById('hud-japan-conquest-pct');
+  if (hudPct) hudPct.textContent = `${conquestPct}%`;
+
+  // Tax Rate & Uncollected Ledger
+  const taxRateEl = document.getElementById('japan-risk-tax-rate');
+  if (taxRateEl) {
+    let rateYen = 0;
+    let rateRespect = 0;
+    for (const [id, state] of Object.entries(game.japanTerritories)) {
+      if (state.owner === 'rayton' && JAPAN_TERRITORIES_DEF[id]) {
+        rateYen += (JAPAN_TERRITORIES_DEF[id].incomeYen || 150);
+        rateRespect += (JAPAN_TERRITORIES_DEF[id].incomeRespect || 75);
+      }
+    }
+    if (game.isRegionFullyOwned('kanto')) rateYen = Math.round(rateYen * 1.25);
+    taxRateEl.textContent = `+¥ ${rateYen.toLocaleString()} / +${rateRespect.toLocaleString()} 🔥 por min`;
+  }
+
+  const uncolEl = document.getElementById('japan-uncollected-taxes');
+  if (uncolEl) {
+    const uncolYen = Math.round(game.japanTaxesAccumulated.yen || 0);
+    const uncolResp = Math.round(game.japanTaxesAccumulated.respect || 0);
+    uncolEl.textContent = `¥ ${uncolYen.toLocaleString()} | ${uncolResp} 🔥`;
+  }
+
+  // Regional Bonuses Ribbon (8 Regions)
+  const bonusesContainer = document.getElementById('regional-bonuses-container');
+  if (bonusesContainer) {
+    bonusesContainer.innerHTML = '';
+    for (const [rid, rdef] of Object.entries(JAPAN_REGIONS)) {
+      const isOwned = game.isRegionFullyOwned(rid);
+      const ownedInRegion = rdef.territories.filter(tid => game.japanTerritories[tid] && game.japanTerritories[tid].owner === 'rayton').length;
+
+      const pill = document.createElement('div');
+      pill.className = `region-bonus-pill ${isOwned ? 'active-bonus' : 'locked-bonus'}`;
+      pill.innerHTML = `
+        <span class="region-crest">${rdef.crest}</span>
+        <div class="region-bonus-meta">
+          <div class="region-bonus-title-row">
+            <strong>${rdef.name}</strong>
+            <span class="region-status-tag">${isOwned ? 'ACTIVO' : `${ownedInRegion}/${rdef.territories.length}`}</span>
+          </div>
+          <span class="region-bonus-desc">${rdef.bonusTitle}</span>
+        </div>
+      `;
+      pill.title = `${rdef.fullName}\nBonus: ${rdef.bonusDesc}`;
+      bonusesContainer.appendChild(pill);
+    }
+  }
+
+  // Render SVG Connections Lines
+  const svgLines = document.getElementById('japan-map-svg-lines');
+  if (svgLines) {
+    svgLines.innerHTML = '';
+    const drawnPairs = new Set();
+    for (const [tid, tdef] of Object.entries(JAPAN_TERRITORIES_DEF)) {
+      (tdef.connections || []).forEach(connId => {
+        const pairKey = [tid, connId].sort().join('--');
+        if (!drawnPairs.has(pairKey) && JAPAN_TERRITORIES_DEF[connId]) {
+          drawnPairs.add(pairKey);
+          const target = JAPAN_TERRITORIES_DEF[connId];
+          const isRaytonLink = (game.japanTerritories[tid]?.owner === 'rayton') && (game.japanTerritories[connId]?.owner === 'rayton');
+
+          const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+          line.setAttribute('x1', `${tdef.coords.x}%`);
+          line.setAttribute('y1', `${tdef.coords.y}%`);
+          line.setAttribute('x2', `${target.coords.x}%`);
+          line.setAttribute('y2', `${target.coords.y}%`);
+          line.setAttribute('class', `tactical-connection-line ${isRaytonLink ? 'conquered-line' : 'hostile-line'}`);
+          svgLines.appendChild(line);
+        }
+      });
+    }
+  }
+
+  // Render 16 Territory Pins
+  const pinsOverlay = document.getElementById('japan-territories-overlay');
+  if (pinsOverlay) {
+    pinsOverlay.innerHTML = '';
+    for (const [tid, tdef] of Object.entries(JAPAN_TERRITORIES_DEF)) {
+      const state = game.japanTerritories[tid] || { owner: tdef.owner, garrison: tdef.garrison };
+      const isOwned = state.owner === 'rayton';
+      const isSelected = game.selectedRiskTerritory === tid;
+
+      const pin = document.createElement('div');
+      pin.className = `territory-pin ${isOwned ? 'owned' : 'enemy'} ${isSelected ? 'selected' : ''}`;
+      pin.style.left = `${tdef.coords.x}%`;
+      pin.style.top = `${tdef.coords.y}%`;
+
+      pin.innerHTML = `
+        <div class="pin-radar-ring"></div>
+        <div class="pin-marker">
+          <span class="pin-crest">${isOwned ? '👑' : '⚔️'}</span>
+          <span class="pin-garrison">${state.garrison || 15}</span>
+        </div>
+        <span class="pin-label">${tdef.name.split(' ')[0]}</span>
+      `;
+
+      pin.addEventListener('click', (e) => {
+        e.stopPropagation();
+        window.soundEngine.playClick();
+        game.selectedRiskTerritory = tid;
+        renderTerritoryIntel();
+        renderJapanRiskMap();
+      });
+
+      pinsOverlay.appendChild(pin);
+    }
+  }
+
+  renderTerritoryIntel();
+}
+
+function renderTerritoryIntel() {
+  const drawer = document.getElementById('territory-intel-drawer');
+  if (!drawer) return;
+
+  const tid = game.selectedRiskTerritory || 'yokohama';
+  const tdef = JAPAN_TERRITORIES_DEF[tid];
+  if (!tdef) return;
+
+  const state = game.japanTerritories[tid] || { owner: tdef.owner, garrison: tdef.garrison };
+  const isOwned = state.owner === 'rayton';
+  const regionDef = JAPAN_REGIONS[tdef.region];
+
+  drawer.innerHTML = `
+    <div class="intel-card" style="padding: 16px; display: flex; flex-direction: column; gap: 12px; height: 100%;">
+      <div class="intel-header" style="display: flex; align-items: center; gap: 12px; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 10px;">
+        <span class="intel-kanji" style="font-family: var(--font-kanji); font-size: 2.2rem; color: var(--gold-bright);">${tdef.kanji}</span>
+        <div class="intel-title-wrap">
+          <span class="intel-region-tag" style="font-size: 0.75rem; color: var(--gold-bright); letter-spacing: 1px;">${regionDef ? regionDef.fullName : 'Japón'}</span>
+          <h3 class="intel-province-name" style="margin: 0; font-family: var(--font-display); font-size: 1.15rem; color: #fff;">${tdef.name}</h3>
+        </div>
+      </div>
+
+      <div class="intel-status-pill ${isOwned ? 'status-owned' : 'status-hostile'}" style="display: flex; justify-content: space-between; align-items: center; background: ${isOwned ? 'rgba(16, 185, 129, 0.15)' : 'rgba(239, 68, 68, 0.15)'}; border: 1px solid ${isOwned ? '#10b981' : '#ef4444'}; padding: 6px 12px; border-radius: 6px;">
+        <span style="font-size: 0.8rem; font-weight: 700; color: ${isOwned ? '#10b981' : '#ef4444'};">${isOwned ? '👑 TERRITORIO RAYTON' : '⚔️ OCUPADO POR RIVAL'}</span>
+        <strong style="color: #fff; font-size: 0.85rem;">${state.garrison} Defensores</strong>
+      </div>
+
+      <div class="intel-gang-row" style="font-size: 0.8rem; color: var(--text-muted);">
+        <span>Fuerza en control: </span><strong style="color: #fff;">${isOwned ? 'Cuartel Territorial RAYTON' : tdef.gang}</strong>
+      </div>
+
+      <p class="intel-lore" style="font-size: 0.78rem; line-height: 1.4; color: #cbd5e1; margin: 0; font-style: italic;">${tdef.lore}</p>
+
+      <div class="intel-rewards-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+        <div class="intel-reward-pill" style="background: rgba(0,0,0,0.4); padding: 6px 8px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.06);">
+          <span style="display: block; font-size: 0.7rem; color: var(--text-muted);">Botín Yenes:</span>
+          <strong style="color: #fbbf24; font-size: 0.85rem;">¥ ${tdef.lootYen.toLocaleString()}</strong>
+        </div>
+        <div class="intel-reward-pill" style="background: rgba(0,0,0,0.4); padding: 6px 8px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.06);">
+          <span style="display: block; font-size: 0.7rem; color: var(--text-muted);">Respeto:</span>
+          <strong style="color: #ef4444; font-size: 0.85rem;">+${tdef.lootRespect.toLocaleString()} 🔥</strong>
+        </div>
+        <div class="intel-reward-pill" style="background: rgba(0,0,0,0.4); padding: 6px 8px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.06);">
+          <span style="display: block; font-size: 0.7rem; color: var(--text-muted);">Esencia Sombría:</span>
+          <strong style="color: #c084fc; font-size: 0.85rem;">+${(tdef.lootDark || 300).toLocaleString()} 🧪</strong>
+        </div>
+        <div class="intel-reward-pill" style="background: rgba(0,0,0,0.4); padding: 6px 8px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.06);">
+          <span style="display: block; font-size: 0.7rem; color: var(--text-muted);">Tributo Pasivo:</span>
+          <strong style="color: #34d399; font-size: 0.8rem;">+¥ ${tdef.incomeYen} / +${tdef.incomeRespect} 🔥</strong>
+        </div>
+      </div>
+
+      <div class="intel-actions-block" style="margin-top: auto; padding-top: 10px;">
+        ${!isOwned ? `
+          <button class="btn btn-danger btn-block btn-launch-territory-raid" id="btn-conquer-territory" style="width: 100%; padding: 12px; font-weight: 700; font-size: 0.95rem;">
+            <span>⚔️</span> ¡ASALTAR Y CONQUISTAR!
+          </button>
+        ` : `
+          <button class="btn btn-gold btn-block" id="btn-reinforce-territory" style="width: 100%; padding: 12px; font-weight: 700; font-size: 0.95rem;">
+            <span>🛡️</span> Reforzar Guarnición (+5 Tropas)
+          </button>
+        `}
+      </div>
+    </div>
+  `;
+
+  const conquerBtn = drawer.querySelector('#btn-conquer-territory');
+  if (conquerBtn) {
+    conquerBtn.addEventListener('click', () => {
+      launchTerritoryRaid(tid);
+    });
+  }
+
+  const reinforceBtn = drawer.querySelector('#btn-reinforce-territory');
+  if (reinforceBtn) {
+    reinforceBtn.addEventListener('click', () => {
+      game.reinforceTerritory(tid);
+    });
+  }
+}
+
+function launchTerritoryRaid(territoryId) {
+  const tdef = JAPAN_TERRITORIES_DEF[territoryId];
+  if (!tdef) return;
+
+  const territoryBase = {
+    id: `territory_${territoryId}`,
+    territoryId: territoryId,
+    name: tdef.name,
+    gang: tdef.gang,
+    lootYen: tdef.lootYen,
+    lootRespect: tdef.lootRespect,
+    lootDark: tdef.lootDark || 300,
+    trophiesWin: 35,
+    trophiesLoss: 15,
+    buildings: tdef.buildings || [
+      { type: 'hq', x: 8, y: 8, level: tdef.difficulty || 2 },
+      { type: 'cannon', x: 6, y: 6, level: tdef.difficulty || 2 },
+      { type: 'watchtower', x: 10, y: 10, level: tdef.difficulty || 2 },
+      { type: 'vault', x: 6, y: 10, level: 2 },
+      { type: 'ramen', x: 10, y: 6, level: 2 }
+    ]
+  };
+
+  const modal = document.getElementById('war-map-modal');
+  if (modal) modal.classList.add('hidden');
+
+  switchToRaidMode(territoryBase);
+}
+
 function renderMultiplayerPanel() {
   if (!game.multiplayerTarget) {
     game.generateMultiplayerTarget();
@@ -3374,23 +6711,234 @@ function renderMultiplayerPanel() {
   if (tropEl) tropEl.textContent = `+${t.trophiesWin} 🏆 / -${t.trophiesLoss} 🏆`;
 }
 
+// ==========================================================================
+// TOKYO DELINQUENT LEADERS GACHA & HERO ROSTER RENDERERS
+// ==========================================================================
+
+function renderGachaModal() {
+  const activeLeader = game.getActiveLeader();
+  const activeBanner = document.getElementById('active-leader-banner-display');
+  if (activeBanner && activeLeader) {
+    activeBanner.innerHTML = `
+      <div class="active-leader-card-glow" style="border-left: 4px solid ${activeLeader.color};">
+        <img src="${activeLeader.avatar}" alt="${activeLeader.name}" class="active-leader-avatar">
+        <div class="active-leader-info">
+          <div class="active-leader-badge-row">
+            <span class="active-leader-crown">👑 LÍDER ACTIVO EN COMBATE</span>
+            <span class="leader-rarity-pill ${activeLeader.rarity}">${'★'.repeat(activeLeader.stars)} ${activeLeader.rarity.toUpperCase()}</span>
+          </div>
+          <h3>${activeLeader.name}</h3>
+          <span class="active-leader-sub">${activeLeader.title} • <strong>Nivel ${activeLeader.level}</strong></span>
+          
+          <div class="active-leader-stats-bar">
+            <span>❤️ HP: <strong>${activeLeader.hp.toLocaleString()}</strong></span>
+            <span>⚔️ DPS: <strong>${activeLeader.dps.toLocaleString()}</strong></span>
+            <span>⚡ Vel: <strong>${activeLeader.speed}</strong></span>
+          </div>
+
+          <div class="active-leader-skills-row">
+            <div class="active-skill-box passive">
+              <span class="skill-kicker">HABILIDAD PASIVA:</span>
+              <strong>${activeLeader.passiveName}</strong>
+              <p>${activeLeader.passiveDesc}</p>
+            </div>
+            <div class="active-skill-box active">
+              <span class="skill-kicker">HABILIDAD ACTIVA:</span>
+              <strong>${activeLeader.abilityName}</strong>
+              <p>${activeLeader.abilityDesc}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  // Count Unlocked
+  let unlockedCount = 0;
+  for (const k of Object.keys(LEADERS_DATA)) {
+    if (game.leaders[k] && game.leaders[k].unlocked) unlockedCount++;
+  }
+  const countEl = document.getElementById('gacha-roster-count');
+  if (countEl) countEl.textContent = `${unlockedCount}/${Object.keys(LEADERS_DATA).length} Reclutados`;
+
+  // Render Roster Grid
+  const rosterGrid = document.getElementById('gacha-leaders-container');
+  if (rosterGrid) {
+    rosterGrid.innerHTML = '';
+    for (const [id, def] of Object.entries(LEADERS_DATA)) {
+      const info = game.getLeaderInfo(id);
+      const card = document.createElement('div');
+      card.className = `gacha-leader-card ${info.unlocked ? 'unlocked' : 'locked'} ${info.isActive ? 'active-leader-card' : ''}`;
+      card.style.borderColor = info.isActive ? 'var(--gold-bright)' : (info.unlocked ? info.color : 'rgba(255,255,255,0.1)');
+
+      const shardsPct = Math.min(100, (info.shards / info.shardsNeeded) * 100);
+
+      card.innerHTML = `
+        <div class="leader-card-header">
+          <span class="leader-rarity-pill ${def.rarity}">${'★'.repeat(def.stars)} ${def.rarity.toUpperCase()}</span>
+          ${info.isActive ? '<span class="leader-current-pill">👑 ACTIVO</span>' : ''}
+        </div>
+
+        <div class="leader-card-avatar-wrap">
+          <img src="${def.avatar}" alt="${def.name}" class="leader-card-avatar ${info.unlocked ? '' : 'locked-silhouette'}">
+          ${!info.unlocked ? '<div class="leader-locked-badge">🔒 BLOQUEADO</div>' : `<div class="leader-level-badge">Nv. ${info.level}</div>`}
+        </div>
+
+        <div class="leader-card-body">
+          <h4 class="leader-card-name">${def.name}</h4>
+          <span class="leader-card-role">${def.role}</span>
+
+          <div class="leader-card-stats-mini">
+            <span>❤️ ${info.hp.toLocaleString()} HP</span>
+            <span>⚔️ ${info.dps.toLocaleString()} DPS</span>
+          </div>
+
+          <div class="leader-card-passive-highlight">
+            <span class="passive-tag">PASIVA</span>
+            <strong>${def.passiveName}</strong>
+            <p>${def.passiveDesc}</p>
+          </div>
+
+          <div class="leader-card-ability-highlight">
+            <span class="active-tag">ACTIVA</span>
+            <strong>${def.abilityName}</strong>
+            <p>${def.abilityDesc}</p>
+          </div>
+
+          <!-- Shards progress bar -->
+          <div class="leader-shards-box">
+            <div class="shards-labels">
+              <span>Fragmentos de Ascenso:</span>
+              <strong>${info.shards} / ${info.shardsNeeded}</strong>
+            </div>
+            <div class="shards-progress-track">
+              <div class="shards-progress-fill" style="width: ${shardsPct}%;"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="leader-card-actions">
+          ${!info.unlocked ? `
+            <button class="btn btn-secondary btn-block disabled" disabled title="Consigue a este líder tirando en el Gacha de Convocatoria">
+              🔒 Reclutar en Gacha
+            </button>
+          ` : info.isActive ? `
+            <div class="active-leader-selected-btn">
+              <span>👑 Comandante Asignado</span>
+            </div>
+          ` : `
+            <button class="btn btn-primary btn-block btn-set-active" data-id="${id}">
+              Asignar como Líder
+            </button>
+          `}
+
+          ${info.unlocked && info.level < 10 && info.shards >= info.shardsNeeded ? `
+            <button class="btn btn-gold btn-block btn-upgrade-leader" data-id="${id}">
+              ⚡ Subir a Nv. ${info.level + 1} (${info.upgradeCostRespect.toLocaleString()} 🔥)
+            </button>
+          ` : ''}
+          ${info.unlocked && info.level >= 10 ? `
+            <span class="badge-max-rank">⭐ RANGO MÁXIMO (Nv. 10)</span>
+          ` : ''}
+        </div>
+      `;
+
+      // Set active leader listener
+      const setBtn = card.querySelector('.btn-set-active');
+      if (setBtn) {
+        setBtn.addEventListener('click', () => {
+          game.setActiveLeader(id);
+        });
+      }
+
+      // Upgrade leader listener
+      const upgBtn = card.querySelector('.btn-upgrade-leader');
+      if (upgBtn) {
+        upgBtn.addEventListener('click', () => {
+          game.upgradeLeader(id);
+        });
+      }
+
+      rosterGrid.appendChild(card);
+    }
+  }
+}
+
+function showGachaReveal(results) {
+  if (!results || results.length === 0) return;
+
+  const gachaModal = document.getElementById('gacha-modal');
+  if (gachaModal) gachaModal.classList.add('hidden');
+
+  const revealModal = document.getElementById('gacha-reveal-modal');
+  const cardsGrid = document.getElementById('gacha-reveal-cards-grid');
+  const titleEl = document.getElementById('gacha-reveal-title');
+
+  if (!revealModal || !cardsGrid) return;
+
+  cardsGrid.innerHTML = '';
+  revealModal.classList.remove('hidden');
+  revealModal.style.display = 'flex';
+
+  const hasLegendary = results.some(r => r.rarity === 'legendary');
+  if (hasLegendary && window.soundEngine.playGachaRevealLegendary) {
+    window.soundEngine.playGachaRevealLegendary();
+  } else if (window.soundEngine.playGachaRevealEpic) {
+    window.soundEngine.playGachaRevealEpic();
+  }
+
+  if (titleEl) {
+    titleEl.textContent = results.length > 1 ? `¡${results.length} COMANDANTES RECLUTADOS!` : '¡COMANDANTE RECLUTADO!';
+  }
+
+  results.forEach((res, idx) => {
+    const card = document.createElement('div');
+    card.className = `gacha-reveal-card ${res.rarity}`;
+    card.style.animationDelay = `${idx * 0.08}s`;
+
+    card.innerHTML = `
+      <div class="reveal-card-inner">
+        <div class="reveal-card-front" style="border-color: ${res.leader.color};">
+          <div class="reveal-stars">${'⭐'.repeat(res.stars)}</div>
+          <img src="${res.leader.avatar}" alt="${res.leader.name}" class="reveal-avatar">
+          <div class="reveal-meta">
+            ${res.isNew ? '<span class="reveal-badge-new">¡NUEVO LÍDER!</span>' : `<span class="reveal-badge-shards">+${res.shardsAwarded} FRAGMENTOS</span>`}
+            <h4>${res.leader.name}</h4>
+            <span class="reveal-role">${res.leader.role}</span>
+            <div class="reveal-passive-line">
+              <strong>${res.leader.passiveName}:</strong> ${res.leader.passiveDesc}
+            </div>
+            <div class="reveal-ability-line">
+              <strong>${res.leader.abilityName}:</strong> ${res.leader.abilityDesc}
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+
+    cardsGrid.appendChild(card);
+  });
+}
+
 // Render Troop & Spell Deployment Deck during Raid
 function renderTroopDeployDeck() {
   const container = document.getElementById('troop-deploy-container');
   if (!container || !game.currentRaid) return;
   container.innerHTML = '';
 
-  // 1. Hero Ren Card (If not yet deployed)
-  if (!game.currentRaid.heroRen) {
+  // 1. Active Leader Card (If not yet deployed)
+  if (!game.currentRaid.leaderUnit && !game.currentRaid.heroRen) {
+    const leader = game.getActiveLeader();
     const heroCard = document.createElement('div');
-    heroCard.className = `troop-card-deploy hero-card ${game.selectedDeployTroop === 'hero_ren' ? 'selected' : ''}`;
+    heroCard.className = `troop-card-deploy hero-card ${game.selectedDeployTroop === 'leader' || game.selectedDeployTroop === 'hero_ren' ? 'selected' : ''}`;
     heroCard.innerHTML = `
-      <span class="troop-count-badge">HÉROE</span>
-      <span class="troop-deploy-icon">👑</span>
-      <span class="troop-deploy-name">Ren Kazuma</span>
+      <span class="troop-count-badge">LÍDER</span>
+      <span class="troop-deploy-icon">${leader.icon}</span>
+      <span class="troop-deploy-name">${leader.name.split(' ')[0]} (Nv. ${leader.level})</span>
     `;
+    heroCard.title = `${leader.name} • ${leader.title}\nPasiva: ${leader.passiveDesc}\nHabilidad: ${leader.abilityDesc}`;
     heroCard.addEventListener('click', () => {
-      game.selectedDeployTroop = 'hero_ren';
+      game.selectedDeployTroop = 'leader';
       game.selectedDeploySpell = null;
       window.soundEngine.playClick();
       renderTroopDeployDeck();
@@ -3629,14 +7177,15 @@ function handleCanvasClick(screenX, screenY) {
       return;
     }
 
-    if (game.selectedDeployTroop === 'hero_ren' && !game.currentRaid.heroRen) {
+    if ((game.selectedDeployTroop === 'leader' || game.selectedDeployTroop === 'hero_ren') && !game.currentRaid.leaderUnit && !game.currentRaid.heroRen) {
       const isPerimeter = gx <= 1 || gy <= 1 || gx >= GRID_SIZE - 2 || gy >= GRID_SIZE - 2;
       if (isPerimeter) {
-        game.currentRaid.deployHero(gx, gy);
+        game.currentRaid.deployLeader(gx, gy);
         game.selectedDeployTroop = null;
         renderTroopDeployDeck();
       } else {
-        showToast('⚠️ ¡Despliega al Líder Ren en la zona perimetral roja exterior!');
+        const leader = game.getActiveLeader();
+        showToast(`⚠️ ¡Despliega al Líder ${leader.name.split(' ')[0]} en la zona perimetral roja exterior!`);
       }
       return;
     }
@@ -3740,6 +7289,27 @@ function setupEventListeners() {
     themeBtn.addEventListener('click', () => game.toggleTheme());
   }
 
+  const weatherBtn = document.getElementById('btn-weather-toggle');
+  if (weatherBtn) {
+    const weatherIcons = { rain: '🌧️', sakura: '🌸', neon: '⚡', clear: '☀️' };
+    weatherBtn.textContent = weatherIcons[game.weather || 'rain'] || '🌧️';
+    weatherBtn.addEventListener('click', () => game.toggleWeather());
+  }
+
+  const raidSpeedBtn = document.getElementById('btn-raid-speed');
+  if (raidSpeedBtn) {
+    raidSpeedBtn.addEventListener('click', () => {
+      if (game.currentRaid) game.currentRaid.toggleSpeed();
+    });
+  }
+
+  const defSpeedBtn = document.getElementById('btn-defense-speed');
+  if (defSpeedBtn) {
+    defSpeedBtn.addEventListener('click', () => {
+      if (game.currentDefense) game.currentDefense.toggleSpeed();
+    });
+  }
+
   const clanBtn = document.getElementById('btn-clan-castle');
   if (clanBtn) {
     clanBtn.addEventListener('click', () => {
@@ -3771,6 +7341,76 @@ function setupEventListeners() {
     renderWarMap();
     document.getElementById('war-map-modal').classList.remove('hidden');
   });
+
+  // Gacha & Leaders Modals
+  const openGacha = () => {
+    window.soundEngine.playClick();
+    renderGachaModal();
+    const modal = document.getElementById('gacha-modal');
+    if (modal) {
+      modal.classList.remove('hidden');
+      modal.style.display = 'flex';
+    }
+  };
+
+  const btnOpenGacha = document.getElementById('btn-open-gacha');
+  if (btnOpenGacha) btnOpenGacha.addEventListener('click', openGacha);
+
+  const btnOpenGachaDock = document.getElementById('btn-open-gacha-dock');
+  if (btnOpenGachaDock) btnOpenGachaDock.addEventListener('click', openGacha);
+
+  // Gacha Summon Buttons
+  const btnSingleGems = document.getElementById('btn-gacha-single-gems');
+  if (btnSingleGems) {
+    btnSingleGems.addEventListener('click', () => {
+      const res = game.rollGacha(1, 'gems');
+      if (res) showGachaReveal(res);
+    });
+  }
+
+  const btnMultiGems = document.getElementById('btn-gacha-multi-gems');
+  if (btnMultiGems) {
+    btnMultiGems.addEventListener('click', () => {
+      const res = game.rollGacha(10, 'gems');
+      if (res) showGachaReveal(res);
+    });
+  }
+
+  const btnSingleRespect = document.getElementById('btn-gacha-single-respect');
+  if (btnSingleRespect) {
+    btnSingleRespect.addEventListener('click', () => {
+      const res = game.rollGacha(1, 'respect');
+      if (res) showGachaReveal(res);
+    });
+  }
+
+  const btnMultiRespect = document.getElementById('btn-gacha-multi-respect');
+  if (btnMultiRespect) {
+    btnMultiRespect.addEventListener('click', () => {
+      const res = game.rollGacha(10, 'respect');
+      if (res) showGachaReveal(res);
+    });
+  }
+
+  // Claim Gacha Reveal
+  const btnClaimReveal = document.getElementById('btn-gacha-reveal-claim');
+  if (btnClaimReveal) {
+    btnClaimReveal.addEventListener('click', () => {
+      window.soundEngine.playClick();
+      const revModal = document.getElementById('gacha-reveal-modal');
+      if (revModal) {
+        revModal.classList.add('hidden');
+        revModal.style.display = 'none';
+      }
+      renderGachaModal();
+      const gModal = document.getElementById('gacha-modal');
+      if (gModal) {
+        gModal.classList.remove('hidden');
+        gModal.style.display = 'flex';
+      }
+      updateUI();
+    });
+  }
 
   // Defense Mode Triggers
   const trigDefBtn = document.getElementById('btn-trigger-defense');
@@ -3825,28 +7465,62 @@ function setupEventListeners() {
     });
   });
 
-  // War Map Tabs (Campaign vs Multiplayer)
+  // War Map Tabs (Japan Risk vs Campaign vs Multiplayer)
+  const tabJapan = document.getElementById('tab-war-japan');
   const tabCampaign = document.getElementById('tab-war-campaign');
   const tabMultiplayer = document.getElementById('tab-war-multiplayer');
+  const paneJapan = document.getElementById('war-pane-japan');
   const paneCampaign = document.getElementById('war-pane-campaign');
   const paneMultiplayer = document.getElementById('war-pane-multiplayer');
 
-  if (tabCampaign && tabMultiplayer) {
-    tabCampaign.addEventListener('click', () => {
-      window.soundEngine.playClick();
-      tabCampaign.classList.add('active');
-      tabMultiplayer.classList.remove('active');
-      if (paneCampaign) paneCampaign.classList.remove('hidden');
-      if (paneMultiplayer) paneMultiplayer.classList.add('hidden');
-    });
+  const showWarTab = (tabName) => {
+    window.soundEngine.playClick();
+    if (tabJapan) tabJapan.classList.toggle('active', tabName === 'japan');
+    if (tabCampaign) tabCampaign.classList.toggle('active', tabName === 'campaign');
+    if (tabMultiplayer) tabMultiplayer.classList.toggle('active', tabName === 'multiplayer');
 
-    tabMultiplayer.addEventListener('click', () => {
+    if (paneJapan) paneJapan.classList.toggle('hidden', tabName !== 'japan');
+    if (paneCampaign) paneCampaign.classList.toggle('hidden', tabName !== 'campaign');
+    if (paneMultiplayer) paneMultiplayer.classList.toggle('hidden', tabName !== 'multiplayer');
+
+    if (tabName === 'japan') renderJapanRiskMap();
+    if (tabName === 'multiplayer') renderMultiplayerPanel();
+  };
+
+  if (tabJapan) tabJapan.addEventListener('click', () => showWarTab('japan'));
+  if (tabCampaign) tabCampaign.addEventListener('click', () => showWarTab('campaign'));
+  if (tabMultiplayer) tabMultiplayer.addEventListener('click', () => showWarTab('multiplayer'));
+
+  // Top Bar HUD Japan Conquest Pill
+  const hudJapanBtn = document.getElementById('hud-japan-conquest-btn');
+  if (hudJapanBtn) {
+    hudJapanBtn.addEventListener('click', () => {
       window.soundEngine.playClick();
-      tabMultiplayer.classList.add('active');
-      tabCampaign.classList.remove('active');
-      if (paneMultiplayer) paneMultiplayer.classList.remove('hidden');
-      if (paneCampaign) paneCampaign.classList.add('hidden');
-      renderMultiplayerPanel();
+      renderWarMap();
+      showWarTab('japan');
+      document.getElementById('war-map-modal').classList.remove('hidden');
+    });
+  }
+
+  // Japan Risk Collect Taxes Button
+  const collectTaxesBtn = document.getElementById('btn-collect-japan-taxes');
+  if (collectTaxesBtn) {
+    collectTaxesBtn.addEventListener('click', () => {
+      game.collectJapanTaxes();
+    });
+  }
+
+  // Shogun Grand Victory Claim Button
+  const claimShogunBtn = document.getElementById('btn-claim-shogun-reward');
+  if (claimShogunBtn) {
+    claimShogunBtn.addEventListener('click', () => {
+      if (window.soundEngine.playConquestFanfare) window.soundEngine.playConquestFanfare();
+      const shogunModal = document.getElementById('japan-conquest-victory-modal');
+      if (shogunModal) {
+        shogunModal.classList.add('hidden');
+        shogunModal.style.display = 'none';
+      }
+      showToast('👑 ¡UNIFICACIÓN TOTAL DE JAPÓN! ¡Has reclamado las 1,000 Gemas y el título de Shogun Supremo!');
     });
   }
 
@@ -4057,7 +7731,63 @@ function setupEventListeners() {
     finishIntro();
   });
 
-  // Audio Toggle
+  // Music Toggle (Música Tranquila Lofi)
+  const musicBtn = document.getElementById('btn-music-toggle');
+  if (musicBtn) {
+    musicBtn.addEventListener('click', () => {
+      const isPlaying = window.soundEngine.toggleMusic();
+      musicBtn.textContent = isPlaying ? '🎵' : '🔇';
+      musicBtn.title = isPlaying ? '🎵 Música Tranquila: Activa (Lofi Chill)' : '🔇 Música Tranquila: Pausada';
+      if (isPlaying) {
+        musicBtn.classList.add('active');
+        musicBtn.classList.remove('muted');
+        showToast('🎵 Música tranquila lofi activada');
+      } else {
+        musicBtn.classList.remove('active');
+        musicBtn.classList.add('muted');
+        showToast('🔇 Música pausada');
+      }
+    });
+  }
+
+  // Help & Quick Guide Modal Controls
+  const helpBtn = document.getElementById('btn-open-help');
+  if (helpBtn) {
+    helpBtn.addEventListener('click', () => {
+      window.soundEngine.playClick();
+      const modal = document.getElementById('help-modal');
+      if (modal) {
+        modal.classList.remove('hidden');
+        modal.style.display = 'flex';
+      }
+    });
+  }
+
+  const closeHelpBtn = document.getElementById('btn-close-help');
+  if (closeHelpBtn) {
+    closeHelpBtn.addEventListener('click', () => {
+      window.soundEngine.playClick();
+      const modal = document.getElementById('help-modal');
+      if (modal) {
+        modal.classList.add('hidden');
+        modal.style.display = 'none';
+      }
+    });
+  }
+
+  // Dismiss Quick Objective Pill
+  const dismissObjBtn = document.getElementById('btn-dismiss-obj');
+  if (dismissObjBtn) {
+    dismissObjBtn.addEventListener('click', () => {
+      const pill = document.getElementById('quick-objective-pill');
+      if (pill) {
+        pill.dataset.dismissed = 'true';
+        pill.style.display = 'none';
+      }
+    });
+  }
+
+  // Audio SFX Toggle
   document.getElementById('btn-audio-toggle').addEventListener('click', (e) => {
     const isMuted = window.soundEngine.toggleMute();
     e.currentTarget.textContent = isMuted ? '🔇' : '🔊';
@@ -4067,6 +7797,55 @@ function setupEventListeners() {
   document.getElementById('btn-reset-game').addEventListener('click', () => {
     if (confirm('¿Restablecer toda tu aldea y recursos de RAYTON?')) {
       game.resetGame();
+    }
+  });
+
+  // Desktop Strategy Keyboard Hotkeys
+  window.addEventListener('keydown', (e) => {
+    if (e.target && (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA')) return;
+
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.modal-overlay:not(.hidden)').forEach(m => {
+        m.classList.add('hidden');
+        m.style.display = 'none';
+      });
+      closeContextDock();
+      game.placementBuilding = null;
+      game.movingBuilding = null;
+      return;
+    }
+
+    if (e.key === 'b' || e.key === 'B') {
+      const barracksBtn = document.getElementById('btn-open-barracks');
+      if (barracksBtn && game.mode === 'base') barracksBtn.click();
+    } else if (e.key === 'c' || e.key === 'C' || e.key === 's' || e.key === 'S') {
+      const shopBtn = document.getElementById('btn-open-shop');
+      if (shopBtn && game.mode === 'base') shopBtn.click();
+    } else if (e.key === 'j' || e.key === 'J' || e.key === 'm' || e.key === 'M') {
+      const warBtn = document.getElementById('btn-open-war-map');
+      if (warBtn && game.mode === 'base') warBtn.click();
+    } else if (e.key === 'g' || e.key === 'G') {
+      const gachaBtn = document.getElementById('btn-open-gacha-dock');
+      if (gachaBtn && game.mode === 'base') gachaBtn.click();
+    } else if (e.key === 'w' || e.key === 'W') {
+      game.toggleWeather();
+    } else if (e.key === 't' || e.key === 'T') {
+      game.toggleTheme();
+    } else if (e.key === ' ') {
+      if (game.mode === 'raid' && game.currentRaid) {
+        e.preventDefault();
+        game.currentRaid.toggleSpeed();
+      } else if (game.mode === 'defense' && game.currentDefense) {
+        e.preventDefault();
+        game.currentDefense.toggleSpeed();
+      } else if (game.mode === 'base') {
+        const collectAllBtn = document.getElementById('btn-collect-all');
+        if (collectAllBtn) collectAllBtn.click();
+      }
+    } else if (['1', '2', '3', '4'].includes(e.key) && game.mode === 'raid') {
+      const slotIdx = parseInt(e.key, 10) - 1;
+      const cards = document.querySelectorAll('.troop-card-deploy');
+      if (cards && cards[slotIdx]) cards[slotIdx].click();
     }
   });
 }
@@ -4159,8 +7938,33 @@ function finishIntro() {
       overlay.classList.add('hidden');
     }, 600);
   }
-  showToast('¡Bienvenido a la Aldea Mítica de RAYTON! Limpia obstáculos, levanta defensas y entrena a tus tropas.');
+
+  // Iniciar música tranquila de fondo
+  if (window.soundEngine && !window.soundEngine.isMusicPlaying()) {
+    window.soundEngine.startMusic();
+  }
+
+  showToast('¡Bienvenido a RAYTON! Construye puestos, entrena cuadrillas y conquista Tokio.');
 }
+
+// Iniciar música con la primera interacción del usuario
+let userHasInteracted = false;
+function initCalmMusicOnFirstGesture() {
+  if (userHasInteracted) return;
+  userHasInteracted = true;
+  if (window.soundEngine && !window.soundEngine.isMusicPlaying()) {
+    window.soundEngine.startMusic();
+    const mBtn = document.getElementById('btn-music-toggle');
+    if (mBtn) {
+      mBtn.textContent = '🎵';
+      mBtn.classList.add('active');
+      mBtn.classList.remove('muted');
+    }
+  }
+}
+
+window.addEventListener('click', initCalmMusicOnFirstGesture, { once: true });
+window.addEventListener('keydown', initCalmMusicOnFirstGesture, { once: true });
 
 // Bootstrapping
 document.addEventListener('DOMContentLoaded', () => {
@@ -4170,3 +7974,4 @@ document.addEventListener('DOMContentLoaded', () => {
   showIntro();
   console.log('RAYTON Clash of Delinquents Mythical Village Engine Initialized.');
 });
+
